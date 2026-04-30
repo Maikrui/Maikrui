@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maikrui Workshop - Die Casting Hardware</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background: #f7f7f7;
+            color: #333;
+            line-height: 1.6;
+        }
+        header {
+            background: #222;
+            color: white;
+            padding: 1rem 0;
+        }
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 1.5rem;
+        }
+        .hero {
+            background: #333;
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+        .products {
+            padding: 4rem 0;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 2.5rem;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .product-card img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+        }
+        .product-info {
+            padding: 1.2rem;
+            text-align: center;
+        }
+        .product-info h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        .product-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        .advantages {
+            background: white;
+            padding: 4rem 0;
+        }
+        .advantage-items {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            text-align: center;
+        }
+        .advantage {
+            flex: 1;
+            min-width: 220px;
+        }
+        footer {
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container header-inner">
+        <div class="logo">Maikrui Workshop</div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="products.html">Products</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="container">
+        <h1>Professional Die Casting Hardware Manufacturer</h1>
+        <p>Custom belt buckles & metal accessories for global buyers</p>
+    </div>
+</section>
+
+<section class="products">
+    <div class="container">
+        <h2 class="section-title">Our Products</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="images/buckle-01.jpg" alt="Belt Buckle">
+                <div class="product-info">
+                    <h3>Custom Die-Cast Belt Buckles</h3>
+                    <p>Brass & Stainless Steel</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="images/die-cast-02.jpg" alt="Die Casting">
+                <div class="product-info">
+                    <h3>Professional Die Casting Factory</h3>
+                    <p>High Precision Mould & Process</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="images/metal-texture-03.jpg" alt="Metal Texture">
+                <div class="product-info">
+                    <h3>Durable Metal Finishes</h3>
+                    <p>Polished & Anti-Corrosion</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="advantages">
+    <div class="container">
+        <h2 class="section-title">Our Advantages</h2>
+        <div class="advantage-items">
+            <div class="advantage">
+                <h3>Factory Direct</h3>
+                <p>Competitive price without middleman</p>
+            </div>
+            <div class="advantage">
+                <h3>Custom Design</h3>
+                <p>OEM & ODM service available</p>
+            </div>
+            <div class="advantage">
+                <h3>Quality Control</h3>
+                <p>Strict inspection for each order</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>Maikrui Workshop © All Rights Reserved</p>
+        <p>Email: your-email@example.com</p>
+    </div>
+</footer>
+
+</body>
+</html>
