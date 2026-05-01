@@ -7,24 +7,57 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
         body { background: #f8f8f8; color: #333; line-height: 1.6; }
-        header { background: #222; color: #fff; padding: 1rem 0; }
-        .container { width: 90%; max-width: 1100px; margin: 0 auto; padding: 2rem 0; }
-        h2 { margin-bottom: 1rem; color: #222; }
+        header { background: #222222; padding: 1rem 0; }
+        .container { width: 90%; max-width: 1100px; margin: 0 auto; }
+        .header-inner { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: bold; color: #d4b068; }
+        nav a { color: #ccc; text-decoration: none; margin-left: 1.5rem; transition: color 0.3s; }
+        nav a:hover { color: #d4b068; }
+        .content { padding: 4rem 0; background: #fff; }
+        h1, h2 { margin: 1rem 0; color: #222; }
         p { margin-bottom: 1rem; }
+        ul { margin-left: 1.5rem; }
+        li { margin-bottom: 0.4rem; }
+        footer { background: #222; color: #bbb; text-align: center; padding: 2rem 0; margin-top: 2rem; }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>Maikrui Workshop</h1>
-        </div>
-    </header>
-    <div class="container">
-        <h2>About Maikrui Workshop</h2>
-        <p>We are an integrated source factory with over 30 years of experience in garment hardware manufacturing.</p>
-        <p>Our core strength is zinc alloy die casting, supported by spin casting, lost wax casting and stamping processes to cover all your order needs.</p>
-        <p>With in-house mold design, CNC machining, plating, epoxy filling and laser engraving, we deliver consistent quality and reliable lead times.</p>
-        <p>We specialize in custom belt buckles, belt rivets and a full range of garment hardware accessories, serving global buyers worldwide.</p>
+<header>
+    <div class="container header-inner">
+        <div class="logo">Maikrui Workshop</div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="products.html">Products</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </nav>
     </div>
+</header>
+
+<section class="content">
+    <div class="container">
+        <h1>About Maikrui Workshop</h1>
+        <p>We are an integrated factory with over 30 years of experience in garment hardware.</p>
+        <p>Our core strength is zinc alloy die casting, supported by spin casting, lost wax casting and stamping.</p>
+        <p>We control full production in-house, including mold design, CNC machining, plating, epoxy filling and laser engraving.</p>
+        <p>We specialize in custom belt buckles, rivets and garment hardware for global buyers.</p>
+
+        <h2>Our Capabilities</h2>
+        <ul>
+            <li>Zinc Alloy Die Casting</li>
+            <li>Spin Casting & Lost Wax Casting</li>
+            <li>Stamping</li>
+            <li>CNC Machining</li>
+            <li>Plating, Painting & Polishing</li>
+            <li>Laser Engraving & Custom Finishes</li>
+        </ul>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>Maikrui Workshop © All Rights Reserved</p>
+    </div>
+</footer>
 </body>
 </html>
