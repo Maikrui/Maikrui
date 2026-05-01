@@ -50,24 +50,23 @@
         nav a:hover {
             color: #d4b068;
         }
-
-        /* 🔧 轮播 —— 修复：原图大小、不超大、不拉伸 */
+        /* 精准锁定 1920*950 轮播 */
         .slider {
             position: relative;
             width: 100%;
-            height: 500px; /* 固定高度，不会被撑大 */
+            height: 950px;
             overflow: hidden;
-            background: #000; /* 黑底，图片contain时边缘不空白 */
+            background: #f8f8f8;
         }
         .slide-item {
             position: absolute;
             width: 100%;
-            height: 100%;
+            height: 950px;
             opacity: 0;
             transition: opacity 1s ease;
-            background-size: contain; /* ✅ 原图比例，完整显示，不放大 */
+            background-size: 100% 950px;
             background-position: center;
-            background-repeat: no-repeat; /* ✅ 不重复平铺 */
+            background-repeat: no-repeat;
         }
         .slide-item.active {
             opacity: 1;
@@ -100,7 +99,6 @@
             color: #fff;
             text-shadow: 1px 1px 2px #000;
         }
-
         /* 左右箭头 */
         .prev, .next {
             position: absolute;
@@ -120,8 +118,7 @@
         .prev:hover, .next:hover {
             background: rgba(0,0,0,0.6);
         }
-
-        /* 指示器 */
+        /* 轮播指示器 */
         .slider-indicators {
             position: absolute;
             bottom: 20px;
@@ -142,7 +139,6 @@
         .indicator.active {
             background: #d4b068;
         }
-
         /* 优势板块 */
         .advantages {
             background: #ffffff;
@@ -169,7 +165,6 @@
             color: #222222;
             margin-bottom: 0.5rem;
         }
-
         footer {
             background: #222222;
             color: #bbbbbb;
@@ -189,11 +184,14 @@
             font-weight: bold;
             z-index: 999;
         }
-
-        /* 移动端 */
+        /* 移动端适配 */
         @media (max-width: 768px) {
             .slider {
                 height: 320px;
+            }
+            .slide-item {
+                height: 320px;
+                background-size: 100% 320px;
             }
             .slide-mask h1 {
                 font-size: 1.6rem;
@@ -208,7 +206,6 @@
     </style>
 </head>
 <body>
-
 <header>
     <div class="container header-inner">
         <div class="logo">Maikrui Workshop</div>
@@ -310,6 +307,7 @@
         startInterval();
     }
 
+    // 修复切换页面回来变大bug
     document.addEventListener("DOMContentLoaded", function() {
         showSlide(0);
         startInterval();
