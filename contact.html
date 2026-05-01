@@ -3,60 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us | Maikruiworkshop</title>
+    <title>Contact Us - Maikrui Workshop</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
-        header { background: #1a1a1a; color: white; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
-        .logo { color: #d4af37; font-size: 1.5rem; font-weight: bold; }
-        nav a { color: white; text-decoration: none; margin-left: 1.5rem; font-size: 1.1rem; }
-        .container { max-width: 600px; margin: 3rem auto; padding: 0 2rem; }
-        h1 { text-align: center; margin-bottom: 2rem; }
-        .form-group { margin-bottom: 1.5rem; }
+        body { background: #f8f8f8; color: #333; line-height: 1.6; }
+        header { background: #222222; padding: 1rem 0; }
+        .container { width: 90%; max-width: 1100px; margin: 0 auto; }
+        .header-inner { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: bold; color: #d4b068; }
+        nav a { color: #cccccc; text-decoration: none; margin-left: 1.5rem; transition: color 0.3s ease; }
+        nav a:hover { color: #d4b068; }
+        .content { padding: 4rem 0; background: #ffffff; }
+        h1 { text-align: center; margin-bottom: 2rem; color: #222; }
+        .form-wrapper { max-width: 600px; margin: 0 auto; }
         label { display: block; margin-bottom: 0.5rem; font-weight: bold; }
-        input, textarea { width: 100%; padding: 1rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem; }
-        .btn { background: #d4af37; color: black; padding: 1rem 2rem; border: none; border-radius: 4px; font-weight: bold; font-size: 1.1rem; cursor: pointer; width: 100%; }
-        .contact-info { margin-top: 3rem; text-align: center; }
+        input, textarea {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1.2rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 1rem;
+            background: #d4b068;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .contact-info { text-align: center; margin-top: 2rem; }
+        footer { background: #222222; color: #bbbbbb; text-align: center; padding: 2rem 0; margin-top: 2rem; }
     </style>
 </head>
 <body>
-    <header>
-        <div class="logo">Maikruiworkshop</div>
+<header>
+    <div class="container header-inner">
+        <div class="logo">Maikrui Workshop</div>
         <nav>
             <a href="index.html">Home</a>
             <a href="products.html">Products</a>
             <a href="about.html">About</a>
             <a href="contact.html">Contact</a>
         </nav>
-    </header>
+    </div>
+</header>
 
+<section class="content">
     <div class="container">
         <h1>Get in Touch</h1>
-        <form>
-            <div class="form-group">
-                <label for="name">Your Name</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Your Email</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="subject">Subject (e.g., Belt Buckle Custom Quote)</label>
-                <input type="text" id="subject" name="subject">
-            </div>
-            <div class="form-group">
-                <label for="message">Your Requirements (quantity, design, material, etc.)</label>
-                <textarea id="message" name="message" rows="5" required></textarea>
-            </div>
-            <button type="submit" class="btn">Send Inquiry</button>
-        </form>
+        <div class="form-wrapper">
+            <form action="mailto:wiki458413539@gmail.com" method="GET">
+                <label>Your Name</label>
+                <input type="text" name="name" required>
 
-        <div class="contact-info">
-            <h3>Contact Information</h3>
-            <p>Email: wiki458413539@gmail.com</p>
-            <p>WhatsApp: +86 15980009534</p>
-            <p>Location: Quanzhou, Fujian, China</p>
+                <label>Your Email</label>
+                <input type="email" name="email" required>
+
+                <label>Subject (e.g., Belt Buckle Custom Quote)</label>
+                <input type="text" name="subject" required>
+
+                <label>Your Requirements (quantity, design, material, etc.)</label>
+                <textarea name="body" rows="5" required></textarea>
+
+                <button type="submit">Open Email to Send Inquiry</button>
+            </form>
+
+            <div class="contact-info">
+                <h3>Contact Information</h3>
+                <p>Email: wiki458413539@gmail.com</p>
+                <p>WhatsApp: +86 15980009534</p>
+                <p>Location: Quanzhou, Fujian, China</p>
+            </div>
         </div>
     </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>Maikrui Workshop © All Rights Reserved</p>
+    </div>
+</footer>
 </body>
 </html>
