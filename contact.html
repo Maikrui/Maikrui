@@ -7,9 +7,9 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
         body { background: #f8f8f8; color: #333; line-height: 1.6; }
-        header { background: #222222; padding: 1rem 0; }
+        header { background: #222222; padding: 1rem 0; position: sticky; top: 0; z-index: 100; }
         .container { width: 90%; max-width: 1100px; margin: 0 auto; }
-        .header-inner { display: flex; justify-content: space-between; align-items: center; }
+        .header-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
         .logo { font-size: 1.5rem; font-weight: bold; color: #d4b068; }
         nav a { color: #cccccc; text-decoration: none; margin-left: 1.5rem; transition: color 0.3s ease; }
         nav a:hover { color: #d4b068; }
@@ -23,6 +23,7 @@
             margin-bottom: 1.2rem;
             border: 1px solid #ddd;
             border-radius: 4px;
+            font-size: 16px;
         }
         button {
             width: 100%;
@@ -32,9 +33,34 @@
             border-radius: 4px;
             font-weight: bold;
             cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
         }
-        .contact-info { text-align: center; margin-top: 2rem; }
+        button:hover {
+            background: #b89652;
+        }
+        .contact-info {
+            text-align: center;
+            margin-top: 2.5rem;
+            padding: 1.5rem;
+            background: #f8f8f8;
+            border-radius: 8px;
+            line-height: 2;
+        }
+        .contact-info h3 {
+            margin-bottom: 0.8rem;
+            color: #222;
+        }
+        .email-link {
+            color: #d4b068;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 17px;
+        }
         footer { background: #222222; color: #bbbbbb; text-align: center; padding: 2rem 0; margin-top: 2rem; }
+        @media (max-width: 768px) {
+            nav a { margin-left: 0.8rem; }
+        }
     </style>
 </head>
 <body>
@@ -54,27 +80,27 @@
     <div class="container">
         <h1>Get in Touch</h1>
         <div class="form-wrapper">
-            <form action="mailto:wiki458413539@gmail.com" method="GET">
+            <form action="https://formsubmit.co/wiki458413539@gmail.com" method="POST">
                 <label>Your Name</label>
                 <input type="text" name="name" required>
 
                 <label>Your Email</label>
                 <input type="email" name="email" required>
 
-                <label>Subject (e.g., Belt Buckle Custom Quote)</label>
-                <input type="text" name="subject" required>
+                <label>Subject</label>
+                <input type="text" name="subject" required placeholder="Belt Buckle / Hardware Inquiry">
 
-                <label>Your Requirements (quantity, design, material, etc.)</label>
-                <textarea name="body" rows="5" required></textarea>
+                <label>Your Requirements</label>
+                <textarea name="message" rows="5" required placeholder="quantity, design, material, finishing..."></textarea>
 
-                <button type="submit">Open Email to Send Inquiry</button>
+                <button type="submit">Send Inquiry Now</button>
             </form>
 
             <div class="contact-info">
-                <h3>Contact Information</h3>
-                <p>Email: wiki458413539@gmail.com</p>
-                <p>WhatsApp: +86 15980009534</p>
-                <p>Location: Quanzhou, Fujian, China</p>
+                <h3>Direct Contact</h3>
+                <p>📩 Email: <a class="email-link" href="mailto:wiki458413539@gmail.com">Click to Send Email</a></p>
+                <p>📱 WhatsApp: +86 15980009534</p>
+                <p>📍 Location: Quanzhou, Fujian, China</p>
             </div>
         </div>
     </div>
