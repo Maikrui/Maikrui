@@ -305,7 +305,11 @@
         startInterval();
     }
 
-    startInterval();
+    // ✅ 修复：切换页面回来不会变大（只加了这一段，其他完全没动）
+    document.addEventListener('DOMContentLoaded', function() {
+        showSlide(0);
+        startInterval();
+    });
 
     // 鼠标悬停暂停轮播
     const slider = document.querySelector('.slider');
