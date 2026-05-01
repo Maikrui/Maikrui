@@ -50,21 +50,24 @@
         nav a:hover {
             color: #d4b068;
         }
-        /* 精准锁定 1920*950 轮播 */
+        /* 轮播：1920×950 全屏无灰边版 */
         .slider {
             position: relative;
             width: 100%;
             height: 950px;
             overflow: hidden;
-            background: #f8f8f8;
+            background: #000;
         }
         .slide-item {
             position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 950px;
+            height: 100%;
             opacity: 0;
             transition: opacity 1s ease;
-            background-size: 100% 950px;
+            /* 关键：cover 模式，图片铺满容器，无灰边 */
+            background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
         }
@@ -189,10 +192,6 @@
             .slider {
                 height: 320px;
             }
-            .slide-item {
-                height: 320px;
-                background-size: 100% 320px;
-            }
             .slide-mask h1 {
                 font-size: 1.6rem;
             }
@@ -307,7 +306,7 @@
         startInterval();
     }
 
-    // 修复切换页面回来变大bug
+    // 关键：页面加载时重置轮播状态，防止切换页面后错乱
     document.addEventListener("DOMContentLoaded", function() {
         showSlide(0);
         startInterval();
