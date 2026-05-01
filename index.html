@@ -50,7 +50,7 @@
         nav a:hover {
             color: #d4b068;
         }
-        /* 轮播：手机端修复版 */
+        /* 轮播 - 电脑端保持你原来的效果 */
         .slider {
             position: relative;
             width: 100%;
@@ -67,8 +67,6 @@
             background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
-            /* 关键：确保背景图片加载 */
-            background-color: #f8f8f8;
         }
         .slide-item.active {
             opacity: 1;
@@ -182,16 +180,22 @@
             font-weight: bold;
             z-index: 999;
         }
-        /* 移动端适配修复 */
+
+        /* 手机端核心优化 */
         @media (max-width: 768px) {
             .slider {
-                height: 320px;
+                height: 300px; /* 降低高度，减少空白 */
+            }
+            .slide-item {
+                background-size: cover; /* 手机端用cover填满，避免大片空白 */
+                background-position: center;
             }
             .slide-mask h1 {
-                font-size: 1.6rem;
+                font-size: 1.4rem;
             }
             .slide-mask p {
-                font-size: 0.95rem;
+                font-size: 0.9rem;
+                max-width: 90%;
             }
             nav a {
                 margin-left: 0.8rem;
@@ -311,7 +315,7 @@
         startInterval();
     }
 
-    // 关键：页面加载时重置轮播状态，手机端也能正常显示
+    // 页面加载重置轮播，防止错乱
     document.addEventListener('DOMContentLoaded', function() {
         showSlide(0);
         startInterval();
