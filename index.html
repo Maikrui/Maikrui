@@ -20,6 +20,9 @@
         header {
             background: #222222;
             padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
         .container {
             width: 90%;
@@ -30,6 +33,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
         .logo {
             font-size: 1.5rem;
@@ -45,13 +50,13 @@
         nav a:hover {
             color: #d4b068;
         }
-
-        /* 轮播样式 */
+        /* 轮播 */
         .slider {
             position: relative;
             width: 100%;
             height: 500px;
             overflow: hidden;
+            background: #f8f8f8;
         }
         .slide-item {
             position: absolute;
@@ -59,16 +64,18 @@
             height: 100%;
             opacity: 0;
             transition: opacity 1s ease;
-            background-size: cover;
+            background-size: contain;
             background-position: center;
+            background-repeat: no-repeat;
         }
         .slide-item.active {
             opacity: 1;
+            z-index: 1;
         }
         .slide-mask {
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.55);
+            background: rgba(0,0,0,0.25);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -80,11 +87,13 @@
         .slide-mask h1 {
             font-size: 2.4rem;
             margin-bottom: 1rem;
+            text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000;
         }
         .slide-mask p {
             font-size: 1.1rem;
             max-width: 800px;
-            color: #eee;
+            color: #fff;
+            text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
         }
         /* 左右箭头 */
         .prev, .next {
@@ -92,8 +101,8 @@
             top: 50%;
             transform: translateY(-50%);
             font-size: 3rem;
-            color: #fff;
-            background: rgba(0,0,0,0.25);
+            color: #666;
+            background: transparent;
             padding: 0 15px;
             cursor: pointer;
             z-index: 10;
@@ -101,7 +110,27 @@
         }
         .prev {left: 0;}
         .next {right: 0;}
-
+        /* 轮播指示器 */
+        .slider-indicators {
+            position: absolute;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            display: flex;
+            gap: 8px;
+        }
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .indicator.active {
+            background: #fff;
+        }
         /* 优势板块 */
         .advantages {
             background: #ffffff;
@@ -128,7 +157,6 @@
             color: #222222;
             margin-bottom: 0.5rem;
         }
-
         footer {
             background: #222222;
             color: #bbbbbb;
@@ -148,6 +176,21 @@
             font-weight: bold;
             z-index: 999;
         }
+        /* 移动端适配 */
+        @media (max-width: 768px) {
+            .slider {
+                height: 320px;
+            }
+            .slide-mask h1 {
+                font-size: 1.6rem;
+            }
+            .slide-mask p {
+                font-size: 0.95rem;
+            }
+            nav a {
+                margin-left: 0.8rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -163,21 +206,21 @@
     </div>
 </header>
 
-<!-- 轮播区域 后面有图只需要替换 background-image 里的图片地址 -->
+<!-- 轮播区域 -->
 <section class="slider">
-    <div class="slide-item active" style="background-image: url('img/banner1.jpg');">
+    <div class="slide-item active" style="background-image: url('banner1.jpg');">
         <div class="slide-mask">
             <h1>Professional Die Casting Hardware Manufacturer</h1>
             <p>30+ years integrated garment hardware factory, custom belt buckles & garment hardware solutions.</p>
         </div>
     </div>
-    <div class="slide-item" style="background-image: url('img/banner2.jpg');">
+    <div class="slide-item" style="background-image: url('banner2.jpg');">
         <div class="slide-mask">
             <h1>OEM & ODM Custom Service</h1>
             <p>Zinc alloy die casting, spin casting, lost wax casting and full finishing support.</p>
         </div>
     </div>
-    <div class="slide-item" style="background-image: url('img/banner3.jpg');">
+    <div class="slide-item" style="background-image: url('banner3.jpg');">
         <div class="slide-mask">
             <h1>Factory Direct Supply</h1>
             <p>Stable quality, competitive price, one-stop service for global buyers.</p>
@@ -186,6 +229,12 @@
 
     <button class="prev" onclick="prevSlide()">&#10094;</button>
     <button class="next" onclick="nextSlide()">&#10095;</button>
+
+    <div class="slider-indicators">
+        <span class="indicator active" onclick="goToSlide(0)"></span>
+        <span class="indicator" onclick="goToSlide(1)"></span>
+        <span class="indicator" onclick="goToSlide(2)"></span>
+    </div>
 </section>
 
 <!-- 工厂优势 -->
@@ -220,21 +269,48 @@
 
 <script>
     let slides = document.querySelectorAll('.slide-item');
+    let indicators = document.querySelectorAll('.indicator');
     let current = 0;
+    let interval;
+
+    function updateIndicators() {
+        indicators.forEach((dot, i) => {
+            dot.classList.toggle('active', i === current);
+        });
+    }
 
     function showSlide(index){
         slides.forEach(item => item.classList.remove('active'));
         current = (index + slides.length) % slides.length;
         slides[current].classList.add('active');
+        updateIndicators();
     }
+
     function prevSlide(){
         showSlide(current - 1);
     }
     function nextSlide(){
         showSlide(current + 1);
     }
-    // 5秒自动切换
-    setInterval(nextSlide, 5000);
+    function goToSlide(index){
+        showSlide(index);
+        resetInterval();
+    }
+
+    function startInterval(){
+        interval = setInterval(nextSlide, 5000);
+    }
+    function resetInterval(){
+        clearInterval(interval);
+        startInterval();
+    }
+
+    startInterval();
+
+    // 鼠标悬停暂停轮播
+    const slider = document.querySelector('.slider');
+    slider.addEventListener('mouseenter', () => clearInterval(interval));
+    slider.addEventListener('mouseleave', () => startInterval());
 </script>
 </body>
 </html>
