@@ -168,7 +168,6 @@
             padding: 2rem 0;
             margin-top: 2rem;
         }
-        /* 可拖动的WhatsApp按钮 */
         .whatsapp-btn {
             position: fixed;
             right: 16px;
@@ -180,18 +179,15 @@
             text-decoration: none;
             font-weight: bold;
             z-index: 999;
-            cursor: move; /* 显示可拖动的鼠标样式 */
-            user-select: none; /* 防止拖动时选中文字 */
-            touch-action: none; /* 移动端禁用默认触摸行为 */
         }
 
         /* 手机端核心优化 */
         @media (max-width: 768px) {
             .slider {
-                height: 300px; /* 降低高度，减少空白 */
+                height: 300px;
             }
             .slide-item {
-                background-size: cover; /* 手机端用cover填满，避免大片空白 */
+                background-size: cover;
                 background-position: center;
             }
             .slide-mask h1 {
@@ -220,7 +216,6 @@
     </div>
 </header>
 
-<!-- 轮播区域 -->
 <section class="slider">
     <div class="slide-item active" style="background-image: url('banner1.jpg');">
         <div class="slide-mask">
@@ -251,7 +246,6 @@
     </div>
 </section>
 
-<!-- 工厂优势 -->
 <section class="advantages">
     <div class="container">
         <h2 class="section-title">Why Choose Us</h2>
@@ -279,7 +273,8 @@
     </div>
 </footer>
 
-<a href="https://wa.me/8615980009534" target="_blank" class="whatsapp-btn" id="waBtn">WhatsApp Us</a>
+<!-- 已换成标准带咨询文案的WhatsApp链接 -->
+<a href="https://api.whatsapp.com/send?phone=8615980009534&text=Hello,%20I%20am%20interested%20in%20your%20hardware%20products." target="_blank" class="whatsapp-btn">WhatsApp Us</a>
 
 <script>
     let slides = document.querySelectorAll('.slide-item');
@@ -319,88 +314,14 @@
         startInterval();
     }
 
-    // 页面加载重置轮播，防止错乱
     document.addEventListener('DOMContentLoaded', function() {
         showSlide(0);
         startInterval();
     });
 
-    // 鼠标悬停暂停轮播
     const slider = document.querySelector('.slider');
     slider.addEventListener('mouseenter', () => clearInterval(interval));
     slider.addEventListener('mouseleave', () => startInterval());
-
-    // --- 新增：可拖动的WhatsApp按钮逻辑 ---
-    const waBtn = document.getElementById('waBtn');
-    let isDragging = false;
-    let startX, startY, initialX, initialY;
-
-    // 鼠标/触摸开始
-    function dragStart(e) {
-        isDragging = true;
-        // 防止点击事件被触发
-        if (e.type === 'touchstart') {
-            startX = e.touches[0].clientX;
-            startY = e.touches[0].clientY;
-        } else {
-            startX = e.clientX;
-            startY = e.clientY;
-        }
-        initialX = waBtn.offsetLeft;
-        initialY = waBtn.offsetTop;
-        waBtn.style.transition = 'none'; // 拖动时取消过渡，防止卡顿
-    }
-
-    // 拖动中
-    function dragMove(e) {
-        if (!isDragging) return;
-        e.preventDefault();
-        let clientX, clientY;
-        if (e.type === 'touchmove') {
-            clientX = e.touches[0].clientX;
-            clientY = e.touches[0].clientY;
-        } else {
-            clientX = e.clientX;
-            clientY = e.clientY;
-        }
-        // 计算新位置
-        const dx = clientX - startX;
-        const dy = clientY - startY;
-        let newLeft = initialX + dx;
-        let newTop = initialY + dy;
-
-        // 边界限制：不超出屏幕可视区域
-        const maxLeft = window.innerWidth - waBtn.offsetWidth;
-        const maxTop = window.innerHeight - waBtn.offsetHeight;
-        newLeft = Math.max(0, Math.min(newLeft, maxLeft));
-        newTop = Math.max(0, Math.min(newTop, maxTop));
-
-        waBtn.style.left = newLeft + 'px';
-        waBtn.style.top = newTop + 'px';
-        waBtn.style.right = 'auto'; // 取消原来的right固定值
-        waBtn.style.bottom = 'auto'; // 取消原来的bottom固定值
-    }
-
-    // 拖动结束
-    function dragEnd() {
-        isDragging = false;
-        waBtn.style.transition = '';
-    }
-
-    // 绑定事件
-    waBtn.addEventListener('mousedown', dragStart);
-    waBtn.addEventListener('touchstart', dragStart);
-    document.addEventListener('mousemove', dragMove);
-    document.addEventListener('touchmove', dragMove);
-    document.addEventListener('mouseup', dragEnd);
-    document.addEventListener('touchend', dragEnd);
-
-    // 防止拖动时触发链接跳转
-    waBtn.addEventListener('click', function(e) {
-        if (isDragging) {
-            e.preventDefault();
-        }
-    });
 </script>
 </body>
 </html>
