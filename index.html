@@ -179,8 +179,12 @@
             text-decoration: none;
             font-weight: bold;
             z-index: 999;
-            cursor: move;
+            cursor: grab;
             user-select: none;
+            touch-action: none;
+        }
+        .whatsapp-btn:active {
+            cursor: grabbing;
         }
 
         /* 手机端核心优化 */
@@ -324,49 +328,62 @@
     slider.addEventListener('mouseenter', () => clearInterval(interval));
     slider.addEventListener('mouseleave', () => startInterval());
 
-    // ========== 新增：可拖动 WhatsApp 按钮 ==========
-    const el = document.getElementById('dragWa');
-    let isMove = false, x, y;
+    // 新版可拖动逻辑，兼容手机和电脑
+    const waBtn = document.getElementById('dragWa');
+    let isDragging = false;
+    let startX, startY, initialX, initialY;
 
-    el.addEventListener('mousedown', start);
-    el.addEventListener('touchstart', start);
-    document.addEventListener('mousemove', move);
-    document.addEventListener('touchmove', move);
-    document.addEventListener('mouseup', end);
-    document.addEventListener('touchend', end);
+    waBtn.addEventListener('mousedown', dragStart);
+    waBtn.addEventListener('touchstart', dragStart, { passive: false });
+    document.addEventListener('mousemove', dragMove);
+    document.addEventListener('touchmove', dragMove, { passive: false });
+    document.addEventListener('mouseup', dragEnd);
+    document.addEventListener('touchend', dragEnd);
 
-    function start(e) {
-        isMove = true;
-        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-        x = clientX - el.offsetLeft;
-        y = clientY - el.offsetTop;
-        el.style.transition = 'none';
+    function dragStart(e) {
+        isDragging = true;
+        const touch = e.touches ? e.touches[0] : e;
+        startX = touch.clientX;
+        startY = touch.clientY;
+        const rect = waBtn.getBoundingClientRect();
+        initialX = rect.left;
+        initialY = rect.top;
+        waBtn.style.transition = 'none';
+        waBtn.style.pointerEvents = 'none';
     }
 
-    function move(e) {
-        if (!isMove) return;
+    function dragMove(e) {
+        if (!isDragging) return;
         e.preventDefault();
-        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-        let left = clientX - x;
-        let top = clientY - y;
+        const touch = e.touches ? e.touches[0] : e;
+        const dx = touch.clientX - startX;
+        const dy = touch.clientY - startY;
+        let newX = initialX + dx;
+        let newY = initialY + dy;
 
-        const maxX = window.innerWidth - el.offsetWidth;
-        const maxY = window.innerHeight - el.offsetHeight;
-        left = Math.max(0, Math.min(left, maxX));
-        top = Math.max(0, Math.min(top, maxY));
+        const maxX = window.innerWidth - waBtn.offsetWidth;
+        const maxY = window.innerHeight - waBtn.offsetHeight;
+        newX = Math.max(0, Math.min(newX, maxX));
+        newY = Math.max(0, Math.min(newY, maxY));
 
-        el.style.left = left + 'px';
-        el.style.top = top + 'px';
-        el.style.right = 'auto';
-        el.style.bottom = 'auto';
+        waBtn.style.left = newX + 'px';
+        waBtn.style.top = newY + 'px';
+        waBtn.style.right = 'auto';
+        waBtn.style.bottom = 'auto';
     }
 
-    function end() {
-        isMove = false;
-        el.style.transition = '';
+    function dragEnd() {
+        isDragging = false;
+        waBtn.style.transition = '';
+        waBtn.style.pointerEvents = '';
     }
+
+    // 防止拖动时触发跳转
+    waBtn.addEventListener('click', function(e) {
+        if (isDragging) {
+            e.preventDefault();
+        }
+    });
 </script>
 </body>
 </html>
