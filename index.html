@@ -179,6 +179,8 @@
             text-decoration: none;
             font-weight: bold;
             z-index: 999;
+            cursor: move;
+            user-select: none;
         }
 
         /* 手机端核心优化 */
@@ -273,8 +275,7 @@
     </div>
 </footer>
 
-<!-- 已换成标准带咨询文案的WhatsApp链接 -->
-<a href="https://api.whatsapp.com/send?phone=8615980009534&text=Hello,%20I%20am%20interested%20in%20your%20hardware%20products." target="_blank" class="whatsapp-btn">WhatsApp Us</a>
+<a href="https://api.whatsapp.com/send?phone=8615980009534&text=Hello,%20I%20am%20interested%20in%20your%20hardware%20products." target="_blank" class="whatsapp-btn" id="dragWa">WhatsApp Us</a>
 
 <script>
     let slides = document.querySelectorAll('.slide-item');
@@ -322,6 +323,50 @@
     const slider = document.querySelector('.slider');
     slider.addEventListener('mouseenter', () => clearInterval(interval));
     slider.addEventListener('mouseleave', () => startInterval());
+
+    // ========== 新增：可拖动 WhatsApp 按钮 ==========
+    const el = document.getElementById('dragWa');
+    let isMove = false, x, y;
+
+    el.addEventListener('mousedown', start);
+    el.addEventListener('touchstart', start);
+    document.addEventListener('mousemove', move);
+    document.addEventListener('touchmove', move);
+    document.addEventListener('mouseup', end);
+    document.addEventListener('touchend', end);
+
+    function start(e) {
+        isMove = true;
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        x = clientX - el.offsetLeft;
+        y = clientY - el.offsetTop;
+        el.style.transition = 'none';
+    }
+
+    function move(e) {
+        if (!isMove) return;
+        e.preventDefault();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        let left = clientX - x;
+        let top = clientY - y;
+
+        const maxX = window.innerWidth - el.offsetWidth;
+        const maxY = window.innerHeight - el.offsetHeight;
+        left = Math.max(0, Math.min(left, maxX));
+        top = Math.max(0, Math.min(top, maxY));
+
+        el.style.left = left + 'px';
+        el.style.top = top + 'px';
+        el.style.right = 'auto';
+        el.style.bottom = 'auto';
+    }
+
+    function end() {
+        isMove = false;
+        el.style.transition = '';
+    }
 </script>
 </body>
 </html>
