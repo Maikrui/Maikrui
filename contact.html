@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us - Maikrui Workshop</title>
+    <title>Contact Us - Maikrui Metal</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
         body { background: #f8f8f8; color: #333; line-height: 1.6; }
@@ -15,7 +15,7 @@
         header { background: var(--brand-dark-blue); padding: 1rem 0; position: sticky; top: 0; z-index: 100; }
         .container { width: 90%; max-width: 1100px; margin: 0 auto; }
         .header-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
-        .logo { font-size: 1.5rem; font-weight: bold; color: var(--brand-silver); }
+        .logo { font-size: 1.5rem; font-weight: bold; color: var(--brand-silver); display: flex; align-items: center; gap: 8px; }
         nav a { color: #cccccc; text-decoration: none; margin-left: 1.5rem; transition: color 0.3s ease; }
         nav a:hover { color: var(--brand-silver); }
         .content { padding: 4rem 0; background: #ffffff; }
@@ -72,7 +72,10 @@
 <body>
 <header>
     <div class="container header-inner">
-        <div class="logo">Maikrui Workshop</div>
+        <div class="logo">
+            <img src="logo.png" style="height:40px; margin-right:8px;">
+            Maikrui Metal
+        </div>
         <nav>
             <a href="index.html">Home</a>
             <a href="products.html">Products</a>
@@ -114,7 +117,7 @@
 
 <footer>
     <div class="container">
-        <p>Maikrui Workshop © All Rights Reserved</p>
+        <p>Maikrui Metal © All Rights Reserved</p>
     </div>
 </footer>
 </body>
