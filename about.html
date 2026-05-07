@@ -7,18 +7,25 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
         body { background: #f8f8f8; color: #333; line-height: 1.6; }
-        header { background: #222222; padding: 1rem 0; }
+
+        /* 统一品牌色调 */
+        :root{
+            --brand-dark-blue: #0A244B;
+            --brand-silver: #E0E0E0;
+        }
+
+        header { background: var(--brand-dark-blue); padding: 1rem 0; }
         .container { width: 90%; max-width: 1100px; margin: 0 auto; }
         .header-inner { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.5rem; font-weight: bold; color: #d4b068; }
+        .logo { font-size: 1.5rem; font-weight: bold; color: var(--brand-silver); }
         nav a { color: #ccc; text-decoration: none; margin-left: 1.5rem; transition: color 0.3s; }
-        nav a:hover { color: #d4b068; }
+        nav a:hover { color: var(--brand-silver); }
         .content { padding: 4rem 0; background: #fff; }
-        h1, h2 { margin: 1rem 0; color: #222; }
+        h1, h2 { margin: 1rem 0; color: var(--brand-dark-blue); }
         p { margin-bottom: 1rem; }
         ul { margin-left: 1.5rem; }
         li { margin-bottom: 0.4rem; }
-        footer { background: #222; color: #bbb; text-align: center; padding: 2rem 0; margin-top: 2rem; }
+        footer { background: var(--brand-dark-blue); color: var(--brand-silver); text-align: center; padding: 2rem 0; margin-top: 2rem; }
     </style>
 </head>
 <body>
