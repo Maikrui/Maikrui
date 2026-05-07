@@ -5,78 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maikrui Workshop | Precision Hardware</title>
     <style>
-        :root {
-            --dark-blue: #001f3f; 
-            --silver: #e0e0e0;
-            --white: #ffffff;
-        }
-
+        :root { --dark-blue: #001f3f; --silver: #e0e0e0; --white: #ffffff; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
-        body { background-color: var(--white); color: #333; }
+        header { background: var(--dark-blue); padding: 12px 0; position: sticky; top: 0; z-index: 1000; }
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo-box img { height: 45px; width: auto; filter: brightness(0) invert(1); }
+        nav a { color: var(--silver); text-decoration: none; margin-left: 20px; font-size: 14px; font-weight: bold; text-transform: uppercase; }
 
-        header {
-            background: var(--dark-blue);
-            padding: 10px 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+        /* 轮播图容器 */
+        .slider-container { position: relative; height: 550px; width: 100%; overflow: hidden; }
+        .slide { 
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+            opacity: 0; transition: opacity 1s ease-in-out;
+            background-size: cover; background-position: center;
+            display: flex; align-items: center; justify-content: center;
         }
+        .slide.active { opacity: 1; }
+        .slide::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,31,63,0.6); }
+        
+        .hero-content { position: relative; z-index: 2; color: var(--white); text-align: center; padding: 0 20px; }
+        .hero-content h1 { font-size: 48px; letter-spacing: 2px; margin-bottom: 20px; }
 
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        /* Logo 区域：如果图片没好，至少有文字 */
-        .logo-box {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            color: white;
-            font-weight: bold;
-            font-size: 20px;
-        }
-        .logo-box img {
-            height: 50px;
-            width: auto;
-            margin-right: 10px;
-        }
-
-        nav a {
-            color: var(--silver);
-            text-decoration: none;
-            margin-left: 20px;
-            font-size: 14px;
-            text-transform: uppercase;
-        }
-
-        /* 主横幅优化 */
-        .hero {
-            height: 500px;
-            background: linear-gradient(rgba(0,31,63,0.75), rgba(0,31,63,0.75)), url('banner.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            text-align: center;
-        }
-
-        .hero-content h1 { font-size: 42px; letter-spacing: 2px; margin-bottom: 15px; }
-        .hero-content p { font-size: 18px; color: var(--silver); max-width: 600px; margin: 0 auto; }
-
-        .features { padding: 60px 0; background: #f4f4f4; }
-        .section-title { text-align: center; margin-bottom: 40px; color: var(--dark-blue); }
-        .grid { display: flex; flex-wrap: wrap; gap: 20px; }
-        .card { flex: 1; min-width: 300px; background: white; padding: 30px; border-top: 5px solid var(--dark-blue); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-
-        footer { background: var(--dark-blue); color: #ccc; padding: 40px 0; text-align: center; font-size: 14px; }
+        .features { padding: 80px 0; background: #f9f9f9; }
+        .grid { display: flex; flex-wrap: wrap; gap: 30px; margin-top: 40px; }
+        .card { flex: 1; min-width: 300px; background: white; padding: 40px; border-top: 6px solid var(--dark-blue); box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+        footer { background: var(--dark-blue); color: #888; padding: 40px 0; text-align: center; }
     </style>
 </head>
 <body>
@@ -84,49 +37,64 @@
 <header>
     <div class="container">
         <a href="index.html" class="logo-box">
-            <img src="logo.jpg" alt="">
-            <span>MAIKRUI</span>
+            <img src="logo.png" alt="Maikrui">
         </a>
         <nav>
-            <a href="#">Home</a>
-            <a href="#">Products</a>
-            <a href="#">About</a>
-            <a href="#">Contact</a>
+            <a href="index.html">Home</a>
+            <a href="products.html">Products</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
         </nav>
     </div>
 </header>
 
-<section class="hero">
-    <div class="hero-content">
-        <h1>PRECISION METAL HARDWARE</h1>
-        <p>Premium Belt Buckles & Custom Die Casting Solutions</p>
+<section class="slider-container">
+    <div class="slide active" style="background-image: url('banner1.jpg');">
+        <div class="hero-content">
+            <h1>PRECISION METAL HARDWARE</h1>
+            <p>Premium Belt Buckles & Custom Die Casting Solutions</p>
+        </div>
+    </div>
+    <div class="slide" style="background-image: url('banner2.jpg');">
+        <div class="hero-content">
+            <h1>INDUSTRIAL EXCELLENCE</h1>
+            <p>Advanced Zinc Alloy Manufacturing Since 2025</p>
+        </div>
+    </div>
+    <div class="slide" style="background-image: url('banner3.jpg');">
+        <div class="hero-content">
+            <h1>GLOBAL SUPPLY CHAIN</h1>
+            <p>Reliable Partner for International Garment Accessories</p>
+        </div>
     </div>
 </section>
 
 <section class="features">
     <div class="container" style="flex-direction: column;">
-        <h2 class="section-title">Professional Manufacturing</h2>
+        <h2 style="text-align: center; color: var(--dark-blue);">Professional Manufacturing</h2>
         <div class="grid">
-            <div class="card">
-                <h3>Industrial Excellence</h3>
-                <p>Advanced die casting with high-precision finishing for every hardware piece.</p>
-            </div>
-            <div class="card">
-                <h3>OEM/ODM Support</h3>
-                <p>From 3D drawings to mass production, we handle your custom needs.</p>
-            </div>
-            <div class="card">
-                <h3>Global Delivery</h3>
-                <p>Strict quality control and reliable logistics for international markets.</p>
-            </div>
+            <div class="card"><h3>Technical Precision</h3><p>Advanced molding to meet your exact specifications.</p></div>
+            <div class="card"><h3>OEM/ODM Service</h3><p>From 3D drawing to final mass production.</p></div>
+            <div class="card"><h3>Strict QC</h3><p>High-durability hardware ensuring brand quality.</p></div>
         </div>
     </div>
 </section>
 
 <footer>
-    <p>MAIKRUI PRECISION HARDWARE WORKSHOP</p>
-    <p>© 2026 | contact@maikrui.com</p>
+    <p style="color: white;">MAIKRUI PRECISION HARDWARE WORKSHOP</p>
+    <p>© 2026 Maikrui | contact@maikrui.com</p>
 </footer>
+
+<script>
+    let slides = document.querySelectorAll('.slide');
+    let currentSlide = 0;
+    function nextSlide() {
+        slides[currentSlide].classList.remove('active');
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].classList.add('active');
+    }
+    setInterval(nextSlide, 4000); // 每4秒自动切换一张图
+</script>
 
 </body>
 </html>
