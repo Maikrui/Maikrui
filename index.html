@@ -5,104 +5,92 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maikrui Workshop | Precision Hardware</title>
     <style>
+        /* 统一使用你的 Logo 深蓝色调 */
         :root { 
-            --dark-blue: #001f3f; 
-            --silver: #bdc3c7; 
+            --primary-blue: #001f3f; 
+            --accent-silver: #bdc3c7; 
+            --light-bg: #f8f9fa;
             --white: #ffffff; 
-            --bg-gray: #f8f9fa;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
-        body { background-color: var(--white); color: #333; overflow-x: hidden; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+        body { background-color: var(--white); color: #333; line-height: 1.6; }
 
-        /* 导航栏：手机端自动换行 */
-        header { background: var(--dark-blue); padding: 15px 0; position: sticky; top: 0; z-index: 1000; }
-        .container { width: 90%; max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        /* 导航栏 */
+        header { background: var(--primary-blue); padding: 1rem 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
+        .container { width: 90%; max-width: 1100px; margin: 0 auto; }
+        .header-inner { display: flex; justify-content: space-between; align-items: center; }
         
-        .logo-box { display: flex; align-items: center; text-decoration: none; color: white; font-weight: bold; font-size: 20px; }
-        .logo-box img { height: 35px; width: auto; margin-right: 10px; filter: brightness(0) invert(1); }
+        .logo-box { display: flex; align-items: center; text-decoration: none; color: white; font-weight: bold; font-size: 1.5rem; }
+        .logo-box img { height: 40px; width: auto; margin-right: 12px; filter: brightness(0) invert(1); }
         
-        nav { display: flex; gap: 15px; }
-        nav a { color: var(--silver); text-decoration: none; font-size: 13px; font-weight: bold; text-transform: uppercase; }
+        nav a { color: var(--accent-silver); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; font-weight: bold; text-transform: uppercase; transition: 0.3s; }
+        nav a:hover { color: var(--white); }
 
-        /* 核心展示区：自适应布局 */
-        .hero-section {
-            background: var(--dark-blue);
-            display: flex;
-            flex-direction: column; /* 手机端默认垂直排列 */
-            align-items: center;
-            overflow: hidden;
-        }
-
-        .hero-content {
-            padding: 40px 5%;
-            text-align: center;
-            color: white;
-            width: 100%;
-        }
-        .hero-content h1 { font-size: 28px; letter-spacing: 1px; margin-bottom: 10px; }
-        .hero-content p { font-size: 16px; color: var(--silver); }
-
-        /* 轮播图区域：手机端高度固定，图片撑满 */
-        .slider-container {
-            width: 100%;
-            height: 250px; /* 手机端初始高度 */
+        /* 响应式轮播图区 */
+        .hero-slider {
             position: relative;
+            height: 450px; /* 电脑端高度 */
+            background: var(--primary-blue);
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .slide { 
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-            opacity: 0; transition: opacity 0.8s ease;
-            background-size: cover; 
-            background-position: center;
+            opacity: 0; transition: opacity 1s ease-in-out;
+            background-size: cover; background-position: center;
         }
         .slide.active { opacity: 1; }
-
-        /* 优势卡片区 */
-        .features { padding: 40px 5%; background: var(--bg-gray); }
-        .grid { 
-            display: grid; 
-            grid-template-columns: 1fr; /* 手机端一列 */
-            gap: 20px; 
-        }
-        .card { 
-            background: white; padding: 25px; 
-            border-top: 4px solid var(--dark-blue); 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05); 
-            text-align: center; 
-        }
-        .card h3 { font-size: 18px; margin-bottom: 10px; color: var(--dark-blue); }
-
-        footer { background: var(--dark-blue); color: #7f8c8d; padding: 40px 0; text-align: center; font-size: 12px; }
-
-        /* --- 电脑端和谐化调整 --- */
-        @media (min-width: 992px) {
-            .hero-section { 
-                flex-direction: row; /* 电脑端左右排列 */
-                height: 500px; 
-            }
-            .hero-content { 
-                width: 40%; 
-                text-align: left; 
-                padding-left: 8%;
-            }
-            .hero-content h1 { font-size: 42px; }
-            .slider-container { width: 60%; height: 100%; }
-            .grid { grid-template-columns: repeat(3, 1fr); } /* 电脑端三列 */
+        /* 叠加一层 Logo 同色系的半透明遮罩，让文字更清晰 */
+        .slide::after { 
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(0, 31, 63, 0.4); 
         }
 
-        /* --- 针对你截图中小程序/手机浏览器的微调 --- */
-        @media (max-width: 480px) {
-            header .container { flex-direction: column; gap: 10px; }
-            .hero-content h1 { font-size: 24px; }
-            .slider-container { height: 220px; } /* 缩小图片比例，防止太占屏幕 */
+        .hero-text { position: relative; z-index: 10; color: white; text-align: center; padding: 0 20px; }
+        .hero-text h1 { font-size: 2.5rem; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 2px; }
+        .hero-text p { font-size: 1.1rem; color: var(--accent-silver); }
+
+        /* 产品展示区 (保持你喜欢的卡片风格) */
+        .section { padding: 4rem 0; }
+        .section-title { text-align: center; font-size: 2rem; margin-bottom: 3rem; color: var(--primary-blue); position: relative; }
+        .section-title::after { content: ''; display: block; width: 50px; height: 3px; background: var(--primary-blue); margin: 10px auto; }
+
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+        .product-card { 
+            background: white; border-radius: 8px; overflow: hidden; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05); transition: 0.3s;
+            border: 1px solid #eee;
+        }
+        .product-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+        .product-card img { width: 100%; height: 240px; object-fit: cover; }
+        .product-info { padding: 1.5rem; text-align: center; }
+        .product-info h3 { margin-bottom: 0.5rem; color: var(--primary-blue); }
+        .product-info p { color: #666; font-size: 0.9rem; }
+
+        /* 优势区 */
+        .advantages { background: var(--light-bg); padding: 4rem 0; }
+        .advantage-items { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; text-align: center; }
+        .advantage h3 { color: var(--primary-blue); margin-bottom: 10px; }
+
+        footer { background: var(--primary-blue); color: var(--accent-silver); text-align: center; padding: 3rem 0; font-size: 0.9rem; }
+        footer p { margin-bottom: 5px; }
+
+        /* 手机端和谐适配 */
+        @media (max-width: 768px) {
+            .hero-slider { height: 300px; }
+            .hero-text h1 { font-size: 1.8rem; }
+            nav { display: none; } /* 手机端隐藏导航或可改为折叠菜单 */
+            .header-inner { justify-content: center; }
         }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="container">
+    <div class="container header-inner">
         <a href="index.html" class="logo-box">
             <img src="logo.png" onerror="this.style.display='none'">
             <span>MAIKRUI</span>
@@ -116,41 +104,81 @@
     </div>
 </header>
 
-<section class="hero-section">
-    <div class="hero-content">
-        <h1>Precision Metal Hardware</h1>
-        <p>Premium Belt Buckles & Custom Die Casting Since 2025.</p>
-    </div>
+<section class="hero-slider">
+    <div class="slide active" style="background-image: url('banner1.jpg');"></div>
+    <div class="slide" style="background-image: url('banner2.jpg');"></div>
+    <div class="slide" style="background-image: url('banner3.jpg');"></div>
     
-    <div class="slider-container">
-        <div class="slide active" style="background-image: url('banner1.jpg');"></div>
-        <div class="slide" style="background-image: url('banner2.jpg');"></div>
-        <div class="slide" style="background-image: url('banner3.jpg');"></div>
+    <div class="hero-text">
+        <h1>Precision Metal Hardware</h1>
+        <p>Expert in Belt Buckles & Custom Zinc Alloy Die Casting</p>
     </div>
 </section>
 
-<section class="features">
-    <div class="grid">
-        <div class="card"><h3>Quality Control</h3><p>Strict testing for every component.</p></div>
-        <div class="card"><h3>Fast Delivery</h3><p>Global shipping and logistics.</p></div>
-        <div class="card"><h3>OEM/ODM</h3><p>Professional custom hardware design.</p></div>
+<section class="section container">
+    <h2 class="section-title">Our Products</h2>
+    <div class="product-grid">
+        <div class="product-card">
+            <img src="banner1.jpg" alt="Buckles">
+            <div class="product-info">
+                <h3>Custom Belt Buckles</h3>
+                <p>High-quality zinc alloy & brass finishes</p>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="banner2.jpg" alt="Die Casting">
+            <div class="product-info">
+                <h3>Precision Die Casting</h3>
+                <p>Advanced mould design & mass production</p>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="banner3.jpg" alt="Garment Trims">
+            <div class="product-info">
+                <h3>Garment Accessories</h3>
+                <p>Durable hardware for global brands</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="advantages">
+    <div class="container">
+        <h2 class="section-title">Why Choose Us</h2>
+        <div class="advantage-items">
+            <div class="advantage">
+                <h3>Factory Direct</h3>
+                <p>Competitive pricing from our family-owned facility.</p>
+            </div>
+            <div class="advantage">
+                <h3>Custom Design</h3>
+                <p>OEM & ODM services tailored to your specifications.</p>
+            </div>
+            <div class="advantage">
+                <h3>Strict QC</h3>
+                <p>100% inspection to ensure premium quality standards.</p>
+            </div>
+        </div>
     </div>
 </section>
 
 <footer>
-    <p style="color: white; margin-bottom: 8px;">MAIKRUI PRECISION HARDWARE WORKSHOP</p>
-    <p>© 2026 Maikrui | contact@maikrui.com</p>
+    <div class="container">
+        <p style="color: white; font-weight: bold;">MAIKRUI PRECISION HARDWARE WORKSHOP</p>
+        <p>© 2026 Maikrui Workshop | contact@maikrui.com</p>
+    </div>
 </footer>
 
 <script>
+    // 轮播图逻辑
     let slides = document.querySelectorAll('.slide');
     let current = 0;
-    function next() {
+    function nextSlide() {
         slides[current].classList.remove('active');
         current = (current + 1) % slides.length;
         slides[current].classList.add('active');
     }
-    setInterval(next, 4000);
+    setInterval(nextSlide, 4000); // 4秒切换一次
 </script>
 
 </body>
