@@ -9,11 +9,14 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
         header { background: var(--dark-blue); padding: 12px 0; position: sticky; top: 0; z-index: 1000; }
         .container { width: 90%; max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .logo-box img { height: 45px; width: auto; filter: brightness(0) invert(1); }
+        
+        /* Logo 适配：如果logo.png不存在，会显示文字 MAIKRUI */
+        .logo-box { display: flex; align-items: center; text-decoration: none; color: white; font-weight: bold; }
+        .logo-box img { height: 45px; width: auto; margin-right: 10px; filter: brightness(0) invert(1); }
+        
         nav a { color: var(--silver); text-decoration: none; margin-left: 20px; font-size: 14px; font-weight: bold; text-transform: uppercase; }
 
-        /* 轮播图容器 */
-        .slider-container { position: relative; height: 550px; width: 100%; overflow: hidden; }
+        .slider-container { position: relative; height: 500px; width: 100%; overflow: hidden; background: #001f3f; }
         .slide { 
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
             opacity: 0; transition: opacity 1s ease-in-out;
@@ -21,15 +24,15 @@
             display: flex; align-items: center; justify-content: center;
         }
         .slide.active { opacity: 1; }
-        .slide::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,31,63,0.6); }
+        /* 遮罩层，防止图片太亮看不清字 */
+        .slide::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); }
         
-        .hero-content { position: relative; z-index: 2; color: var(--white); text-align: center; padding: 0 20px; }
-        .hero-content h1 { font-size: 48px; letter-spacing: 2px; margin-bottom: 20px; }
+        .hero-content { position: relative; z-index: 2; color: var(--white); text-align: center; }
+        .hero-content h1 { font-size: 40px; text-transform: uppercase; }
 
-        .features { padding: 80px 0; background: #f9f9f9; }
-        .grid { display: flex; flex-wrap: wrap; gap: 30px; margin-top: 40px; }
-        .card { flex: 1; min-width: 300px; background: white; padding: 40px; border-top: 6px solid var(--dark-blue); box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
-        footer { background: var(--dark-blue); color: #888; padding: 40px 0; text-align: center; }
+        .features { padding: 60px 0; background: #f4f4f4; }
+        .grid { display: flex; flex-wrap: wrap; gap: 20px; }
+        .card { flex: 1; min-width: 300px; background: white; padding: 30px; border-top: 5px solid var(--dark-blue); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
     </style>
 </head>
 <body>
@@ -37,7 +40,8 @@
 <header>
     <div class="container">
         <a href="index.html" class="logo-box">
-            <img src="logo.png" alt="Maikrui">
+            <img src="logo.png" onerror="this.style.display='none'">
+            <span>MAIKRUI</span>
         </a>
         <nav>
             <a href="index.html">Home</a>
@@ -50,50 +54,35 @@
 
 <section class="slider-container">
     <div class="slide active" style="background-image: url('banner1.jpg');">
-        <div class="hero-content">
-            <h1>PRECISION METAL HARDWARE</h1>
-            <p>Premium Belt Buckles & Custom Die Casting Solutions</p>
-        </div>
+        <div class="hero-content"><h1>Precision Hardware</h1></div>
     </div>
     <div class="slide" style="background-image: url('banner2.jpg');">
-        <div class="hero-content">
-            <h1>INDUSTRIAL EXCELLENCE</h1>
-            <p>Advanced Zinc Alloy Manufacturing Since 2025</p>
-        </div>
+        <div class="hero-content"><h1>Custom Die Casting</h1></div>
     </div>
     <div class="slide" style="background-image: url('banner3.jpg');">
-        <div class="hero-content">
-            <h1>GLOBAL SUPPLY CHAIN</h1>
-            <p>Reliable Partner for International Garment Accessories</p>
-        </div>
+        <div class="hero-content"><h1>Global Shipping</h1></div>
     </div>
 </section>
 
 <section class="features">
     <div class="container" style="flex-direction: column;">
-        <h2 style="text-align: center; color: var(--dark-blue);">Professional Manufacturing</h2>
         <div class="grid">
-            <div class="card"><h3>Technical Precision</h3><p>Advanced molding to meet your exact specifications.</p></div>
-            <div class="card"><h3>OEM/ODM Service</h3><p>From 3D drawing to final mass production.</p></div>
-            <div class="card"><h3>Strict QC</h3><p>High-durability hardware ensuring brand quality.</p></div>
+            <div class="card"><h3>Quality Control</h3><p>Strict testing for every buckle.</p></div>
+            <div class="card"><h3>Fast Lead Time</h3><p>Reliable production for global clients.</p></div>
         </div>
     </div>
 </section>
 
-<footer>
-    <p style="color: white;">MAIKRUI PRECISION HARDWARE WORKSHOP</p>
-    <p>© 2026 Maikrui | contact@maikrui.com</p>
-</footer>
-
 <script>
     let slides = document.querySelectorAll('.slide');
-    let currentSlide = 0;
-    function nextSlide() {
-        slides[currentSlide].classList.remove('active');
-        currentSlide = (currentSlide + 1) % slides.length;
-        slides[currentSlide].classList.add('active');
+    let current = 0;
+    function next() {
+        slides[current].classList.remove('active');
+        current = (current + 1) % slides.length;
+        slides[current].classList.add('active');
     }
-    setInterval(nextSlide, 4000); // 每4秒自动切换一张图
+    // 每3秒换一张图
+    setInterval(next, 3000);
 </script>
 
 </body>
