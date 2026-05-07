@@ -17,11 +17,10 @@
             color: #333;
             line-height: 1.6;
         }
-        /* 品牌色变量，和你的logo完全对齐 */
         :root {
-            --brand-dark-blue: #0A244B; /* logo主深蓝色 */
-            --brand-silver: #E0E0E0;    /* logo金属银 */
-            --brand-text-dark: #0A244B; /* 主文本深色，和logo文字一致 */
+            --brand-dark-blue: #0A244B;
+            --brand-silver: #E0E0E0;
+            --brand-text-dark: #0A244B;
         }
         header {
             background: var(--brand-dark-blue);
@@ -45,7 +44,7 @@
         .logo {
             font-size: 1.5rem;
             font-weight: bold;
-            color: var(--brand-silver); /* 改为logo银色调 */
+            color: var(--brand-silver);
             display: flex;
             align-items: center;
             gap: 8px;
@@ -57,9 +56,8 @@
             transition: color 0.3s ease;
         }
         nav a:hover {
-            color: var(--brand-silver); /* hover改为logo银色调 */
+            color: var(--brand-silver);
         }
-        /* 轮播 - 电脑端保持你原来的效果 */
         .slider {
             position: relative;
             width: 100%;
@@ -87,7 +85,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(10, 36, 75, 0.35); /* 改为品牌蓝色半透明遮罩 */
+            background: rgba(10, 36, 75, 0.35);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -108,7 +106,6 @@
             color: #fff;
             text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
         }
-        /* 左右箭头改为logo银色调 */
         .prev, .next {
             position: absolute;
             top: 50%;
@@ -123,7 +120,6 @@
         }
         .prev {left: 0;}
         .next {right: 0;}
-        /* 轮播指示器激活色改为logo银色调 */
         .slider-indicators {
             position: absolute;
             bottom: 16px;
@@ -144,7 +140,6 @@
         .indicator.active {
             background: var(--brand-silver);
         }
-        /* 优势板块 */
         .advantages {
             background: #ffffff;
             padding: 4rem 0;
@@ -153,7 +148,7 @@
             text-align: center;
             font-size: 1.8rem;
             margin-bottom: 2.5rem;
-            color: var(--brand-text-dark); /* 改为logo文字深色 */
+            color: var(--brand-text-dark);
         }
         .advantage-items {
             display: flex;
@@ -167,12 +162,12 @@
             min-width: 220px;
         }
         .advantage h3 {
-            color: var(--brand-text-dark); /* 改为logo文字深色 */
+            color: var(--brand-text-dark);
             margin-bottom: 0.5rem;
         }
         footer {
-            background: var(--brand-dark-blue); /* 改为品牌深蓝色 */
-            color: var(--brand-silver); /* 改为logo银色调 */
+            background: var(--brand-dark-blue);
+            color: var(--brand-silver);
             text-align: center;
             padding: 2rem 0;
             margin-top: 2rem;
@@ -195,8 +190,6 @@
         .whatsapp-btn:active {
             cursor: grabbing;
         }
-
-        /* 手机端核心优化 */
         @media (max-width: 768px) {
             .slider {
                 height: 300px;
@@ -222,7 +215,7 @@
 <header>
     <div class="container header-inner">
         <div class="logo">
-            <img src="logo.png" style="height:40px; margin-right:8px; background:transparent;">
+            <img src="logo.png" style="height:40px; margin-right:8px; background:none;">
             Maikrui Metal
         </div>
         <nav>
@@ -340,7 +333,6 @@
     slider.addEventListener('mouseenter', () => clearInterval(interval));
     slider.addEventListener('mouseleave', () => startInterval());
 
-    // 新版可拖动逻辑，兼容手机和电脑
     const waBtn = document.getElementById('dragWa');
     let isDragging = false;
     let startX, startY, initialX, initialY;
@@ -390,7 +382,6 @@
         waBtn.style.pointerEvents = '';
     }
 
-    // 防止拖动时触发跳转
     waBtn.addEventListener('click', function(e) {
         if (isDragging) {
             e.preventDefault();
