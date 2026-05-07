@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - Maikrui Workshop</title>
+    <title>About Us - Maikrui Metal</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
         body { background: #f8f8f8; color: #333; line-height: 1.6; }
@@ -24,7 +24,7 @@
             flex-wrap: wrap; /* 关键：允许导航自动换行 */
             gap: 1rem;
         }
-        .logo { font-size: 1.5rem; font-weight: bold; color: var(--brand-silver); }
+        .logo { font-size: 1.5rem; font-weight: bold; color: var(--brand-silver); display: flex; align-items: center; gap: 8px; }
         nav a { color: #ccc; text-decoration: none; margin-left: 1.5rem; transition: color 0.3s; }
         nav a:hover { color: var(--brand-silver); }
         /* 手机端导航间距适配 */
@@ -42,7 +42,10 @@
 <body>
 <header>
     <div class="container header-inner">
-        <div class="logo">Maikrui Workshop</div>
+        <div class="logo">
+            <img src="logo.png" style="height:40px; margin-right:8px;">
+            Maikrui Metal
+        </div>
         <nav>
             <a href="index.html">Home</a>
             <a href="products.html">Products</a>
@@ -54,7 +57,7 @@
 
 <section class="content">
     <div class="container">
-        <h1>About Maikrui Workshop</h1>
+        <h1>About Maikrui Metal</h1>
         <p>We are an integrated factory with over 30 years of experience in garment hardware.</p>
         <p>Our core strength is zinc alloy die casting, supported by spin casting, lost wax casting and stamping.</p>
         <p>We control full production in-house, including mold design, CNC machining, plating, epoxy filling and laser engraving.</p>
@@ -74,7 +77,7 @@
 
 <footer>
     <div class="container">
-        <p>Maikrui Workshop © All Rights Reserved</p>
+        <p>Maikrui Metal © All Rights Reserved</p>
     </div>
 </footer>
 </body>
