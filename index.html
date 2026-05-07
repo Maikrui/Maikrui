@@ -49,6 +49,14 @@
             align-items: center;
             gap: 8px;
         }
+        /* 强制logo图片无背景、无边框 */
+        .logo img {
+            background: transparent !important;
+            border: none !important;
+            outline: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
         nav a {
             color: #cccccc;
             text-decoration: none;
@@ -215,7 +223,7 @@
 <header>
     <div class="container header-inner">
         <div class="logo">
-            <img src="logo.png" style="height:40px; margin-right:8px; background:transparent; border:none;" loading="lazy">
+            <img src="logo.png" style="height:40px; margin-right:8px;" loading="lazy">
             Maikrui Metal
         </div>
         <nav>
