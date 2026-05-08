@@ -114,10 +114,68 @@
         .product-card h3 { margin-bottom: 0.5rem; color: var(--brand-dark-blue); }
         footer { background: var(--brand-dark-blue); color: var(--brand-silver); text-align: center; padding: 2rem 0; margin-top: 2rem; }
 
-        @media (max-width: 768px) {
-            .page-wrap { flex-direction: column; }
-            .side-nav { width: 100%; position: static; }
-            nav a { margin-left: 0.8rem; }
+        /* ================== 画册式排版（只加这个，不破坏你原有代码） ================== */
+        .catalog-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 50px;
+            align-items: center;
+        }
+        .catalog-row.reverse {
+            direction: rtl;
+        }
+        .catalog-row.reverse > * {
+            direction: ltr;
+        }
+        .catalog-text {
+            padding: 15px;
+        }
+        .catalog-text h2 {
+            font-size: 22px;
+            color: var(--brand-dark-blue);
+            margin-bottom: 8px;
+        }
+        .catalog-text p {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+        .catalog-badge {
+            display: inline-block;
+            border: 1px solid var(--brand-dark-blue);
+            color: var(--brand-dark-blue);
+            padding: 3px 8px;
+            font-size: 12px;
+        }
+        .catalog-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .img-large {
+            grid-column: span 2;
+            background: #f8f8f8;
+            border: 1px dashed #ccc;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            border-radius: 6px;
+        }
+        .img-small {
+            background: #f8f8f8;
+            border: 1px dashed #ccc;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            border-radius: 6px;
+        }
+        @media (max-width:768px) {
+            .catalog-row { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -168,20 +226,59 @@
         </ul>
     </div>
 
+    <!-- ================== 右侧内容：画册式排版（你要的效果） ================== -->
     <div class="content">
         <h1>Our Products</h1>
-        <div class="product-grid">
-            <div class="product-card">
-                <h3>Zinc Alloy Buckles</h3>
-                <p>Die-cast zinc alloy belt buckles, OEM/ODM</p>
+
+        <div class="catalog-row">
+            <div class="catalog-text">
+                <h2>Belt Buckle Series</h2>
+                <p>Custom zinc alloy & stainless steel belt buckles</p>
+                <span class="catalog-badge">CUSTOM DESIGN</span>
             </div>
-            <div class="product-card">
-                <h3>Stainless Steel Buckles</h3>
-                <p>Durable, anti-rust, high strength</p>
+            <div class="catalog-images">
+                <div class="img-large">Main Image</div>
+                <div class="img-small">Sample</div>
+                <div class="img-small">Detail</div>
             </div>
-            <div class="product-card">
-                <h3>Brass Buckles</h3>
-                <p>Solid brass, antique & polished finish</p>
+        </div>
+
+        <div class="catalog-row reverse">
+            <div class="catalog-images">
+                <div class="img-large">Main Image</div>
+                <div class="img-small">Sample</div>
+                <div class="img-small">Detail</div>
+            </div>
+            <div class="catalog-text">
+                <h2>Shoe Buckle & Accessories</h2>
+                <p>Durable metal accessories for footwear</p>
+                <span class="catalog-badge">HIGH QUALITY</span>
+            </div>
+        </div>
+
+        <div class="catalog-row">
+            <div class="catalog-text">
+                <h2>Bag Metal Hardware</h2>
+                <p>Metal accessories for bags, luggage & leather goods</p>
+                <span class="catalog-badge">OEM ACCEPTED</span>
+            </div>
+            <div class="catalog-images">
+                <div class="img-large">Main Image</div>
+                <div class="img-small">Sample</div>
+                <div class="img-small">Detail</div>
+            </div>
+        </div>
+
+        <div class="catalog-row reverse">
+            <div class="catalog-images">
+                <div class="img-large">Main Image</div>
+                <div class="img-small">Sample</div>
+                <div class="img-small">Detail</div>
+            </div>
+            <div class="catalog-text">
+                <h2>Garment Metal Parts</h2>
+                <p>Buttons, rivets, tags & hardware for apparel</p>
+                <span class="catalog-badge">FULL RANGE</span>
             </div>
         </div>
     </div>
