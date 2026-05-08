@@ -6,7 +6,7 @@
     <title>About Us - Maikrui Metal</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
-        body { background: #f8f8f8; color: #333; line-height: 1.6; }
+        body { background: #f8f8f8; color: #333; line-height: 1.6; padding-top: 65px; }
 
         /* 统一品牌色调 */
         :root{
@@ -14,20 +14,26 @@
             --brand-silver: #E0E0E0;
         }
 
-        header { background: var(--brand-dark-blue); padding: 1rem 0; }
+        header {
+            background: var(--brand-dark-blue);
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+        }
         .container { width: 90%; max-width: 1100px; margin: 0 auto; }
-        /* 修复：和其他页面保持一致的响应式flex布局 */
         .header-inner { 
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
-            flex-wrap: wrap; /* 关键：允许导航自动换行 */
+            flex-wrap: wrap;
             gap: 1rem;
         }
         .logo { font-size: 1.5rem; font-weight: bold; color: var(--brand-silver); display: flex; align-items: center; gap: 8px; }
         nav a { color: #ccc; text-decoration: none; margin-left: 1.5rem; transition: color 0.3s; }
         nav a:hover { color: var(--brand-silver); }
-        /* 手机端导航间距适配 */
         @media (max-width: 768px) {
             nav a { margin-left: 0.8rem; }
         }
