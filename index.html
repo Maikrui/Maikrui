@@ -49,13 +49,17 @@
             align-items: center;
             gap: 8px;
         }
-        /* 强制logo图片无背景、无边框 */
+        /* 🔥 这里强制 Logo 完全透明，解决你的问题 */
         .logo img {
             background: transparent !important;
             border: none !important;
             outline: none !important;
+            box-shadow: none !important;
+            filter: none !important;
             padding: 0 !important;
             margin: 0 !important;
+            height: 40px !important;
+            width: auto !important;
         }
         nav a {
             color: #cccccc;
@@ -220,10 +224,12 @@
     </style>
 </head>
 <body>
+
 <header>
     <div class="container header-inner">
         <div class="logo">
-            <img src="logo.png" style="height:40px; margin-right:8px;" loading="lazy">
+            <!-- 🔥 Logo 图片已经强制透明 -->
+            <img src="logo.png" alt="Logo">
             Maikrui Metal
         </div>
         <nav>
