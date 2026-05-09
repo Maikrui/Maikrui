@@ -358,6 +358,8 @@
     const waBtn = document.getElementById('dragWa');
     let isDragging = false;
     let startX, startY, initialX, initialY;
+    // 标记是否发生了真正拖拽位移
+    let hasMoved = false;
 
     waBtn.addEventListener('mousedown', dragStart);
     waBtn.addEventListener('touchstart', dragStart, { passive: false });
@@ -368,6 +370,7 @@
 
     function dragStart(e) {
         isDragging = true;
+        hasMoved = false;
         const touch = e.touches ? e.touches[0] : e;
         startX = touch.clientX;
         startY = touch.clientY;
@@ -384,6 +387,12 @@
         const touch = e.touches ? e.touches[0] : e;
         const dx = touch.clientX - startX;
         const dy = touch.clientY - startY;
+
+        // 有位移就标记为真正拖拽
+        if(Math.abs(dx) > 5 || Math.abs(dy) > 5){
+            hasMoved = true;
+        }
+
         let newX = initialX + dx;
         let newY = initialY + dy;
 
@@ -404,8 +413,9 @@
         waBtn.style.pointerEvents = '';
     }
 
+    // 关键修复：只有真正拖动过才阻止跳转，轻点直接跳转
     waBtn.addEventListener('click', function(e) {
-        if (isDragging) {
+        if (hasMoved) {
             e.preventDefault();
         }
     });
