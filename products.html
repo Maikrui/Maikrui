@@ -6,7 +6,7 @@
     <title>Products | Maikrui Metal</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
-        body { background: #f8f8f8; color: #333; line-height: 1.6; padding-top: 65px; }
+        body { background: #f8f8f8; color: #333; padding-top: 70px; }
 
         :root{
             --brand-dark-blue: #0A244B;
@@ -14,52 +14,20 @@
             --active-color:#0A244B;
         }
 
-        /* 导航样式和首页100%完全一致 */
-        header {
-            background: var(--brand-dark-blue);
-            padding: 1rem 0;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 999;
+        header{
+            position:fixed;
+            top:0; left:0; width:100%;
+            background:var(--brand-dark-blue);
+            z-index:999;
+            padding:1rem 0;
         }
-        .container {
-            width: 90%;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-        .header-inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: nowrap; /* 强制不换行 */
-        }
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--brand-silver);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            white-space: nowrap;
-        }
-        .logo img {
-            height: 40px;
-            width: auto;
-        }
-        .top-nav a {
-            color: #ccc;
-            text-decoration: none;
-            margin-left: 1.5rem;
-            transition: color 0.3s ease;
-            white-space: nowrap;
-        }
-        .top-nav a:hover {
-            color: var(--brand-silver);
-        }
+        .container{width:92%; margin:0 auto; max-width:1200px;}
+        .header-inner{display:flex; justify-content:space-between; align-items:center; flex-wrap:nowrap;}
+        .logo{color:var(--brand-silver); font-weight:bold; font-size:1.4rem; display:flex; align-items:center; white-space: nowrap;}
+        .logo img{height:38px; margin-right:8px;}
+        .top-nav a{color:#ccc; text-decoration:none; margin-left:18px; white-space: nowrap;}
+        .top-nav a:hover{color:#fff;}
 
-        /* 产品页原有样式，完全不动 */
         .mobile-cate{
             display:none;
             gap:0.5rem;
@@ -164,22 +132,12 @@
             margin-top:2rem;
         }
 
-        /* 手机端适配，和首页完全一致 */
         @media (max-width:768px){
-            .header-inner {
-                flex-wrap: nowrap;
-                gap: 0.2rem;
-            }
-            .logo {
-                font-size: 1.1rem;
-            }
-            .logo img {
-                height: 32px;
-            }
-            .top-nav a {
-                margin-left: 0.4rem;
-                font-size: 0.85rem;
-            }
+            .header-inner{gap: 0.3rem;}
+            .logo{font-size: 1.1rem;}
+            .logo img{height: 32px;}
+            .top-nav a{margin-left: 0.5rem; font-size: 0.85rem;}
+            .top-nav a{flex-shrink:0;}
             .side-left{display:none;}
             .mobile-cate{display:flex;}
             .product-row{grid-template-columns:1fr;}
@@ -230,7 +188,6 @@
         </div>
 
         <div class="main-content">
-            <!-- 锌合金皮带扣 4款 -->
             <div class="cate-box" id="zinc">
                 <h1>Zinc Alloy Belt Buckles</h1>
                 <div class="product">
@@ -287,7 +244,6 @@
                 </div>
             </div>
 
-            <!-- 鞋扣 3款 -->
             <div class="cate-box" id="shoe-buckle" style="display:none;">
                 <h1>Shoe Buckles</h1>
                 <div class="product">
@@ -331,7 +287,6 @@
                 </div>
             </div>
 
-            <!-- 其他分类 -->
             <div class="cate-box" id="steel" style="display:none;"><h1>Stainless Steel Buckles</h1><p>Coming soon...</p></div>
             <div class="cate-box" id="brass" style="display:none;"><h1>Brass Buckles</h1><p>Coming soon...</p></div>
             <div class="cate-box" id="rivet" style="display:none;"><h1>Rivets & Eyelets</h1><p>Coming soon...</p></div>
@@ -351,31 +306,26 @@
 <script>
     const btns = document.querySelectorAll('.cate-link, .mobile-cate .btn');
     const boxes = document.querySelectorAll('.cate-box');
-
     btns.forEach(btn => {
         btn.addEventListener('click', () => {
             const target = btn.dataset.cate;
             btns.forEach(b => b.classList.remove('active'));
             boxes.forEach(box => box.style.display = 'none');
-
             btns.forEach(b => {
                 if(b.dataset.cate === target) b.classList.add('active');
             });
             document.getElementById(target).style.display = 'block';
         });
     });
-
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = lightbox.querySelector('img');
     const close = lightbox.querySelector('.close');
-
     document.querySelectorAll('.product-img img').forEach(img => {
         img.addEventListener('click', () => {
             lightboxImg.src = img.src;
             lightbox.classList.add('show');
         });
     });
-
     close.addEventListener('click', () => lightbox.classList.remove('show'));
     lightbox.addEventListener('click', (e) => {
         if(e.target === lightbox) lightbox.classList.remove('show');
