@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x32" href="/favicon-16x16.png">
@@ -36,8 +36,8 @@
             flex-wrap: wrap;
             gap: 1rem;
         }
-        .logo { font-size: 1.5rem; font-weight: bold; color: var(--brand-silver); display: flex; align-items: center; gap: 8px; }
-        nav a { color: #ccc; text-decoration: none; margin-left: 1.5rem; transition: color 0.3s; }
+        .logo { font-size: 1.5rem; font-weight: bold; color: var(--brand-silver); display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+        nav a { color: #ccc; text-decoration: none; margin-left: 1.5rem; transition: color 0.3s; white-space: nowrap; }
         nav a:hover { color: var(--brand-silver); }
         @media (max-width: 768px) {
             nav a { margin-left: 0.8rem; }
