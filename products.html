@@ -3,12 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <title>Metal Accessories & Hardware | Maikrui Metal Products</title>
-    <meta name="description" content="Browse our custom metal accessories: zinc alloy belt buckles, stainless steel buckles, shoe buckles, and garment hardware. OEM solutions for global brands.">
+    <title>Metal Accessories | Maikrui Metal Products</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
         body { background: #f8f8f8; color: #333; line-height: 1.6; padding-top: 65px; }
@@ -27,24 +22,19 @@
             width: 100%;
             z-index: 100;
         }
-        .container { width: 90%; max-width: 1100px; margin: 0 auto; }
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; }
         .header-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap:1rem; }
-        .logo { font-size: 1.5rem; font-weight: bold; color: var(--brand-silver); display: flex; align-items: center; gap: 8px; }
-        nav a { color: #ccc; text-decoration: none; margin-left: 1.5rem; transition: color 0.3s; }
-        nav a:hover { color: var(--brand-silver); }
+        .logo { font-size: 1.5rem; font-weight: bold; color: var(--brand-silver); display: flex; align-items: center; }
+        nav a { color: #ccc; text-decoration: none; margin-left: 1.5rem; }
+        nav a:hover { color: #fff; }
 
         .page-wrap {
             display: flex;
-            max-width: 1200px;
-            margin: 0 auto;
             gap: 2rem;
             padding: 2rem 0;
         }
         .side-nav {
             width: 240px;
-            position: sticky;
-            top: 100px;
-            height: fit-content;
             background: #fff;
             border: 1px solid #eee;
             border-radius: 6px;
@@ -58,15 +48,9 @@
             background: #f8f8f8;
             border-radius: 4px;
             cursor: pointer;
-            transition: all 0.3s;
-        }
-        .cate-item:hover {
-            background: #f0f0f0;
-            color: var(--brand-dark-blue);
         }
         .sub-cate {
             padding-left: 1rem;
-            display: block;
             margin-top: 0.3rem;
         }
         .sub-cate a {
@@ -93,17 +77,14 @@
         }
         h1 { margin-bottom: 2rem; color: var(--brand-dark-blue); }
 
-        /* --- 核心修改：产品布局 & 放大效果 --- */
-        .product-item {
-            display: none;
-        }
+        /* 产品布局 */
+        .product-item { display: none; }
         .product-item.show {
             display: grid;
-            grid-template-columns: 1fr 1.3fr; /* 给图片区域更多宽度 */
+            grid-template-columns: 1fr 1.4fr;
             gap: 30px;
             align-items: center;
         }
-        .catalog-text { padding: 10px; }
         .catalog-text h2 {
             font-size: 24px;
             color: var(--brand-dark-blue);
@@ -123,24 +104,25 @@
             border-radius: 3px;
         }
 
-        /* 图片区域：更大更紧凑 */
+        /* 图片区域（已放大） */
         .catalog-images {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 15px;
         }
         .img-box {
-            background: #f8f8f8;
-            border-radius: 6px;
+            background: #fff;
+            border-radius: 8px;
             overflow: hidden;
-            cursor: pointer; /* 鼠标变手型，提示可点击 */
+            cursor: pointer;
+            border: 1px solid #eee;
         }
         .img-box.large {
             grid-column: span 2;
-            height: 280px; /* 主图高度加大 */
+            height: 320px;
         }
         .img-box.small {
-            height: 180px; /* 小图高度加大 */
+            height: 200px;
         }
         .img-box img {
             width: 100%;
@@ -148,46 +130,32 @@
             object-fit: contain;
             display: block;
             background: #fff;
-            transition: transform 0.2s;
-        }
-        .img-box:hover img {
-            transform: scale(1.03); /* 悬停轻微放大，提升质感 */
         }
 
-        /* 灯箱（点击放大效果） */
+        /* 点击放大效果 */
         .lightbox {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.85);
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9);
             z-index: 9999;
             align-items: center;
             justify-content: center;
         }
-        .lightbox.show {
-            display: flex;
-        }
-        .lightbox img {
-            max-width: 90%;
-            max-height: 90%;
-            border-radius: 8px;
-        }
+        .lightbox.show { display: flex; }
+        .lightbox img { max-width: 90%; max-height: 90%; }
         .lightbox .close {
             position: absolute;
-            top: 30px;
-            right: 40px;
-            color: white;
+            top: 20px; right: 30px;
+            color: #fff;
             font-size: 40px;
             cursor: pointer;
-            line-height: 1;
         }
 
         footer {
             background: var(--brand-dark-blue);
-            color: var(--brand-silver);
+            color: #fff;
             text-align: center;
             padding: 2rem 0;
             margin-top: 2rem;
@@ -209,10 +177,10 @@
             Maikrui Metal
         </div>
         <nav>
-            <a href="index.html">Home</a>
-            <a href="products.html">Products</a>
-            <a href="about.html">About</a>
-            <a href="contact.html">Contact</a>
+            <a href="#">Home</a>
+            <a href="#">Products</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
         </nav>
     </div>
 </header>
@@ -225,23 +193,6 @@
                 <ul class="sub-cate">
                     <li><a class="menu-link active" data-target="belt-zinc">Zinc Alloy Buckles</a></li>
                     <li><a class="menu-link" data-target="belt-steel">Stainless Steel Buckles</a></li>
-                    <li><a class="menu-link" data-target="belt-brass">Brass Buckles</a></li>
-                </ul>
-            </li>
-            <li>
-                <div class="cate-item">Shoe Buckles</div>
-                <ul class="sub-cate">
-                    <li><a class="menu-link" data-target="shoe-buckle">Shoe Buckles</a></li>
-                    <li><a class="menu-link" data-target="shoe-eyelet">Shoe Hooks & Eyelets</a></li>
-                </ul>
-            </li>
-            <li>
-                <div class="cate-item">Garment Hardware</div>
-                <ul class="sub-cate">
-                    <li><a class="menu-link" data-target="rivet-eyelet">Rivets & Eyelets</a></li>
-                    <li><a class="menu-link" data-target="button-clasp">Buttons & Clasps</a></li>
-                    <li><a class="menu-link" data-target="pull-tag">Pull Tabs & Tags</a></li>
-                    <li><a class="menu-link" data-target="oring-loop">O-Rings & Loops</a></li>
                 </ul>
             </li>
         </ul>
@@ -250,139 +201,39 @@
     <div class="content">
         <h1>Our Products</h1>
 
-        <!-- 1 锌合金皮带扣（你第一个产品） -->
+        <!-- 你的第一张产品 → 直接放图 -->
         <div class="product-item show" id="belt-zinc">
             <div class="catalog-text">
                 <h2>Zinc Alloy Belt Buckles</h2>
-                <p>High-grade zinc alloy belt buckles with custom logo, size and plating options. OEM & ODM orders are welcome.</p>
+                <p>High-grade zinc alloy belt buckles with custom logo, size and plating. Durable, fashion and OEM available.</p>
                 <span class="catalog-badge">CUSTOM DESIGN</span>
             </div>
             <div class="catalog-images">
-                <!-- 把你的三张图按下面的方式放进去，文件名要和实际的一致 -->
                 <div class="img-box large">
-                    <img src="O1CN01ik9lEb2GFeBBcnPaY_!!2222219978986-0-cib.jpg" alt="Belt Buckle Main">
+                    <img src="img1.jpg">
                 </div>
                 <div class="img-box small">
-                    <img src="O1CN01hJzShz2GFeBBmBTbm_!!2222219978986-0-cib.jpg" alt="Side View">
+                    <img src="img2.jpg">
                 </div>
                 <div class="img-box small">
-                    <img src="图片抠图 (2).jpg" alt="Detail View">
+                    <img src="img3.jpg">
                 </div>
             </div>
         </div>
 
-        <!-- 其他产品先留空，后面再填 -->
         <div class="product-item" id="belt-steel">
             <div class="catalog-text">
-                <h2>Stainless Steel Belt Buckles</h2>
-                <p>Anti-rust stainless steel belt buckles, polished finish, durable for daily and business use.</p>
-                <span class="catalog-badge">ANTI RUST</span>
-            </div>
-            <div class="catalog-images">
-                <div class="img-box large"></div>
-                <div class="img-box small"></div>
-                <div class="img-box small"></div>
+                <h2>Stainless Steel Buckles</h2>
+                <p>Coming soon</p>
             </div>
         </div>
-
-        <div class="product-item" id="belt-brass">
-            <div class="catalog-text">
-                <h2>Brass Belt Buckles</h2>
-                <p>Solid brass material, vintage style belt buckles, high quality metal texture.</p>
-                <span class="catalog-badge">HIGH GRADE</span>
-            </div>
-            <div class="catalog-images">
-                <div class="img-box large"></div>
-                <div class="img-box small"></div>
-                <div class="img-box small"></div>
-            </div>
-        </div>
-
-        <div class="product-item" id="shoe-buckle">
-            <div class="catalog-text">
-                <h2>Shoe Buckle & Accessories</h2>
-                <p>Durable metal hardware for footwear: buckles, hooks and eyelets. Strong structure & fashionable finish.</p>
-                <span class="catalog-badge">HIGH QUALITY</span>
-            </div>
-            <div class="catalog-images">
-                <div class="img-box large"></div>
-                <div class="img-box small"></div>
-                <div class="img-box small"></div>
-            </div>
-        </div>
-
-        <div class="product-item" id="shoe-eyelet">
-            <div class="catalog-text">
-                <h2>Shoe Hooks & Eyelets</h2>
-                <p>Metal eyelets and hooks for shoes, firm installation, various plating colors.</p>
-                <span class="catalog-badge">FULL SIZE</span>
-            </div>
-            <div class="catalog-images">
-                <div class="img-box large"></div>
-                <div class="img-box small"></div>
-                <div class="img-box small"></div>
-            </div>
-        </div>
-
-        <div class="product-item" id="rivet-eyelet">
-            <div class="catalog-text">
-                <h2>Rivets & Eyelets</h2>
-                <p>Garment rivets, eyelets for jeans, bags and clothing hardware parts.</p>
-                <span class="catalog-badge">OEM ACCEPTED</span>
-            </div>
-            <div class="catalog-images">
-                <div class="img-box large"></div>
-                <div class="img-box small"></div>
-                <div class="img-box small"></div>
-            </div>
-        </div>
-
-        <div class="product-item" id="button-clasp">
-            <div class="catalog-text">
-                <h2>Buttons & Clasps</h2>
-                <p>Metal buttons and clasps for coat, jacket and fashion apparel customization.</p>
-                <span class="catalog-badge">CUSTOM LOGO</span>
-            </div>
-            <div class="catalog-images">
-                <div class="img-box large"></div>
-                <div class="img-box small"></div>
-                <div class="img-box small"></div>
-            </div>
-        </div>
-
-        <div class="product-item" id="pull-tag">
-            <div class="catalog-text">
-                <h2>Pull Tabs & Tags</h2>
-                <p>Zipper pullers, metal logo tags for bags, garments and luggage.</p>
-                <span class="catalog-badge">FULL RANGE</span>
-            </div>
-            <div class="catalog-images">
-                <div class="img-box large"></div>
-                <div class="img-box small"></div>
-                <div class="img-box small"></div>
-            </div>
-        </div>
-
-        <div class="product-item" id="oring-loop">
-            <div class="catalog-text">
-                <h2>O-Rings & Loops</h2>
-                <p>Metal O rings, D rings and loops for bag, belt and garment accessories.</p>
-                <span class="catalog-badge">ALL SIZES</span>
-            </div>
-            <div class="catalog-images">
-                <div class="img-box large"></div>
-                <div class="img-box small"></div>
-                <div class="img-box small"></div>
-            </div>
-        </div>
-
     </div>
 </div>
 
-<!-- 灯箱放大层 -->
+<!-- 点击放大层 -->
 <div class="lightbox" id="lightbox">
     <span class="close">&times;</span>
-    <img src="" alt="Large View">
+    <img src="">
 </div>
 
 <footer>
@@ -392,42 +243,30 @@
 </footer>
 
 <script>
-    // 左侧菜单切换
+    // 菜单切换
     const menuLinks = document.querySelectorAll('.menu-link');
     const productItems = document.querySelectorAll('.product-item');
-
     menuLinks.forEach(link => {
         link.addEventListener('click', () => {
             menuLinks.forEach(l => l.classList.remove('active'));
             productItems.forEach(p => p.classList.remove('show'));
             link.classList.add('active');
-            let target = link.getAttribute('data-target');
-            document.getElementById(target).classList.add('show');
+            document.getElementById(link.dataset.target).classList.add('show');
         });
     });
 
-    // 灯箱点击放大效果
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = lightbox.querySelector('img');
-    const closeBtn = lightbox.querySelector('.close');
-    const imgBoxes = document.querySelectorAll('.img-box img');
-
-    imgBoxes.forEach(img => {
+    // 点击放大
+    const lb = document.getElementById('lightbox');
+    const lbImg = lb.querySelector('img');
+    const close = lb.querySelector('.close');
+    document.querySelectorAll('.img-box img').forEach(img => {
         img.addEventListener('click', () => {
-            lightboxImg.src = img.src;
-            lightbox.classList.add('show');
+            lbImg.src = img.src;
+            lb.classList.add('show');
         });
     });
-
-    closeBtn.addEventListener('click', () => {
-        lightbox.classList.remove('show');
-    });
-
-    lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) {
-            lightbox.classList.remove('show');
-        }
-    });
+    close.addEventListener('click', () => lb.classList.remove('show'));
+    lb.addEventListener('click', e=>e.target===lb&&lb.classList.remove('show'));
 </script>
 
 </body>
