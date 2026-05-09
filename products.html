@@ -15,7 +15,7 @@
       --brand-text-dark:#0A244B;
     }
 
-    /* 顶部导航【完全原样 未做任何修改】 */
+    /* 顶部导航（完全不动） */
     header {
       background:var(--brand-dark-blue);
       padding:1rem 0;
@@ -48,6 +48,7 @@
       nav a { margin-left:0.8rem; }
     }
 
+    /* 原有样式保留 */
     .mobile-cate{ display:none; }
     .page-wrap{ display:flex; gap:2rem; padding:1rem 0 2rem; }
     .side-left{
@@ -99,31 +100,35 @@
       background:var(--active-color); color:#fff; text-align:center; padding:2rem 0; margin-top:2rem;
     }
 
-    .menu-toggle { display:none; }
+    /* ===================== 侧滑抽屉方案（行业通用） ===================== */
+    .menu-toggle {
+      display:none;
+    }
     .overlay {
       position:fixed; top:0; left:0; width:100%; height:100%;
       background:rgba(0,0,0,0.6); z-index:199; opacity:0; visibility:hidden;
       transition:all 0.3s ease;
     }
-    .overlay.show { opacity:1; visibility:visible; }
+    .overlay.show {
+      opacity:1; visibility:visible;
+    }
 
     @media (max-width:768px) {
-      /* 核心：清晰、居中、醒目、超大点击区域 */
+      /* 【关键修改】按钮下移，不被导航圆角挡住 */
       .menu-toggle {
-        display:block !important;
+        display:block;
         width:100%;
-        margin:16px 0;
+        margin:10px 0;
         padding:12px 0;
-        text-align:center;
-        font-size:17px;
-        font-weight:bold;
+        background:#f0f2f5;
         color:var(--brand-dark-blue);
-        background:#ffffff;
-        border:1px solid #e5e5e5;
-        border-radius:8px;
+        border:none;
+        border-radius:6px;
+        font-size:16px;
+        font-weight:bold;
+        text-align:center;
         cursor:pointer;
       }
-
       .side-left {
         position:fixed;
         top:0; left:0;
@@ -137,8 +142,21 @@
         border-radius:0;
         border-right:1px solid #eee;
       }
-      .side-left.show { transform:translateX(0); }
-
+      .side-left.show {
+        transform:translateX(0);
+      }
+      .page-wrap {
+        flex-direction:column;
+        gap:1rem;
+      }
+      .main-content {
+        padding:1rem;
+      }
+      .product-row {
+        grid-template-columns:1fr;
+        gap:1rem;
+      }
+      /* 关闭按钮 */
       .close-drawer {
         display:block;
         text-align:right;
@@ -147,10 +165,6 @@
         color:#333;
         margin-bottom:10px;
       }
-
-      .page-wrap { flex-direction:column; gap:1rem; }
-      .main-content { padding:1rem; }
-      .product-row { grid-template-columns:1fr; gap:1rem; }
     }
   </style>
 </head>
@@ -171,13 +185,15 @@
   </div>
 </header>
 
+<!-- 遮罩层 -->
 <div class="overlay" id="overlay" onclick="closeMenu()"></div>
 
 <div class="container">
-  <!-- 清晰居中可点击按钮 -->
-  <button class="menu-toggle" id="menuToggle">☰ Product Categories</button>
+  <!-- 手机端分类触发按钮（清晰可见，居中，可点击） -->
+  <button class="menu-toggle" id="menuToggle">☰  Product Categories</button>
 
   <div class="page-wrap">
+    <!-- 侧滑抽屉菜单 -->
     <div class="side-left" id="categoryMenu">
       <span class="close-drawer" onclick="closeMenu()">×</span>
       <ul>
@@ -272,9 +288,11 @@
               <h2>Shoe Buckle Style 2</h2>
               <p>Alloy shoe ornament buckle, various plating color, custom design and logo are acceptable.</p>
             </div>
-            <div class="img-big"><img src="s2-1.jpg"></div>
+            <div class="product-img">
+              <div class="img-big"><img src="s2-1.jpg"></div>
               <div class="img-sm"><img src="s2-2.jpg"></div>
               <div class="img-sm"><img src="s2-3.jpg"></div>
+            </div>
           </div>
         </div>
         <div class="product">
@@ -309,6 +327,7 @@
 </footer>
 
 <script>
+  // 侧滑抽屉核心逻辑
   const menu = document.getElementById('categoryMenu');
   const overlay = document.getElementById('overlay');
   const toggleBtn = document.getElementById('menuToggle');
@@ -324,12 +343,14 @@
 
   toggleBtn.addEventListener('click', openMenu);
 
+  // 点分类后自动关闭菜单（体验更好）
   document.querySelectorAll('.cate-link').forEach(link => {
     link.addEventListener('click', () => {
       closeMenu();
     });
   });
 
+  // 原有分类切换
   const btns = document.querySelectorAll('.cate-link');
   const boxes = document.querySelectorAll('.cate-box');
   btns.forEach(btn => {
@@ -344,6 +365,7 @@
     });
   });
 
+  // 图片灯箱
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = lightbox.querySelector('img');
   const close = lightbox.querySelector('.close');
