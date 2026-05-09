@@ -16,30 +16,64 @@
       --brand-text-dark:#0A244B;
     }
 
-    /* 顶部导航 */
+    /* ========== 导航栏 100% 统一 与首页/about/contact 完全一样 ========== */
     header {
-      background:var(--brand-dark-blue);
-      padding:1rem 0;
-      position:fixed;
-      top:0; left:0; width:100%;
-      z-index:100;
+      background: var(--brand-dark-blue);
+      padding: 1rem 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
     }
     .container {
-      width:90%; max-width:1100px; margin:0 auto;
+      width: 90%;
+      max-width: 1100px;
+      margin: 0 auto;
     }
     .header-inner {
-      display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
     }
     .logo {
-      font-size:1.5rem; font-weight:bold; color:var(--brand-silver);
-      display:flex; align-items:center; gap:8px; white-space:nowrap;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--brand-silver);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
     }
-    .logo img { height:40px !important; width:auto !important; }
+    .logo img {
+      background: transparent !important;
+      border: none !important;
+      outline: none !important;
+      box-shadow: none !important;
+      filter: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      height: 40px !important;
+      width: auto !important;
+    }
     nav a {
-      color:#ccc; text-decoration:none; margin-left:1.5rem;
-      transition:color 0.3s ease; white-space:nowrap;
+      color: #cccccc;
+      text-decoration: none;
+      margin-left: 1.5rem;
+      transition: color 0.3s ease;
+      white-space: nowrap;
     }
-    nav a:hover { color:var(--brand-silver); }
+    nav a:hover {
+      color: var(--brand-silver);
+    }
+    @media (max-width: 768px) {
+      nav a {
+        margin-left: 0.8rem;
+      }
+    }
+    /* ========== 导航结束 以下内容完全不动 ========== */
 
     /* 页面主体结构 */
     .page-wrap { display:flex; gap:2rem; padding:1rem 0 2rem; }
