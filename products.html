@@ -18,7 +18,7 @@
             position:fixed;
             top:0; left:0; width:100%;
             background:var(--brand-dark-blue);
-            z-index:99;
+            z-index:999;
             padding:1rem 0;
         }
 
@@ -134,6 +134,10 @@
         }
 
         @media (max-width:768px){
+            .header-inner{gap: 0.3rem;}
+            .logo{font-size: 1.1rem;}
+            .logo img{height: 32px;}
+            .top-nav a{margin-left: 0.5rem; font-size: 0.85rem;}
             .side-left{display:none;}
             .mobile-cate{display:flex;}
             .product-row{grid-template-columns:1fr;}
@@ -184,7 +188,6 @@
         </div>
 
         <div class="main-content">
-            <!-- 锌合金皮带扣 4款 -->
             <div class="cate-box" id="zinc">
                 <h1>Zinc Alloy Belt Buckles</h1>
                 <div class="product">
@@ -241,7 +244,6 @@
                 </div>
             </div>
 
-            <!-- 鞋扣 3款 -->
             <div class="cate-box" id="shoe-buckle" style="display:none;">
                 <h1>Shoe Buckles</h1>
                 <div class="product">
@@ -285,7 +287,6 @@
                 </div>
             </div>
 
-            <!-- 其他分类 -->
             <div class="cate-box" id="steel" style="display:none;"><h1>Stainless Steel Buckles</h1><p>Coming soon...</p></div>
             <div class="cate-box" id="brass" style="display:none;"><h1>Brass Buckles</h1><p>Coming soon...</p></div>
             <div class="cate-box" id="rivet" style="display:none;"><h1>Rivets & Eyelets</h1><p>Coming soon...</p></div>
