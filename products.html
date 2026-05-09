@@ -93,60 +93,96 @@
         }
         h1 { margin-bottom: 2rem; color: var(--brand-dark-blue); }
 
-        /* 产品单页布局 */
+        /* --- 核心修改：产品布局 & 放大效果 --- */
         .product-item {
             display: none;
         }
         .product-item.show {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            grid-template-columns: 1fr 1.3fr; /* 给图片区域更多宽度 */
+            gap: 30px;
             align-items: center;
         }
         .catalog-text { padding: 10px; }
         .catalog-text h2 {
-            font-size: 22px;
+            font-size: 24px;
             color: var(--brand-dark-blue);
-            margin-bottom: 8px;
+            margin-bottom: 12px;
         }
         .catalog-text p {
-            font-size: 14px;
+            font-size: 15px;
             color: #555;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
         .catalog-badge {
             display: inline-block;
             border: 1px solid var(--brand-dark-blue);
             color: var(--brand-dark-blue);
-            padding: 4px 10px;
-            font-size: 12px;
+            padding: 6px 14px;
+            font-size: 13px;
             border-radius: 3px;
         }
+
+        /* 图片区域：更大更紧凑 */
         .catalog-images {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            gap: 15px;
         }
-        .img-large {
+        .img-box {
+            background: #f8f8f8;
+            border-radius: 6px;
+            overflow: hidden;
+            cursor: pointer; /* 鼠标变手型，提示可点击 */
+        }
+        .img-box.large {
             grid-column: span 2;
-            background: #f1f1f1;
-            height: 190px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #444;
-            border-radius: 6px;
-            font-weight: bold;
+            height: 280px; /* 主图高度加大 */
         }
-        .img-small {
-            background: #f1f1f1;
-            height: 120px;
-            display: flex;
+        .img-box.small {
+            height: 180px; /* 小图高度加大 */
+        }
+        .img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            background: #fff;
+            transition: transform 0.2s;
+        }
+        .img-box:hover img {
+            transform: scale(1.03); /* 悬停轻微放大，提升质感 */
+        }
+
+        /* 灯箱（点击放大效果） */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 9999;
             align-items: center;
             justify-content: center;
-            color: #444;
-            border-radius: 6px;
-            font-weight: bold;
+        }
+        .lightbox.show {
+            display: flex;
+        }
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+        }
+        .lightbox .close {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+            line-height: 1;
         }
 
         footer {
@@ -214,21 +250,28 @@
     <div class="content">
         <h1>Our Products</h1>
 
-        <!-- 1 锌合金皮带扣 -->
+        <!-- 1 锌合金皮带扣（你第一个产品） -->
         <div class="product-item show" id="belt-zinc">
             <div class="catalog-text">
                 <h2>Zinc Alloy Belt Buckles</h2>
-                <p>High-grade zinc alloy & stainless steel belt buckles. Custom logo, size and plating are available.</p>
+                <p>High-grade zinc alloy belt buckles with custom logo, size and plating options. OEM & ODM orders are welcome.</p>
                 <span class="catalog-badge">CUSTOM DESIGN</span>
             </div>
             <div class="catalog-images">
-                <div class="img-large">Belt Buckle Main</div>
-                <div class="img-small">Style 1</div>
-                <div class="img-small">Detail</div>
+                <!-- 把你的三张图按下面的方式放进去，文件名要和实际的一致 -->
+                <div class="img-box large">
+                    <img src="O1CN01ik9lEb2GFeBBcnPaY_!!2222219978986-0-cib.jpg" alt="Belt Buckle Main">
+                </div>
+                <div class="img-box small">
+                    <img src="O1CN01hJzShz2GFeBBmBTbm_!!2222219978986-0-cib.jpg" alt="Side View">
+                </div>
+                <div class="img-box small">
+                    <img src="图片抠图 (2).jpg" alt="Detail View">
+                </div>
             </div>
         </div>
 
-        <!-- 2 不锈钢皮带扣 -->
+        <!-- 其他产品先留空，后面再填 -->
         <div class="product-item" id="belt-steel">
             <div class="catalog-text">
                 <h2>Stainless Steel Belt Buckles</h2>
@@ -236,13 +279,12 @@
                 <span class="catalog-badge">ANTI RUST</span>
             </div>
             <div class="catalog-images">
-                <div class="img-large">Steel Buckle Main</div>
-                <div class="img-small">Style 1</div>
-                <div class="img-small">Detail</div>
+                <div class="img-box large"></div>
+                <div class="img-box small"></div>
+                <div class="img-box small"></div>
             </div>
         </div>
 
-        <!-- 3 黄铜皮带扣 -->
         <div class="product-item" id="belt-brass">
             <div class="catalog-text">
                 <h2>Brass Belt Buckles</h2>
@@ -250,13 +292,12 @@
                 <span class="catalog-badge">HIGH GRADE</span>
             </div>
             <div class="catalog-images">
-                <div class="img-large">Brass Buckle Main</div>
-                <div class="img-small">Style 1</div>
-                <div class="img-small">Detail</div>
+                <div class="img-box large"></div>
+                <div class="img-box small"></div>
+                <div class="img-box small"></div>
             </div>
         </div>
 
-        <!-- 4 鞋扣 -->
         <div class="product-item" id="shoe-buckle">
             <div class="catalog-text">
                 <h2>Shoe Buckle & Accessories</h2>
@@ -264,13 +305,12 @@
                 <span class="catalog-badge">HIGH QUALITY</span>
             </div>
             <div class="catalog-images">
-                <div class="img-large">Shoe Buckle Main</div>
-                <div class="img-small">Style 1</div>
-                <div class="img-small">Detail</div>
+                <div class="img-box large"></div>
+                <div class="img-box small"></div>
+                <div class="img-box small"></div>
             </div>
         </div>
 
-        <!-- 后面其它产品我先给你留好位置，直接改文字和图片就行 -->
         <div class="product-item" id="shoe-eyelet">
             <div class="catalog-text">
                 <h2>Shoe Hooks & Eyelets</h2>
@@ -278,9 +318,9 @@
                 <span class="catalog-badge">FULL SIZE</span>
             </div>
             <div class="catalog-images">
-                <div class="img-large">Shoe Eyelet Main</div>
-                <div class="img-small">Style 1</div>
-                <div class="img-small">Detail</div>
+                <div class="img-box large"></div>
+                <div class="img-box small"></div>
+                <div class="img-box small"></div>
             </div>
         </div>
 
@@ -291,9 +331,9 @@
                 <span class="catalog-badge">OEM ACCEPTED</span>
             </div>
             <div class="catalog-images">
-                <div class="img-large">Rivet Main</div>
-                <div class="img-small">Style 1</div>
-                <div class="img-small">Detail</div>
+                <div class="img-box large"></div>
+                <div class="img-box small"></div>
+                <div class="img-box small"></div>
             </div>
         </div>
 
@@ -304,9 +344,9 @@
                 <span class="catalog-badge">CUSTOM LOGO</span>
             </div>
             <div class="catalog-images">
-                <div class="img-large">Button Main</div>
-                <div class="img-small">Style 1</div>
-                <div class="img-small">Detail</div>
+                <div class="img-box large"></div>
+                <div class="img-box small"></div>
+                <div class="img-box small"></div>
             </div>
         </div>
 
@@ -317,9 +357,9 @@
                 <span class="catalog-badge">FULL RANGE</span>
             </div>
             <div class="catalog-images">
-                <div class="img-large">Pull Tag Main</div>
-                <div class="img-small">Style 1</div>
-                <div class="img-small">Detail</div>
+                <div class="img-box large"></div>
+                <div class="img-box small"></div>
+                <div class="img-box small"></div>
             </div>
         </div>
 
@@ -330,13 +370,19 @@
                 <span class="catalog-badge">ALL SIZES</span>
             </div>
             <div class="catalog-images">
-                <div class="img-large">O-Ring Main</div>
-                <div class="img-small">Style 1</div>
-                <div class="img-small">Detail</div>
+                <div class="img-box large"></div>
+                <div class="img-box small"></div>
+                <div class="img-box small"></div>
             </div>
         </div>
 
     </div>
+</div>
+
+<!-- 灯箱放大层 -->
+<div class="lightbox" id="lightbox">
+    <span class="close">&times;</span>
+    <img src="" alt="Large View">
 </div>
 
 <footer>
@@ -352,15 +398,35 @@
 
     menuLinks.forEach(link => {
         link.addEventListener('click', () => {
-            // 移除所有激活状态
             menuLinks.forEach(l => l.classList.remove('active'));
             productItems.forEach(p => p.classList.remove('show'));
-
-            // 当前菜单高亮 + 显示对应产品
             link.classList.add('active');
             let target = link.getAttribute('data-target');
             document.getElementById(target).classList.add('show');
         });
+    });
+
+    // 灯箱点击放大效果
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = lightbox.querySelector('img');
+    const closeBtn = lightbox.querySelector('.close');
+    const imgBoxes = document.querySelectorAll('.img-box img');
+
+    imgBoxes.forEach(img => {
+        img.addEventListener('click', () => {
+            lightboxImg.src = img.src;
+            lightbox.classList.add('show');
+        });
+    });
+
+    closeBtn.addEventListener('click', () => {
+        lightbox.classList.remove('show');
+    });
+
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+            lightbox.classList.remove('show');
+        }
     });
 </script>
 
