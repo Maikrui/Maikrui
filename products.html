@@ -5,82 +5,141 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Products | Maikrui Metal</title>
   <style>
+    /* 全局基础样式 */
     * { margin:0; padding:0; box-sizing:border-box; font-family:Arial,sans-serif; }
-    body { background:#f8f8f8; color:#333; line-height:1.6; padding-top:70px; }
+    body { background:#f8f8f8; color:#333; line-height:1.6; padding-top:65px; }
 
     :root{
       --brand-dark-blue:#0A244B;
       --brand-silver:#E0E0E0;
+      --active-color:#0A244B;
+      --brand-text-dark:#0A244B;
     }
 
+    /* 顶部导航 */
     header {
       background:var(--brand-dark-blue);
       padding:1rem 0;
       position:fixed;
       top:0; left:0; width:100%;
-      z-index:1000;
+      z-index:100;
     }
-    .container { width:90%; max-width:1100px; margin:0 auto; }
-    .header-inner { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; }
-    .logo { font-size:1.5rem; font-weight:bold; color:var(--brand-silver); display:flex; align-items:center; gap:8px; }
-    .logo img { height:40px; width:auto; border:none; }
-    nav a { color:#ccc; text-decoration:none; margin-left:1.5rem; font-size: 15px; }
-    nav a:hover { color:#fff; }
+    .container {
+      width:90%; max-width:1100px; margin:0 auto;
+    }
+    .header-inner {
+      display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;
+    }
+    .logo {
+      font-size:1.5rem; font-weight:bold; color:var(--brand-silver);
+      display:flex; align-items:center; gap:8px; white-space:nowrap;
+    }
+    .logo img { height:40px !important; width:auto !important; }
+    nav a {
+      color:#ccc; text-decoration:none; margin-left:1.5rem;
+      transition:color 0.3s ease; white-space:nowrap;
+    }
+    nav a:hover { color:var(--brand-silver); }
 
-    .mobile-category-bar {
+    /* 页面主体结构 */
+    .page-wrap { display:flex; gap:2rem; padding:1rem 0 2rem; }
+    
+    /* 桌面端左侧分类 (PC显示，手机隐藏) */
+    .side-left {
+      width:230px; background:#fff; padding:1.5rem; border-radius:8px;
+      border:1px solid #eee; height:fit-content; position: sticky; top: 80px;
+    }
+    .side-left .cate-title {
+      font-weight:bold; padding:0.6rem 0.5rem; background:#f6f6f6;
+      border-radius:4px; margin:0.8rem 0 0.4rem; color: var(--brand-dark-blue);
+    }
+    .side-left .cate-link {
+      display:block; padding:0.6rem; border-radius:4px;
+      color:#333; cursor:pointer; margin:0.2rem 0; text-decoration: none;
+    }
+    .side-left .cate-link.active { background:var(--active-color); color:#fff; }
+
+    /* 手机端横向滑动标签 (手机显示，PC隐藏) */
+    .mobile-tabs-wrap {
       display: none;
       background: #fff;
-      border-bottom: 1px solid #ddd;
+      border-bottom: 1px solid #eee;
+      position: sticky;
+      top: 65px; 
+      z-index: 90;
+      margin: 0 -5.5% 1rem; 
+      padding: 0 5%;
+    }
+    .mobile-tabs {
+      display: flex;
       overflow-x: auto;
       white-space: nowrap;
-      -webkit-overflow-scrolling: touch;
-      margin-bottom: 10px;
+      padding: 12px 0;
+      gap: 12px;
+      scrollbar-width: none;
     }
+    .mobile-tabs::-webkit-scrollbar { display: none; }
+    .tab-item {
+      display: inline-block;
+      padding: 6px 16px;
+      background: #f0f2f5;
+      border-radius: 20px;
+      font-size: 14px;
+      color: #666;
+    }
+    .tab-item.active { background: var(--brand-dark-blue); color: #fff; font-weight: bold; }
+    .tab-item.more-btn { background: #fff; border: 1px dashed #ccc; }
 
-    @media (max-width: 768px) {
-      .mobile-category-bar { display: flex; }
-      .category-tab {
-        padding: 12px 20px;
-        display: inline-block;
-        color: #666;
-        text-decoration: none;
-        font-size: 14px;
-        border-bottom: 2px solid transparent;
-        cursor:pointer;
+    /* 右侧产品内容 */
+    .main-content { flex:1; background:#fff; padding:2rem; border-radius:8px; border:1px solid #eee; }
+    h1 { margin-bottom:1.8rem; color:var(--active-color); font-size:24px; }
+    .product { margin-bottom:3rem; padding-bottom:2rem; border-bottom:1px solid #eee; }
+    .product:last-child { margin-bottom:0; padding-bottom:0; border:none; }
+    .product-row { display:grid; grid-template-columns:1fr 1.4fr; gap:2rem; align-items:center; }
+    .product-text h2 { font-size:20px; margin-bottom:0.6rem; color:var(--active-color); }
+    .product-text p { font-size:14px; color:#555; line-height:1.6; }
+    
+    /* 产品图片布局（画册风格） */
+    .product-img { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .img-big { grid-column:1/-1; height:280px; }
+    .img-sm { height:160px; }
+    .product-img div { border:1px solid #f0f0f0; border-radius:6px; overflow:hidden; background:#fff; }
+    .product-img img { width:100%; height:100%; object-fit:contain; cursor:pointer; transition: transform 0.3s; }
+    .product-img img:hover { transform: scale(1.05); }
+
+    /* 遮罩与抽屉 */
+    .overlay {
+      position:fixed; top:0; left:0; width:100%; height:100%;
+      background:rgba(0,0,0,0.6); z-index:199; opacity:0; visibility:hidden; transition:0.3s;
+    }
+    .overlay.show { opacity:1; visibility:visible; }
+    
+    /* 响应式调整 */
+    @media (max-width:768px) {
+      .side-left {
+        position:fixed; top:0; left:0; width:280px; height:100vh;
+        z-index:200; transform:translateX(-100%); transition:0.3s;
+        border-radius:0;
       }
-      .category-tab.active {
-        color: var(--brand-dark-blue);
-        border-bottom: 2px solid var(--brand-dark-blue);
-        font-weight: bold;
-      }
-      .page-wrap { flex-direction: column; }
-      .side-left { display: none; }
-      .main-content { padding: 1rem !important; }
-      .product-row { grid-template-columns: 1fr !important; }
+      .side-left.show { transform:translateX(0); }
+      .mobile-tabs-wrap { display: block; }
+      .page-wrap { flex-direction:column; gap:0.5rem; }
+      .main-content { padding:1.5rem; }
+      .product-row { grid-template-columns:1fr; gap:1.5rem; }
+      .img-big { height:220px; }
+      .close-drawer { display:block; text-align:right; font-size:28px; cursor:pointer; margin-bottom:10px; }
     }
 
-    .page-wrap { display: flex; gap: 2rem; padding: 1rem 0; }
-    .side-left {
-      width: 230px; background: #fff; padding: 1.2rem; border-radius: 6px;
-      border: 1px solid #eee; height: fit-content;
+    /* 灯箱 */
+    .lightbox{
+      position:fixed; top:0; left:0; width:100%; height:100%;
+      background:rgba(0,0,0,0.9); display:none; align-items:center; justify-content:center; z-index:999;
     }
-    .cate-title { font-weight: bold; padding: 0.5rem 0; color: #888; font-size: 12px; }
-    .cate-link { display: block; padding: 0.6rem; color: #333; text-decoration: none; border-radius: 4px; cursor: pointer; }
-    .cate-link.active { background: var(--brand-dark-blue); color: #fff; }
+    .lightbox.show{ display:flex; }
+    .lightbox img{ max-width:90%; max-height:90%; border:2px solid #fff; }
+    .lightbox .close{ position:absolute; top:20px; right:30px; color:#fff; font-size:40px; cursor:pointer; }
 
-    .main-content { flex: 1; background: #fff; padding: 2rem; border-radius: 8px; border: 1px solid #eee; }
-    .cate-box h1 { margin-bottom: 1.5rem; color: var(--brand-dark-blue); font-size: 22px; }
-    .product { margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid #eee; }
-    .product-row { display: grid; grid-template-columns: 1fr 1.5fr; gap: 2rem; align-items: start; }
-    .product-text h2 { font-size: 18px; color: #333; margin-bottom: 10px; }
-    .product-text p { font-size: 14px; color: #666; }
-
-    .product-img { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
-    .img-main { grid-column: 1/-1; height: 260px; background: #fff; border: 1px solid #eee; border-radius: 4px; overflow: hidden; }
-    .img-sub { height: 130px; background: #fff; border: 1px solid #eee; border-radius: 4px; overflow: hidden; }
-    .product-img img { width: 100%; height: 100%; object-fit: contain; display: block; }
-
-    footer { background: var(--brand-dark-blue); color: #fff; text-align: center; padding: 2rem 0; margin-top: 2rem; }
+    footer { background:var(--brand-dark-blue); color:#fff; text-align:center; padding:2rem 0; margin-top:2rem; }
   </style>
 </head>
 <body>
@@ -88,101 +147,141 @@
 <header>
   <div class="container header-inner">
     <div class="logo">
-      <img src="logo.png" alt="Logo"> Maikrui Metal
+      <img src="logo.png" alt="Logo">
+      Maikrui Metal
     </div>
     <nav>
       <a href="index.html">Home</a>
-      <a href="products.html">Products</a>
+      <a href="products.html" style="color:#fff">Products</a>
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
     </nav>
   </div>
 </header>
 
-<div class="mobile-category-bar">
-    <span class="category-tab active" data-cate="zinc">Zinc Alloy</span>
-    <span class="category-tab" data-cate="steel">Stainless Steel</span>
-    <span class="category-tab" data-cate="brass">Brass</span>
-    <span class="category-tab" data-cate="shoe">Shoe Buckles</span>
-    <span class="category-tab" data-cate="rivet">Rivets</span>
-</div>
+<div class="overlay" id="overlay" onclick="closeMenu()"></div>
 
 <div class="container">
+  <div class="mobile-tabs-wrap">
+    <div class="mobile-tabs">
+      <span class="tab-item active" data-cate="zinc">Zinc Alloy</span>
+      <span class="tab-item" data-cate="steel">Stainless Steel</span>
+      <span class="tab-item" data-cate="shoe-buckle">Shoe Buckles</span>
+      <span class="tab-item" data-cate="rivet">Rivets</span>
+      <span class="tab-item more-btn" id="menuToggle">More ☰</span>
+    </div>
+  </div>
+
   <div class="page-wrap">
-    <div class="side-left">
-      <div class="cate-title">CATEGORIES</div>
-      <div class="cate-link active" data-cate="zinc">Zinc Alloy Buckles</div>
-      <div class="cate-link" data-cate="steel">Stainless Steel Buckles</div>
-      <div class="cate-link" data-cate="brass">Brass Buckles</div>
-      <div class="cate-link" data-cate="shoe">Shoe Buckles</div>
-      <div class="cate-link" data-cate="rivet">Rivets & Eyelets</div>
+    <div class="side-left" id="categoryMenu">
+      <span class="close-drawer" onclick="closeMenu()" style="display:none;">×</span>
+      <div style="font-weight:bold; font-size:18px; margin-bottom:15px; color:var(--brand-dark-blue)" class="mobile-only-title">Categories</div>
+      <ul>
+        <li class="cate-title">Belt Buckles</li>
+        <li><span class="cate-link active" data-cate="zinc">Zinc Alloy Buckles</span></li>
+        <li><span class="cate-link" data-cate="steel">Stainless Steel Buckles</span></li>
+        <li class="cate-title">Other Accessories</li>
+        <li><span class="cate-link" data-cate="shoe-buckle">Shoe Buckles</span></li>
+        <li><span class="cate-link" data-cate="rivet">Rivets & Eyelets</span></li>
+      </ul>
     </div>
 
     <div class="main-content">
       <div class="cate-box" id="zinc">
-        <h1>Zinc Alloy Buckles</h1>
+        <h1>Zinc Alloy Belt Buckles</h1>
         <div class="product">
           <div class="product-row">
             <div class="product-text">
-              <h2>Automatic Belt Buckle</h2>
-              <p>High-end polishing and environment-friendly plating. Suitable for 35mm leather belts.</p>
+              <h2>Luxury Automatic Buckle</h2>
+              <p>Precision-engineered zinc alloy with premium electroplating. Features a smooth sliding mechanism and 48H salt spray resistance. Perfect for high-end business belts.</p>
             </div>
             <div class="product-img">
-              <div class="img-main"><img src="p1.jpg" alt="Product"></div>
-              <div class="img-sub"><img src="p1-2.jpg" alt="Detail"></div>
-              <div class="img-sub"><img src="p1-3.jpg" alt="Detail"></div>
+              <div class="img-big"><img src="p2-1.jpg" alt="Buckle Main"></div>
+              <div class="img-sm"><img src="p2-2.jpg" alt="Detail 1"></div>
+              <div class="img-sm"><img src="p2-3.jpg" alt="Detail 2"></div>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="cate-box" id="steel" style="display:none;">
-        <h1>Stainless Steel Buckles</h1>
-        <p>Coming soon...</p>
-      </div>
-
-      <div class="cate-box" id="brass" style="display:none;">
-        <h1>Brass Buckles</h1>
-        <p>Coming soon...</p>
-      </div>
-
-      <div class="cate-box" id="shoe" style="display:none;">
+      <div class="cate-box" id="shoe-buckle" style="display:none;">
         <h1>Shoe Buckles</h1>
-        <p>Coming soon...</p>
+        <div class="product">
+          <div class="product-row">
+            <div class="product-text">
+              <h2>Fashion Shoe Ornament</h2>
+              <p>Durable alloy construction with eco-friendly plating. Widely used for sandals and fashion boots. Custom shapes and logos available.</p>
+            </div>
+            <div class="product-img">
+              <div class="img-big"><img src="s1-1.jpg"></div>
+              <div class="img-sm"><img src="s1-2.jpg"></div>
+              <div class="img-sm"><img src="s1-3.jpg"></div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="cate-box" id="rivet" style="display:none;">
-        <h1>Rivets & Eyelets</h1>
-        <p>Coming soon...</p>
-      </div>
+      <div class="cate-box" id="steel" style="display:none;"><h1>Stainless Steel Buckles</h1><p>Coming soon...</p></div>
+      <div class="cate-box" id="rivet" style="display:none;"><h1>Rivets & Eyelets</h1><p>Coming soon...</p></div>
     </div>
   </div>
 </div>
 
-<footer>Maikrui Metal © 2026</footer>
+<div class="lightbox" id="lightbox">
+  <span class="close">&times;</span>
+  <img src="">
+</div>
+
+<footer>
+  <div class="container">Maikrui Metal © 2026 All Rights Reserved</div>
+</footer>
 
 <script>
-  const tabs = document.querySelectorAll('.category-tab, .cate-link');
+  const menu = document.getElementById('categoryMenu');
+  const overlay = document.getElementById('overlay');
+  const toggleBtn = document.getElementById('menuToggle');
   const boxes = document.querySelectorAll('.cate-box');
+  const cateLinks = document.querySelectorAll('.cate-link, .tab-item[data-cate]');
 
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      const target = tab.dataset.cate;
-      
-      tabs.forEach(t => t.classList.remove('active'));
-      tabs.forEach(t => {
-        if(t.dataset.cate === target) t.classList.add('active');
-      });
+  // 菜单开关逻辑
+  function openMenu() { menu.classList.add('show'); overlay.classList.add('show'); }
+  function closeMenu() { menu.classList.remove('show'); overlay.classList.remove('show'); }
+  toggleBtn.addEventListener('click', openMenu);
 
+  // 分类切换逻辑 (核心)
+  cateLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      const target = link.dataset.cate;
+      if(!target) return;
+
+      // 1. 更新所有导航状态
+      document.querySelectorAll('.cate-link, .tab-item').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll(`[data-cate="${target}"]`).forEach(el => el.classList.add('active'));
+
+      // 2. 切换显示区域
       boxes.forEach(box => box.style.display = 'none');
       const targetBox = document.getElementById(target);
       if(targetBox) targetBox.style.display = 'block';
 
+      // 3. 手机端自动关闭菜单并回到顶部
+      closeMenu();
       if(window.innerWidth <= 768) {
-        window.scrollTo({ top: 70, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     });
   });
+
+  // 图片灯箱逻辑
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = lightbox.querySelector('img');
+  document.querySelectorAll('.product-img img').forEach(img => {
+    img.addEventListener('click', () => {
+      lightboxImg.src = img.src;
+      lightbox.classList.add('show');
+    });
+  });
+  lightbox.querySelector('.close').addEventListener('click', () => lightbox.classList.remove('show'));
+  lightbox.addEventListener('click', (e) => { if(e.target === lightbox) lightbox.classList.remove('show'); });
 </script>
 
 </body>
