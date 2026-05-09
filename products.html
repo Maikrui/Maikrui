@@ -66,7 +66,7 @@
         }
         .sub-cate {
             padding-left: 1rem;
-            display: none;
+            display: block;
             margin-top: 0.3rem;
         }
         .sub-cate a {
@@ -76,13 +76,14 @@
             text-decoration: none;
             font-size: 0.9rem;
             border-radius: 4px;
+            cursor: pointer;
         }
-        .sub-cate a:hover {
+        .sub-cate a:hover,
+        .sub-cate a.active {
             background: #f8f8f8;
             color: var(--brand-dark-blue);
+            font-weight: bold;
         }
-        .cate-item.active + .sub-cate { display: block; }
-        .cate-item.active { color: var(--brand-dark-blue); }
 
         .content {
             flex: 1;
@@ -92,16 +93,16 @@
         }
         h1 { margin-bottom: 2rem; color: var(--brand-dark-blue); }
 
-        /* 画册排版（不破坏你原有样式） */
-        .catalog-row {
+        /* 产品单页布局 */
+        .product-item {
+            display: none;
+        }
+        .product-item.show {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
-            margin-bottom: 50px;
             align-items: center;
         }
-        .catalog-row.reverse { direction: rtl; }
-        .catalog-row.reverse > * { direction: ltr; }
         .catalog-text { padding: 10px; }
         .catalog-text h2 {
             font-size: 22px;
@@ -157,7 +158,7 @@
         }
 
         @media (max-width:768px) {
-            .catalog-row { grid-template-columns: 1fr; }
+            .product-item.show { grid-template-columns: 1fr; }
             .page-wrap { flex-direction: column; }
             .side-nav { width: 100%; }
         }
@@ -184,27 +185,27 @@
     <div class="side-nav">
         <ul>
             <li>
-                <div class="cate-item active">Belt Buckles</div>
+                <div class="cate-item">Belt Buckles</div>
                 <ul class="sub-cate">
-                    <li><a href="#">Zinc Alloy Buckles</a></li>
-                    <li><a href="#">Stainless Steel Buckles</a></li>
-                    <li><a href="#">Brass Buckles</a></li>
+                    <li><a class="menu-link active" data-target="belt-zinc">Zinc Alloy Buckles</a></li>
+                    <li><a class="menu-link" data-target="belt-steel">Stainless Steel Buckles</a></li>
+                    <li><a class="menu-link" data-target="belt-brass">Brass Buckles</a></li>
                 </ul>
             </li>
             <li>
                 <div class="cate-item">Shoe Buckles</div>
                 <ul class="sub-cate">
-                    <li><a href="#">Shoe Buckles</a></li>
-                    <li><a href="#">Shoe Hooks & Eyelets</a></li>
+                    <li><a class="menu-link" data-target="shoe-buckle">Shoe Buckles</a></li>
+                    <li><a class="menu-link" data-target="shoe-eyelet">Shoe Hooks & Eyelets</a></li>
                 </ul>
             </li>
             <li>
                 <div class="cate-item">Garment Hardware</div>
                 <ul class="sub-cate">
-                    <li><a href="#">Rivets & Eyelets</a></li>
-                    <li><a href="#">Buttons & Clasps</a></li>
-                    <li><a href="#">Pull Tabs & Tags</a></li>
-                    <li><a href="#">O-Rings & Loops</a></li>
+                    <li><a class="menu-link" data-target="rivet-eyelet">Rivets & Eyelets</a></li>
+                    <li><a class="menu-link" data-target="button-clasp">Buttons & Clasps</a></li>
+                    <li><a class="menu-link" data-target="pull-tag">Pull Tabs & Tags</a></li>
+                    <li><a class="menu-link" data-target="oring-loop">O-Rings & Loops</a></li>
                 </ul>
             </li>
         </ul>
@@ -213,10 +214,10 @@
     <div class="content">
         <h1>Our Products</h1>
 
-        <!-- 皮带扣 -->
-        <div class="catalog-row">
+        <!-- 1 锌合金皮带扣 -->
+        <div class="product-item show" id="belt-zinc">
             <div class="catalog-text">
-                <h2>Belt Buckle Series</h2>
+                <h2>Zinc Alloy Belt Buckles</h2>
                 <p>High-grade zinc alloy & stainless steel belt buckles. Custom logo, size and plating are available.</p>
                 <span class="catalog-badge">CUSTOM DESIGN</span>
             </div>
@@ -227,47 +228,114 @@
             </div>
         </div>
 
-        <!-- 鞋扣 -->
-        <div class="catalog-row reverse">
+        <!-- 2 不锈钢皮带扣 -->
+        <div class="product-item" id="belt-steel">
+            <div class="catalog-text">
+                <h2>Stainless Steel Belt Buckles</h2>
+                <p>Anti-rust stainless steel belt buckles, polished finish, durable for daily and business use.</p>
+                <span class="catalog-badge">ANTI RUST</span>
+            </div>
             <div class="catalog-images">
-                <div class="img-large">Shoe Buckle Main</div>
+                <div class="img-large">Steel Buckle Main</div>
                 <div class="img-small">Style 1</div>
                 <div class="img-small">Detail</div>
             </div>
+        </div>
+
+        <!-- 3 黄铜皮带扣 -->
+        <div class="product-item" id="belt-brass">
+            <div class="catalog-text">
+                <h2>Brass Belt Buckles</h2>
+                <p>Solid brass material, vintage style belt buckles, high quality metal texture.</p>
+                <span class="catalog-badge">HIGH GRADE</span>
+            </div>
+            <div class="catalog-images">
+                <div class="img-large">Brass Buckle Main</div>
+                <div class="img-small">Style 1</div>
+                <div class="img-small">Detail</div>
+            </div>
+        </div>
+
+        <!-- 4 鞋扣 -->
+        <div class="product-item" id="shoe-buckle">
             <div class="catalog-text">
                 <h2>Shoe Buckle & Accessories</h2>
                 <p>Durable metal hardware for footwear: buckles, hooks and eyelets. Strong structure & fashionable finish.</p>
                 <span class="catalog-badge">HIGH QUALITY</span>
             </div>
+            <div class="catalog-images">
+                <div class="img-large">Shoe Buckle Main</div>
+                <div class="img-small">Style 1</div>
+                <div class="img-small">Detail</div>
+            </div>
         </div>
 
-        <!-- 包袋五金 -->
-        <div class="catalog-row">
+        <!-- 后面其它产品我先给你留好位置，直接改文字和图片就行 -->
+        <div class="product-item" id="shoe-eyelet">
             <div class="catalog-text">
-                <h2>Bag Metal Hardware</h2>
-                <p>Full set hardware for bags: buckles, D-rings, locks, clips and chain accessories. OEM & ODM welcomed.</p>
+                <h2>Shoe Hooks & Eyelets</h2>
+                <p>Metal eyelets and hooks for shoes, firm installation, various plating colors.</p>
+                <span class="catalog-badge">FULL SIZE</span>
+            </div>
+            <div class="catalog-images">
+                <div class="img-large">Shoe Eyelet Main</div>
+                <div class="img-small">Style 1</div>
+                <div class="img-small">Detail</div>
+            </div>
+        </div>
+
+        <div class="product-item" id="rivet-eyelet">
+            <div class="catalog-text">
+                <h2>Rivets & Eyelets</h2>
+                <p>Garment rivets, eyelets for jeans, bags and clothing hardware parts.</p>
                 <span class="catalog-badge">OEM ACCEPTED</span>
             </div>
             <div class="catalog-images">
-                <div class="img-large">Bag Hardware Main</div>
+                <div class="img-large">Rivet Main</div>
                 <div class="img-small">Style 1</div>
                 <div class="img-small">Detail</div>
             </div>
         </div>
 
-        <!-- 服装辅料 -->
-        <div class="catalog-row reverse">
+        <div class="product-item" id="button-clasp">
+            <div class="catalog-text">
+                <h2>Buttons & Clasps</h2>
+                <p>Metal buttons and clasps for coat, jacket and fashion apparel customization.</p>
+                <span class="catalog-badge">CUSTOM LOGO</span>
+            </div>
             <div class="catalog-images">
-                <div class="img-large">Garment Hardware Main</div>
+                <div class="img-large">Button Main</div>
                 <div class="img-small">Style 1</div>
                 <div class="img-small">Detail</div>
             </div>
+        </div>
+
+        <div class="product-item" id="pull-tag">
             <div class="catalog-text">
-                <h2>Garment Metal Parts</h2>
-                <p>Buttons, rivets, hooks, eyelets and logo tags for jeans, coats and fashion apparel.</p>
+                <h2>Pull Tabs & Tags</h2>
+                <p>Zipper pullers, metal logo tags for bags, garments and luggage.</p>
                 <span class="catalog-badge">FULL RANGE</span>
             </div>
+            <div class="catalog-images">
+                <div class="img-large">Pull Tag Main</div>
+                <div class="img-small">Style 1</div>
+                <div class="img-small">Detail</div>
+            </div>
         </div>
+
+        <div class="product-item" id="oring-loop">
+            <div class="catalog-text">
+                <h2>O-Rings & Loops</h2>
+                <p>Metal O rings, D rings and loops for bag, belt and garment accessories.</p>
+                <span class="catalog-badge">ALL SIZES</span>
+            </div>
+            <div class="catalog-images">
+                <div class="img-large">O-Ring Main</div>
+                <div class="img-small">Style 1</div>
+                <div class="img-small">Detail</div>
+            </div>
+        </div>
+
     </div>
 </div>
 
@@ -278,10 +346,20 @@
 </footer>
 
 <script>
-    const cates = document.querySelectorAll('.cate-item');
-    cates.forEach(item => {
-        item.addEventListener('click', () => {
-            item.classList.toggle('active');
+    // 左侧菜单切换
+    const menuLinks = document.querySelectorAll('.menu-link');
+    const productItems = document.querySelectorAll('.product-item');
+
+    menuLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            // 移除所有激活状态
+            menuLinks.forEach(l => l.classList.remove('active'));
+            productItems.forEach(p => p.classList.remove('show'));
+
+            // 当前菜单高亮 + 显示对应产品
+            link.classList.add('active');
+            let target = link.getAttribute('data-target');
+            document.getElementById(target).classList.add('show');
         });
     });
 </script>
