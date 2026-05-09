@@ -13,18 +13,19 @@
             --brand-silver: #E0E0E0;
         }
 
-        /* 关键修复：导航栏固定+预留顶部空间 */
+        /* 导航栏固定在顶部 */
         header {
             background: var(--brand-dark-blue);
             padding: 1rem 0;
-            position: fixed;
+            position: sticky; /* 改成sticky，随页面滚动消失 */
             top: 0; left: 0;
             width: 100%;
             z-index: 100;
         }
-        /* 给header预留高度，防止body内容被挡住 */
+
+        /* 桌面端给body预留空间，手机端靠sticky导航栏自然消失 */
         body {
-            padding-top: 120px; /* 手机端也足够的安全距离 */
+            padding-top: 0;
         }
 
         .container { width: 90%; max-width: 1200px; margin: 0 auto; }
@@ -35,11 +36,14 @@
         nav a:hover { color: #fff; }
 
         .page-wrap {
-            display: flex; gap: 2rem; padding: 1rem 0; /* 顶部padding减少，靠body的padding-top撑 */
+            display: flex; gap: 2rem; padding: 2rem 0;
         }
         .side-nav {
             width: 240px; background: #fff; border: 1px solid #eee;
             border-radius: 6px; padding: 1rem;
+            position: sticky;
+            top: 2rem;
+            height: fit-content;
         }
         .side-nav ul { list-style: none; }
         .side-nav li { margin-bottom: 0.5rem; }
@@ -157,9 +161,9 @@
         @media (max-width:768px) {
             .product-inner { grid-template-columns:1fr; }
             .page-wrap { flex-direction:column; }
-            .side-nav { width:100%; }
-            /* 手机端额外加固，确保不被挡住 */
-            body { padding-top: 130px; }
+            .side-nav { width:100%; position:static; }
+            /* 手机端导航栏会随页面滚动消失，所以不需要额外padding-top */
+            body { padding-top: 0; }
         }
     </style>
 </head>
@@ -374,7 +378,7 @@
 </footer>
 
 <script>
-    // 左侧分类切换
+    // 左侧分类切换 + 自动滚动到产品顶部
     const links = document.querySelectorAll('.menu-link');
     const categories = document.querySelectorAll('.category');
 
@@ -385,7 +389,16 @@
             
             link.classList.add('active');
             const target = link.dataset.target;
-            document.getElementById(target).style.display = 'block';
+            const targetElement = document.getElementById(target);
+            targetElement.style.display = 'block';
+
+            // 点击后自动滚动到产品区域顶部，避开导航栏
+            const headerHeight = document.querySelector('header').offsetHeight;
+            const topPosition = targetElement.offsetTop - headerHeight - 20;
+            window.scrollTo({
+                top: topPosition,
+                behavior: 'smooth'
+            });
         });
     });
 
