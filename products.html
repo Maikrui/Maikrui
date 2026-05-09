@@ -5,16 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Products | Maikrui Metal</title>
   <style>
-    /* 1. 还原您的基础全局样式 */
     * { margin:0; padding:0; box-sizing:border-box; font-family:Arial,sans-serif; }
-    body { background:#f8f8f8; color:#333; line-height:1.6; padding-top:70px; } /* 这里的间距确保内容不被Header遮挡 */
+    body { background:#f8f8f8; color:#333; line-height:1.6; padding-top:70px; }
 
     :root{
       --brand-dark-blue:#0A244B;
       --brand-silver:#E0E0E0;
     }
 
-    /* 2. 绝对严禁改动的主导航栏样式 (还原最初版) */
     header {
       background:var(--brand-dark-blue);
       padding:1rem 0;
@@ -29,7 +27,6 @@
     nav a { color:#ccc; text-decoration:none; margin-left:1.5rem; font-size: 15px; }
     nav a:hover { color:#fff; }
 
-    /* 3. 手机端二级分类（作为独立层级，排在Header下方） */
     .mobile-category-bar {
       display: none;
       background: #fff;
@@ -37,7 +34,6 @@
       overflow-x: auto;
       white-space: nowrap;
       -webkit-overflow-scrolling: touch;
-      position: relative; /* 不再强行sticky，防止遮挡内容 */
       margin-bottom: 10px;
     }
 
@@ -50,6 +46,7 @@
         text-decoration: none;
         font-size: 14px;
         border-bottom: 2px solid transparent;
+        cursor:pointer;
       }
       .category-tab.active {
         color: var(--brand-dark-blue);
@@ -57,12 +54,11 @@
         font-weight: bold;
       }
       .page-wrap { flex-direction: column; }
-      .side-left { display: none; } /* 手机端不显示左侧栏 */
+      .side-left { display: none; }
       .main-content { padding: 1rem !important; }
       .product-row { grid-template-columns: 1fr !important; }
     }
 
-    /* 4. PC端页面布局 */
     .page-wrap { display: flex; gap: 2rem; padding: 1rem 0; }
     .side-left {
       width: 230px; background: #fff; padding: 1.2rem; border-radius: 6px;
@@ -72,7 +68,6 @@
     .cate-link { display: block; padding: 0.6rem; color: #333; text-decoration: none; border-radius: 4px; cursor: pointer; }
     .cate-link.active { background: var(--brand-dark-blue); color: #fff; }
 
-    /* 5. 产品显示区域（修复图片不显示的问题） */
     .main-content { flex: 1; background: #fff; padding: 2rem; border-radius: 8px; border: 1px solid #eee; }
     .cate-box h1 { margin-bottom: 1.5rem; color: var(--brand-dark-blue); font-size: 22px; }
     .product { margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid #eee; }
@@ -83,7 +78,7 @@
     .product-img { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
     .img-main { grid-column: 1/-1; height: 260px; background: #fff; border: 1px solid #eee; border-radius: 4px; overflow: hidden; }
     .img-sub { height: 130px; background: #fff; border: 1px solid #eee; border-radius: 4px; overflow: hidden; }
-    .product-img img { width: 100%; height: 100%; object-fit: contain; display: block; } /* 确保图片块状显示 */
+    .product-img img { width: 100%; height: 100%; object-fit: contain; display: block; }
 
     footer { background: var(--brand-dark-blue); color: #fff; text-align: center; padding: 2rem 0; margin-top: 2rem; }
   </style>
@@ -145,7 +140,22 @@
         <h1>Stainless Steel Buckles</h1>
         <p>Coming soon...</p>
       </div>
+
+      <div class="cate-box" id="brass" style="display:none;">
+        <h1>Brass Buckles</h1>
+        <p>Coming soon...</p>
       </div>
+
+      <div class="cate-box" id="shoe" style="display:none;">
+        <h1>Shoe Buckles</h1>
+        <p>Coming soon...</p>
+      </div>
+
+      <div class="cate-box" id="rivet" style="display:none;">
+        <h1>Rivets & Eyelets</h1>
+        <p>Coming soon...</p>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -157,20 +167,17 @@
 
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
-      const target = tab.getAttribute('data-cate');
+      const target = tab.dataset.cate;
       
-      // 更新激活状态
+      tabs.forEach(t => t.classList.remove('active'));
       tabs.forEach(t => {
-        if(t.getAttribute('data-cate') === target) t.classList.add('active');
-        else t.classList.remove('active');
+        if(t.dataset.cate === target) t.classList.add('active');
       });
 
-      // 切换内容显示
-      boxes.forEach(box => {
-        box.style.display = (box.id === target) ? 'block' : 'none';
-      });
+      boxes.forEach(box => box.style.display = 'none');
+      const targetBox = document.getElementById(target);
+      if(targetBox) targetBox.style.display = 'block';
 
-      // 手机端点击后回到顶部查看产品
       if(window.innerWidth <= 768) {
         window.scrollTo({ top: 70, behavior: 'smooth' });
       }
