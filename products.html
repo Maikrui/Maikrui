@@ -100,7 +100,7 @@
       background:var(--active-color); color:#fff; text-align:center; padding:2rem 0; margin-top:2rem;
     }
 
-    /* ===================== 完美融入版分类按钮 ===================== */
+    /* ===================== 【修复版】能看到、能点击的分类按钮 ===================== */
     .menu-toggle {
       display:none;
     }
@@ -114,19 +114,21 @@
     }
 
     @media (max-width:768px) {
-      /* 按钮：无背景、无边框、完全融入、居中对称 */
+      /* 修复：手机端按钮必须能看到、能点击 */
       .menu-toggle {
         display:block;
         width:100%;
-        padding:10px 0;
+        padding:12px 0;
         background:transparent;
         color:var(--brand-dark-blue);
         border:none;
         font-size:16px;
         text-align:center;
         cursor:pointer;
-        margin:0;
-        font-weight:normal;
+        margin:0 0 1rem 0;
+        font-weight:bold;
+        /* 关键：加个下边框，让按钮位置清晰 */
+        border-bottom:1px solid #eee;
       }
       .side-left {
         position:fixed;
@@ -147,7 +149,7 @@
       .page-wrap {
         flex-direction:column;
         gap:1rem;
-        padding-top:0.5rem;
+        padding-top:0;
       }
       .main-content {
         padding:1rem;
@@ -188,7 +190,7 @@
 <div class="overlay" id="overlay" onclick="closeMenu()"></div>
 
 <div class="container">
-  <!-- 完全融入的分类按钮 -->
+  <!-- 修复：能看到、能点击的分类按钮 -->
   <button class="menu-toggle" id="menuToggle">☰  Product Categories</button>
 
   <div class="page-wrap">
