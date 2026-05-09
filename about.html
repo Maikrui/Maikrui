@@ -10,15 +10,23 @@
     <title>About Maikrui Metal - Die Casting Factory</title>
 <meta name="description" content="Maikrui Metal is a reliable die casting factory with 30+ years experience. We provide high-quality, eco-friendly metal hardware for worldwide clients.">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
-        body { background: #f8f8f8; color: #333; line-height: 1.6; padding-top: 65px; }
-
-        /* 统一品牌色调 */
-        :root{
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background: #f8f8f8;
+            color: #333;
+            line-height: 1.6;
+            padding-top: 65px;
+        }
+        :root {
             --brand-dark-blue: #0A244B;
             --brand-silver: #E0E0E0;
+            --brand-text-dark: #0A244B;
         }
-
         header {
             background: var(--brand-dark-blue);
             padding: 1rem 0;
@@ -28,12 +36,17 @@
             width: 100%;
             z-index: 100;
         }
-        .container { width: 90%; max-width: 1100px; margin: 0 auto; }
-        .header-inner { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            flex-wrap: nowrap;
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
         .logo {
             font-size: 1.5rem;
@@ -55,10 +68,20 @@
             height: 40px !important;
             width: auto !important;
         }
-        nav a { color: #cccccc; text-decoration: none; margin-left: 1.5rem; transition: color 0.3s ease; white-space: nowrap; }
-        nav a:hover { color: var(--brand-silver); }
+        nav a {
+            color: #cccccc;
+            text-decoration: none;
+            margin-left: 1.5rem;
+            transition: color 0.3s ease;
+            white-space: nowrap;
+        }
+        nav a:hover {
+            color: var(--brand-silver);
+        }
         @media (max-width: 768px) {
-            nav a { margin-left: 0.8rem; }
+            nav a {
+                margin-left: 0.8rem;
+            }
         }
         .content { padding: 4rem 0; background: #fff; }
         h1, h2 { margin: 1rem 0; color: var(--brand-dark-blue); }
