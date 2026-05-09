@@ -28,7 +28,26 @@
         }
         .container { width: 90%; max-width: 1100px; margin: 0 auto; }
         .header-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
-        .logo { font-size: 1.5rem; font-weight: bold; color: var(--brand-silver); display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--brand-silver);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+        .logo img {
+            background: transparent !important;
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+            filter: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            height: 40px !important;
+            width: auto !important;
+        }
         nav a { color: #cccccc; text-decoration: none; margin-left: 1.5rem; transition: color 0.3s ease; white-space: nowrap; }
         nav a:hover { color: var(--brand-silver); }
         .content { padding: 4rem 0; background: #ffffff; }
@@ -86,7 +105,7 @@
 <header>
     <div class="container header-inner">
         <div class="logo">
-            <img src="logo.png" style="height:40px; margin-right:8px;">
+            <img src="logo.png" alt="Logo">
             Maikrui Metal
         </div>
         <nav>
