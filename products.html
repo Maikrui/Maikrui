@@ -2,20 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Products | Maikrui Metal</title>
   <style>
     * { margin:0; padding:0; box-sizing:border-box; font-family:Arial,sans-serif; }
-    body { background:#f8f8f8; color:#333; line-height:1.6; padding-top:65px; }
+    body { background:#f8f8f8; color:#333; line-height:1.6; padding-top:70px; }
 
     :root{
       --brand-dark-blue:#0A244B;
       --brand-silver:#E0E0E0;
-      --active-color:#0A244B;
-      --brand-text-dark:#0A244B;
     }
 
-    /* 顶部导航（完全不动） */
     header {
       background:var(--brand-dark-blue);
       padding:1rem 0;
@@ -27,30 +24,22 @@
       width:90%; max-width:1100px; margin:0 auto;
     }
     .header-inner {
-      display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;
+      display:flex; justify-content:space-between; align-items:center;
     }
     .logo {
       font-size:1.5rem; font-weight:bold; color:var(--brand-silver);
-      display:flex; align-items:center; gap:8px; white-space:nowrap;
+      display:flex; align-items:center; gap:8px;
     }
     .logo img {
-      background:transparent !important; border:none !important; outline:none !important;
-      box-shadow:none !important; filter:none !important; padding:0 !important; margin:0 !important;
-      height:40px !important; width:auto !important;
+      height:40px; width:auto; background:transparent; border:none;
     }
     nav a {
-      color:#ccc; text-decoration:none; margin-left:1.5rem;
-      transition:color 0.3s ease; white-space:nowrap;
+      color:#ccc; text-decoration:none; margin-left:1.2rem;
     }
     nav a:hover { color:var(--brand-silver); }
 
-    @media (max-width:768px) {
-      nav a { margin-left:0.8rem; }
-    }
-
-    /* 原有样式保留 */
-    .mobile-cate{ display:none; }
-    .page-wrap{ display:flex; gap:2rem; padding:1rem 0 2rem; }
+    /* 电脑端侧边分类 */
+    .page-wrap{ display:flex; gap:2rem; padding:1rem 0; }
     .side-left{
       width:230px; background:#fff; padding:1rem; border-radius:6px;
       border:1px solid #eee; height:fit-content;
@@ -65,107 +54,70 @@
       color:#333; cursor:pointer; margin:0.2rem 0;
     }
     .side-left .cate-link.active{
-      background:var(--active-color); color:#fff;
+      background:var(--brand-dark-blue); color:#fff;
     }
+
     .main-content{
       flex:1; background:#fff; padding:2rem; border-radius:8px;
     }
-    h1{ margin-bottom:1.8rem; color:var(--active-color); font-size:24px; }
+    h1{ margin-bottom:1.8rem; color:var(--brand-dark-blue); font-size:24px; }
     .product{
       margin-bottom:3rem; padding-bottom:2rem; border-bottom:1px solid #eee;
     }
-    .product:last-child{ margin-bottom:0; padding-bottom:0; border:none; }
     .product-row{
       display:grid; grid-template-columns:1fr 1.4fr; gap:2rem; align-items:center;
     }
-    .product-text h2{ font-size:20px; margin-bottom:0.6rem; color:var(--active-color); }
-    .product-text p{ font-size:14px; color:#555; line-height:1.5; }
+    .product-text h2{ font-size:20px; margin-bottom:0.6rem; color:var(--brand-dark-blue); }
     .product-img{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
     .img-big{ grid-column:1/-1; height:260px; }
     .img-sm{ height:160px; }
-    .product-img div{ border:1px solid #eee; border-radius:6px; overflow:hidden; background:#fff; }
-    .product-img img{ width:100%; height:100%; object-fit:contain; cursor:pointer; }
+    .product-img div{ border:1px solid #eee; border-radius:6px; overflow:hidden; }
+    .product-img img{ width:100%; height:100%; object-fit:contain; }
 
-    .lightbox{
-      position:fixed; top:0; left:0; width:100%; height:100%;
-      background:rgba(0,0,0,0.9); display:none; align-items:center; justify-content:center; z-index:999;
+    /* 遮罩 */
+    .overlay {
+      position:fixed; inset:0; background:rgba(0,0,0,0.6);
+      z-index:199; opacity:0; visibility:hidden; transition:0.3s;
     }
-    .lightbox.show{ display:flex; }
-    .lightbox img{ max-width:90%; max-height:90%; }
-    .lightbox .close{
-      position:absolute; top:20px; right:30px; color:#fff; font-size:36px; cursor:pointer;
-    }
+    .overlay.show { opacity:1; visibility:visible; }
 
-    footer{
-      background:var(--active-color); color:#fff; text-align:center; padding:2rem 0; margin-top:2rem;
-    }
-
-    /* ===================== 【修复版】能看到、能点击的分类按钮 ===================== */
-    .menu-toggle {
+    /* ========== 手机专用：分类按钮 + 侧滑菜单 ========== */
+    .cate-btn {
       display:none;
     }
-    .overlay {
-      position:fixed; top:0; left:0; width:100%; height:100%;
-      background:rgba(0,0,0,0.6); z-index:199; opacity:0; visibility:hidden;
-      transition:all 0.3s ease;
-    }
-    .overlay.show {
-      opacity:1; visibility:visible;
-    }
-
     @media (max-width:768px) {
-      /* 修复：手机端按钮必须能看到、能点击 */
-      .menu-toggle {
-        display:block;
+      /* 手机导航下方 明显可点击按钮 */
+      .cate-btn {
+        display:block !important;
         width:100%;
-        padding:12px 0;
-        background:transparent;
+        margin:10px 0;
+        padding:14px;
+        background:#fff;
         color:var(--brand-dark-blue);
-        border:none;
+        border:1px solid #eee;
+        border-radius:6px;
         font-size:16px;
         text-align:center;
         cursor:pointer;
-        margin:0 0 1rem 0;
-        font-weight:bold;
-        /* 关键：加个下边框，让按钮位置清晰 */
-        border-bottom:1px solid #eee;
       }
+      /* 侧边栏变侧滑抽屉 */
       .side-left {
-        position:fixed;
-        top:0; left:0;
+        position:fixed; top:0; left:0;
         width:280px; height:100vh;
-        background:#fff;
-        z-index:200;
-        transform:translateX(-100%);
-        transition:transform 0.3s ease;
+        z-index:200; background:#fff;
+        transform:translateX(-100%); transition:0.3s;
         overflow-y:auto;
-        padding:20px;
-        border-radius:0;
-        border-right:1px solid #eee;
       }
-      .side-left.show {
-        transform:translateX(0);
-      }
-      .page-wrap {
-        flex-direction:column;
-        gap:1rem;
-        padding-top:0;
-      }
-      .main-content {
-        padding:1rem;
-      }
-      .product-row {
-        grid-template-columns:1fr;
-        gap:1rem;
-      }
-      .close-drawer {
-        display:block;
-        text-align:right;
-        font-size:24px;
-        cursor:pointer;
-        color:#333;
-        margin-bottom:10px;
-      }
+      .side-left.show { transform:translateX(0); }
+
+      .page-wrap { flex-direction:column; gap:1rem; }
+      .main-content { padding:1rem; }
+      .product-row { grid-template-columns:1fr; }
+    }
+
+    footer{
+      background:var(--brand-dark-blue); color:#fff; text-align:center;
+      padding:2rem 0; margin-top:2rem;
     }
   </style>
 </head>
@@ -186,16 +138,14 @@
   </div>
 </header>
 
-<!-- 遮罩层 -->
-<div class="overlay" id="overlay" onclick="closeMenu()"></div>
+<div class="overlay" id="overlay"></div>
 
 <div class="container">
-  <!-- 修复：能看到、能点击的分类按钮 -->
-  <button class="menu-toggle" id="menuToggle">☰  Product Categories</button>
+  <!-- 手机端专属可见按钮 -->
+  <button class="cate-btn" id="cateBtn">☰  Click For Product Categories</button>
 
   <div class="page-wrap">
-    <div class="side-left" id="categoryMenu">
-      <span class="close-drawer" onclick="closeMenu()">×</span>
+    <div class="side-left" id="cateMenu">
       <ul>
         <li class="cate-title">Belt Buckles</li>
         <li><span class="cate-link active" data-cate="zinc">Zinc Alloy Buckles</span></li>
@@ -226,45 +176,6 @@
             </div>
           </div>
         </div>
-        <div class="product">
-          <div class="product-row">
-            <div class="product-text">
-              <h2>Automatic Buckle</h2>
-              <p>Smooth automatic sliding mechanism, zinc alloy construction, fashion business style for belts.</p>
-            </div>
-            <div class="product-img">
-              <div class="img-big"><img src="p2-1.jpg"></div>
-              <div class="img-sm"><img src="p2-2.jpg"></div>
-              <div class="img-sm"><img src="p2-3.jpg"></div>
-            </div>
-          </div>
-        </div>
-        <div class="product">
-          <div class="product-row">
-            <div class="product-text">
-              <h2>Western Style Buckle</h2>
-              <p>Vintage western design, thick zinc alloy, strong metal texture for casual and fashion belts.</p>
-            </div>
-            <div class="product-img">
-              <div class="img-big"><img src="p3-1.jpg"></div>
-              <div class="img-sm"><img src="p3-2.jpg"></div>
-              <div class="img-sm"><img src="p3-3.jpg"></div>
-            </div>
-          </div>
-        </div>
-        <div class="product">
-          <div class="product-row">
-            <div class="product-text">
-              <h2>Custom Logo Buckle</h2>
-              <p>Full custom design, accept artwork and logo, suitable for brand promotion and gift use.</p>
-            </div>
-            <div class="product-img">
-              <div class="img-big"><img src="p4-1.jpg"></div>
-              <div class="img-sm"><img src="p4-2.jpg"></div>
-              <div class="img-sm"><img src="p4-3.jpg"></div>
-            </div>
-          </div>
-        </div>
       </div>
 
       <div class="cate-box" id="shoe-buckle" style="display:none;">
@@ -282,32 +193,6 @@
             </div>
           </div>
         </div>
-        <div class="product">
-          <div class="product-row">
-            <div class="product-text">
-              <h2>Shoe Buckle Style 2</h2>
-              <p>Alloy shoe ornament buckle, various plating color, custom design and logo are acceptable.</p>
-            </div>
-            <div class="product-img">
-              <div class="img-big"><img src="s2-1.jpg"></div>
-              <div class="img-sm"><img src="s2-2.jpg"></div>
-              <div class="img-sm"><img src="s2-3.jpg"></div>
-            </div>
-          </div>
-        </div>
-        <div class="product">
-          <div class="product-row">
-            <div class="product-text">
-              <h2>Shoe Buckle Style 3</h2>
-              <p>Fashion metal shoe buckle, stable structure, widely used for casual shoes, sandals and boots.</p>
-            </div>
-            <div class="product-img">
-              <div class="img-big"><img src="s3-1.jpg"></div>
-              <div class="img-sm"><img src="s3-2.jpg"></div>
-              <div class="img-sm"><img src="s3-3.jpg"></div>
-            </div>
-          </div>
-        </div>
       </div>
 
       <div class="cate-box" id="steel" style="display:none;"><h1>Stainless Steel Buckles</h1><p>Coming soon...</p></div>
@@ -317,64 +202,46 @@
   </div>
 </div>
 
-<div class="lightbox" id="lightbox">
-  <span class="close">&times;</span>
-  <img src="">
-</div>
-
 <footer>
   <div class="container">Maikrui Metal © All Rights Reserved</div>
 </footer>
 
 <script>
-  const menu = document.getElementById('categoryMenu');
+  // 手机分类开关
+  const cateBtn = document.getElementById('cateBtn');
+  const cateMenu = document.getElementById('cateMenu');
   const overlay = document.getElementById('overlay');
-  const toggleBtn = document.getElementById('menuToggle');
 
-  function openMenu() {
-    menu.classList.add('show');
+  function openMenu(){
+    cateMenu.classList.add('show');
     overlay.classList.add('show');
   }
-  function closeMenu() {
-    menu.classList.remove('show');
+  function closeMenu(){
+    cateMenu.classList.remove('show');
     overlay.classList.remove('show');
   }
 
-  toggleBtn.addEventListener('click', openMenu);
+  cateBtn.onclick = openMenu;
+  overlay.onclick = closeMenu;
 
-  document.querySelectorAll('.cate-link').forEach(link => {
-    link.addEventListener('click', () => {
-      closeMenu();
-    });
-  });
-
-  const btns = document.querySelectorAll('.cate-link');
+  // 分类切换
+  const links = document.querySelectorAll('.cate-link');
   const boxes = document.querySelectorAll('.cate-box');
-  btns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const target = btn.dataset.cate;
-      btns.forEach(b => b.classList.remove('active'));
-      boxes.forEach(box => box.style.display = 'none');
-      btns.forEach(b => {
-        if(b.dataset.cate === target) b.classList.add('active');
-      });
-      document.getElementById(target).style.display = 'block';
-    });
-  });
 
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImg = lightbox.querySelector('img');
-  const close = lightbox.querySelector('.close');
-  document.querySelectorAll('.product-img img').forEach(img => {
-    img.addEventListener('click', () => {
-      lightboxImg.src = img.src;
-      lightbox.classList.add('show');
-    });
-  });
-  close.addEventListener('click', () => lightbox.classList.remove('show'));
-  lightbox.addEventListener('click', (e) => {
-    if(e.target === lightbox) lightbox.classList.remove('show');
+  links.forEach(item=>{
+    item.onclick = function(){
+      let target = this.dataset.cate;
+      links.forEach(l=>l.classList.remove('active'));
+      this.classList.add('active');
+      boxes.forEach(b=>b.style.display='none');
+      document.getElementById(target).style.display='block';
+      // 点完自动关闭侧边栏
+      if(window.innerWidth <=768){
+        closeMenu();
+      }
+    }
   });
 </script>
+
 </body>
 </html>
