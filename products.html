@@ -15,9 +15,6 @@
             --brand-text-dark: #0A244B;
         }
 
-        /* ========================================== */
-        /* 导航 100% 和你首页完全一样（只改了这里）👇 */
-        /* ========================================== */
         header {
             background: var(--brand-dark-blue);
             padding: 1rem 0;
@@ -70,31 +67,14 @@
             color: var(--brand-silver);
         }
 
-        /* 手机端和首页完全一样 */
         @media (max-width: 768px) {
             nav a {
                 margin-left: 0.8rem;
             }
         }
 
-        /* ========== 以下全部是你原来的产品样式，完全没动 ========== */
         .mobile-cate{
             display:none;
-            gap:0.5rem;
-            flex-wrap:wrap;
-            margin:1.2rem 0;
-        }
-        .mobile-cate .btn{
-            padding:0.5rem 0.9rem;
-            border:1px solid var(--active-color);
-            border-radius:30px;
-            font-size:14px;
-            cursor:pointer;
-            background:#fff;
-        }
-        .mobile-cate .btn.active{
-            background:var(--active-color);
-            color:#fff;
         }
 
         .page-wrap{display:flex; gap:2rem; padding:1rem 0 2rem;}
@@ -168,7 +148,7 @@
         .lightbox img{max-width:90%; max-height:90%;}
         .lightbox .close{
             position:absolute;
-            top:20px; right:30px;
+            top:20px right:30px;
             color:#fff;
             font-size:36px;
             cursor:pointer;
@@ -182,13 +162,47 @@
             margin-top:2rem;
         }
 
+        /* ===================== 方案3：手机折叠菜单（只改这里） ===================== */
+        .mobile-menu-btn {
+            display: none;
+        }
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+                width: 100%;
+                padding: 12px;
+                background: var(--brand-dark-blue);
+                color: #fff;
+                border: none;
+                border-radius: 6px;
+                font-size: 16px;
+                cursor: pointer;
+                margin: 10px 0;
+                text-align: center;
+            }
+            .page-wrap {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .side-left {
+                width: 100%;
+                display: none;
+            }
+            .side-left.show {
+                display: block;
+            }
+            .main-content {
+                padding: 1rem;
+            }
+            .product-row {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
 
-<!-- ========================================== */
-/* 导航 HTML 100% 和你首页完全一样（只改这里）👇 */
-/* =========================================== -->
 <header>
     <div class="container header-inner">
         <div class="logo">
@@ -205,16 +219,11 @@
 </header>
 
 <div class="container">
-    <div class="mobile-cate">
-        <span class="btn active" data-cate="zinc">Zinc Alloy Buckles</span>
-        <span class="btn" data-cate="shoe-buckle">Shoe Buckles</span>
-        <span class="btn" data-cate="steel">Stainless Steel</span>
-        <span class="btn" data-cate="brass">Brass Buckles</span>
-        <span class="btn" data-cate="rivet">Rivets</span>
-    </div>
+    <!-- 手机端折叠按钮 -->
+    <button class="mobile-menu-btn" onclick="toggleMenu()">☰ Product Categories</button>
 
     <div class="page-wrap">
-        <div class="side-left">
+        <div class="side-left" id="categoryMenu">
             <ul>
                 <li class="cate-title">Belt Buckles</li>
                 <li><span class="cate-link active" data-cate="zinc">Zinc Alloy Buckles</span></li>
@@ -346,6 +355,12 @@
 </footer>
 
 <script>
+    // 折叠菜单功能
+    function toggleMenu() {
+        const menu = document.getElementById('categoryMenu');
+        menu.classList.toggle('show');
+    }
+
     const btns = document.querySelectorAll('.cate-link, .mobile-cate .btn');
     const boxes = document.querySelectorAll('.cate-box');
     btns.forEach(btn => {
