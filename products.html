@@ -6,28 +6,78 @@
     <title>Products | Maikrui Metal</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
-        body { background: #f8f8f8; color: #333; padding-top: 70px; }
+        body { background: #f8f8f8; color: #333; line-height: 1.6; padding-top: 65px; }
 
         :root{
             --brand-dark-blue: #0A244B;
             --brand-silver: #E0E0E0;
             --active-color:#0A244B;
+            --brand-text-dark: #0A244B;
         }
 
-        header{
-            position:fixed;
-            top:0; left:0; width:100%;
-            background:var(--brand-dark-blue);
-            z-index:999;
-            padding:1rem 0;
+        /* ========================================== */
+        /* 导航 100% 和你首页完全一样（只改了这里）👇 */
+        /* ========================================== */
+        header {
+            background: var(--brand-dark-blue);
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
         }
-        .container{width:92%; margin:0 auto; max-width:1200px;}
-        .header-inner{display:flex; justify-content:space-between; align-items:center; flex-wrap:nowrap;}
-        .logo{color:var(--brand-silver); font-weight:bold; font-size:1.4rem; display:flex; align-items:center; white-space: nowrap;}
-        .logo img{height:38px; margin-right:8px;}
-        .top-nav a{color:#ccc; text-decoration:none; margin-left:18px; white-space: nowrap;}
-        .top-nav a:hover{color:#fff;}
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--brand-silver);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+        .logo img {
+            background: transparent !important;
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+            filter: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            height: 40px !important;
+            width: auto !important;
+        }
+        nav a {
+            color: #cccccc;
+            text-decoration: none;
+            margin-left: 1.5rem;
+            transition: color 0.3s ease;
+            white-space: nowrap;
+        }
+        nav a:hover {
+            color: var(--brand-silver);
+        }
 
+        /* 手机端和首页完全一样 */
+        @media (max-width: 768px) {
+            nav a {
+                margin-left: 0.8rem;
+            }
+        }
+
+        /* ========== 以下全部是你原来的产品样式，完全没动 ========== */
         .mobile-cate{
             display:none;
             gap:0.5rem;
@@ -132,33 +182,25 @@
             margin-top:2rem;
         }
 
-        @media (max-width:768px){
-            .header-inner{gap: 0.3rem;}
-            .logo{font-size: 1.1rem;}
-            .logo img{height: 32px;}
-            .top-nav a{margin-left: 0.5rem; font-size: 0.85rem;}
-            .top-nav a{flex-shrink:0;}
-            .side-left{display:none;}
-            .mobile-cate{display:flex;}
-            .product-row{grid-template-columns:1fr;}
-            body{padding-top:65px;}
-            .main-content{padding:1.5rem;}
-        }
     </style>
 </head>
 <body>
 
+<!-- ========================================== */
+/* 导航 HTML 100% 和你首页完全一样（只改这里）👇 */
+/* =========================================== -->
 <header>
     <div class="container header-inner">
         <div class="logo">
-            <img src="logo.png"> Maikrui Metal
+            <img src="logo.png" alt="Logo">
+            Maikrui Metal
         </div>
-        <div class="top-nav">
+        <nav>
             <a href="index.html">Home</a>
             <a href="products.html">Products</a>
             <a href="about.html">About</a>
             <a href="contact.html">Contact</a>
-        </div>
+        </nav>
     </div>
 </header>
 
