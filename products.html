@@ -13,12 +13,20 @@
             --brand-silver: #E0E0E0;
         }
 
+        /* 关键修复：导航栏固定+预留顶部空间 */
         header {
             background: var(--brand-dark-blue);
             padding: 1rem 0;
             position: fixed;
-            top: 0; left: 0; width: 100%; z-index: 100;
+            top: 0; left: 0;
+            width: 100%;
+            z-index: 100;
         }
+        /* 给header预留高度，防止body内容被挡住 */
+        body {
+            padding-top: 120px; /* 手机端也足够的安全距离 */
+        }
+
         .container { width: 90%; max-width: 1200px; margin: 0 auto; }
         .header-inner { display: flex; justify-content: space-between; align-items: center; gap:1rem; flex-wrap:wrap; }
         .logo { font-size: 1.5rem; font-weight: bold; color: var(--brand-silver); display: flex; align-items: center; }
@@ -26,11 +34,8 @@
         nav a { color: #ccc; text-decoration: none; margin-left: 1.5rem; }
         nav a:hover { color: #fff; }
 
-        /* 关键修复：给body加上padding-top，避免内容被导航栏挡住 */
-        body { padding-top: 85px; }
-
         .page-wrap {
-            display: flex; gap: 2rem; padding: 2rem 0;
+            display: flex; gap: 2rem; padding: 1rem 0; /* 顶部padding减少，靠body的padding-top撑 */
         }
         .side-nav {
             width: 240px; background: #fff; border: 1px solid #eee;
@@ -153,8 +158,8 @@
             .product-inner { grid-template-columns:1fr; }
             .page-wrap { flex-direction:column; }
             .side-nav { width:100%; }
-            /* 手机端再加大一点，避免被导航栏挡住 */
-            body { padding-top: 100px; }
+            /* 手机端额外加固，确保不被挡住 */
+            body { padding-top: 130px; }
         }
     </style>
 </head>
