@@ -100,7 +100,7 @@
       background:var(--active-color); color:#fff; text-align:center; padding:2rem 0; margin-top:2rem;
     }
 
-    /* ===================== 侧滑抽屉方案（行业通用） ===================== */
+    /* ===================== 完美融入版分类按钮 ===================== */
     .menu-toggle {
       display:none;
     }
@@ -114,18 +114,19 @@
     }
 
     @media (max-width:768px) {
-      /* 手机：全屏侧滑菜单 */
+      /* 按钮：无背景、无边框、完全融入、居中对称 */
       .menu-toggle {
         display:block;
         width:100%;
-        padding:14px 16px;
-        background:var(--brand-dark-blue);
-        color:#fff;
-        border:none; border-radius:6px;
-        font-size:16px; font-weight:500;
-        text-align:left;
+        padding:10px 0;
+        background:transparent;
+        color:var(--brand-dark-blue);
+        border:none;
+        font-size:16px;
+        text-align:center;
         cursor:pointer;
-        margin:12px 0;
+        margin:0;
+        font-weight:normal;
       }
       .side-left {
         position:fixed;
@@ -146,6 +147,7 @@
       .page-wrap {
         flex-direction:column;
         gap:1rem;
+        padding-top:0.5rem;
       }
       .main-content {
         padding:1rem;
@@ -154,7 +156,6 @@
         grid-template-columns:1fr;
         gap:1rem;
       }
-      /* 关闭按钮 */
       .close-drawer {
         display:block;
         text-align:right;
@@ -187,13 +188,12 @@
 <div class="overlay" id="overlay" onclick="closeMenu()"></div>
 
 <div class="container">
-  <!-- 手机端分类触发按钮（整行可点） -->
+  <!-- 完全融入的分类按钮 -->
   <button class="menu-toggle" id="menuToggle">☰  Product Categories</button>
 
   <div class="page-wrap">
-    <!-- 侧滑抽屉菜单 -->
     <div class="side-left" id="categoryMenu">
-      <span class="close-drawer" onclick="closeMenu()" style="display:none;">×</span>
+      <span class="close-drawer" onclick="closeMenu()">×</span>
       <ul>
         <li class="cate-title">Belt Buckles</li>
         <li><span class="cate-link active" data-cate="zinc">Zinc Alloy Buckles</span></li>
@@ -325,7 +325,6 @@
 </footer>
 
 <script>
-  // 侧滑抽屉核心逻辑
   const menu = document.getElementById('categoryMenu');
   const overlay = document.getElementById('overlay');
   const toggleBtn = document.getElementById('menuToggle');
@@ -341,14 +340,12 @@
 
   toggleBtn.addEventListener('click', openMenu);
 
-  // 点分类后自动关闭菜单（体验更好）
   document.querySelectorAll('.cate-link').forEach(link => {
     link.addEventListener('click', () => {
       closeMenu();
     });
   });
 
-  // 原有分类切换
   const btns = document.querySelectorAll('.cate-link');
   const boxes = document.querySelectorAll('.cate-box');
   btns.forEach(btn => {
@@ -363,7 +360,6 @@
     });
   });
 
-  // 图片灯箱
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = lightbox.querySelector('img');
   const close = lightbox.querySelector('.close');
