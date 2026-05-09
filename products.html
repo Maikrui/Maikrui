@@ -14,7 +14,7 @@
             --active-color:#0A244B;
         }
 
-        /* 导航样式和其他页面完全统一 */
+        /* 导航样式和首页100%完全一致 */
         header {
             background: var(--brand-dark-blue);
             padding: 1rem 0;
@@ -22,7 +22,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            z-index: 999; /* 锁死层级，不被产品内容挡住 */
+            z-index: 999;
         }
         .container {
             width: 90%;
@@ -33,6 +33,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: nowrap; /* 强制不换行 */
         }
         .logo {
             font-size: 1.5rem;
@@ -41,7 +42,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            white-space: nowrap; /* 文字永远不换行 */
+            white-space: nowrap;
         }
         .logo img {
             height: 40px;
@@ -52,7 +53,7 @@
             text-decoration: none;
             margin-left: 1.5rem;
             transition: color 0.3s ease;
-            white-space: nowrap; /* 导航文字永远不换行 */
+            white-space: nowrap;
         }
         .top-nav a:hover {
             color: var(--brand-silver);
@@ -163,10 +164,11 @@
             margin-top:2rem;
         }
 
-        /* 手机端适配，和其他页面完全统一 */
+        /* 手机端适配，和首页完全一致 */
         @media (max-width:768px){
             .header-inner {
-                gap: 0.3rem;
+                flex-wrap: nowrap;
+                gap: 0.2rem;
             }
             .logo {
                 font-size: 1.1rem;
@@ -175,7 +177,7 @@
                 height: 32px;
             }
             .top-nav a {
-                margin-left: 0.5rem;
+                margin-left: 0.4rem;
                 font-size: 0.85rem;
             }
             .side-left{display:none;}
