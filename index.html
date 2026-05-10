@@ -27,6 +27,7 @@
             --brand-dark-blue: #0A244B;
             --brand-silver: #E0E0E0;
             --brand-text-dark: #0A244B;
+            --active-color:#0A244B;
         }
         header {
             background: var(--brand-dark-blue);
@@ -79,6 +80,154 @@
         nav a:hover {
             color: var(--brand-silver);
         }
+
+    /* ========== 手机端箭头提示样式（已加粗醒目、放大箭头） ========== */
+    @media (max-width:768px) {
+      #productsNav::after {
+        content:" ▾";
+        font-size: 22px;
+        margin-left:4px;
+        color: #ffffff;
+        font-weight: bold;
+      }
+      .level2-item::after {
+        content:" ▾";
+        font-size: 20px;
+        margin-left:6px;
+        color: var(--brand-dark-blue);
+        font-weight: bold;
+      }
+    }
+
+    /* 手机端 二级横向滑动导航 */
+    .second-level-nav {
+      display: none;
+      width: 100%;
+      background: #ffffff;
+      border-bottom: 1px solid #e0e0e0;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      z-index: 99;
+    }
+    .second-level-nav.show {
+      display: block;
+    }
+    .scroll-wrap {
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .scroll-wrap::-webkit-scrollbar {
+      display: none;
+    }
+    .scroll-items {
+      display: flex;
+      padding: 10px 12px;
+      gap: 16px;
+      white-space: nowrap;
+    }
+    .scroll-items a {
+      color: var(--brand-dark-blue);
+      font-size: 14px;
+      text-decoration: none;
+      padding: 4px 0;
+      font-weight: 500;
+    }
+    .scroll-items a.active {
+      color: #0056b3;
+      border-bottom: 2px solid #0056b3;
+    }
+
+    /* 手机端 三级下拉导航 */
+    .third-level-wrap {
+      display: none;
+      width: 100%;
+      background: #f8f8f8;
+      border-bottom: 1px solid #eee;
+    }
+    .third-level-wrap.show {
+      display: block;
+    }
+    .third-level-items {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 8px 12px;
+      gap: 12px;
+    }
+    .third-level-items a {
+      color: #333;
+      font-size: 13px;
+      text-decoration: none;
+      padding: 6px 10px;
+      background: #fff;
+      border-radius: 4px;
+      border: 1px solid #eee;
+    }
+    .third-level-items a:active {
+      background: var(--brand-dark-blue);
+      color: #fff;
+      border-color: var(--brand-dark-blue);
+    }
+
+    @media (max-width:768px) {
+      nav a { margin-left:0.8rem; }
+      nav { position: static; }
+      .header-inner { position: relative; }
+    }
+    @media (min-width:769px) {
+      .second-level-nav,
+      .third-level-wrap { display: none !important; }
+    }
+
+    .mobile-cate{ display:none; }
+    .page-wrap{ display:flex; gap:2rem; padding:1rem 0 2rem; }
+    .side-left{
+      width:230px; background:#fff; padding:1rem; border-radius:6px;
+      border:1px solid #eee; height:fit-content;
+    }
+    .side-left ul{ list-style:none; }
+    .side-left .cate-title{
+      font-weight:bold; padding:0.6rem 0.5rem; background:#f6f6f6;
+      border-radius:4px; margin:0.8rem 0 0.4rem;
+    }
+    .side-left .cate-link{
+      display:block; padding:0.6rem; border-radius:4px;
+      color:#333; cursor:pointer; margin:0.2rem 0;
+    }
+    .side-left .cate-link.active{
+      background:var(--active-color); color:#fff;
+    }
+    .main-content{
+      flex:1; background:#fff; padding:2rem; border-radius:8px;
+    }
+    h1{ margin-bottom:1.8rem; color:var(--active-color); font-size:24px; }
+    .product{
+      margin-bottom:3rem; padding-bottom:2rem; border-bottom:1px solid #eee;
+    }
+    .product:last-child{ margin-bottom:0; padding-bottom:0; border:none; }
+    .product-row{
+      display:grid; grid-template-columns:1fr 1.4fr; gap:2rem; align-items:center;
+    }
+    .product-text h2{ font-size:20px; margin-bottom:0.6rem; color:var(--active-color); }
+    .product-text p{ font-size:14px; color:#555; line-height:1.5; }
+    .product-img{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .img-big{ grid-column:1/-1; height:260px; }
+    .img-sm{ height:160px; }
+    .product-img div{ border:1px solid #eee; border-radius:6px; overflow:hidden; background:#fff; }
+    .product-img img{ width:100%; height:100%; object-fit:contain; cursor:pointer; }
+
+    .lightbox{
+      position:fixed; top:0; left:0; width:100%; height:100%;
+      background:rgba(0,0,0,0.9); display:none; align-items:center; justify-content:center; z-index:999;
+    }
+    .lightbox.show{ display:flex; }
+    .lightbox img{ max-width:90%; max-height:90%; }
+    .lightbox .close{
+      position:absolute; top:20px; right:30px; color:#fff; font-size:36px; cursor:pointer;
+    }
+
         .slider {
             position: relative;
             width: 100%;
@@ -186,25 +335,69 @@
             color: var(--brand-text-dark);
             margin-bottom: 0.5rem;
         }
-        footer {
-            background: var(--brand-dark-blue);
-            color: var(--brand-silver);
-            text-align: center;
-            padding: 2rem 0;
-            margin-top: 2rem;
-        }
-        .whatsapp-btn {
-            position: fixed;
-            right: 16px;
-            bottom: 32px;
-            background: #25D366;
-            color: white;
-            padding: 12px 16px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            z-index: 999;
-        }
+
+    .menu-toggle {
+      display:none;
+    }
+    .overlay {
+      position:fixed; top:0; left:0; width:100%; height:100%;
+      background:rgba(0,0,0,0.6); z-index:199; opacity:0; visibility:hidden;
+      transition:all 0.3s ease;
+    }
+    .overlay.show {
+      opacity:1; visibility:visible;
+    }
+
+    @media (max-width:768px) {
+      .menu-toggle {
+        display:block;
+        width:100%;
+        text-align:center;
+        padding:8px 0;
+        background:transparent;
+        color:var(--brand-dark-blue);
+        border:none;
+        font-size:16px;
+        cursor:pointer;
+        margin:0;
+      }
+      .side-left {
+        position:fixed;
+        top:0; left:0;
+        width:280px; height:100vh;
+        background:#fff;
+        z-index:200;
+        transform:translateX(-100%);
+        transition:transform 0.3s ease;
+        overflow-y:auto;
+        padding:20px;
+        border-radius:0;
+        border-right:1px solid #eee;
+      }
+      .side-left.show {
+        transform:translateX(0);
+      }
+      .page-wrap {
+        flex-direction:column;
+        gap:1rem;
+      }
+      .main-content {
+        padding:1rem;
+      }
+      .product-row {
+        grid-template-columns:1fr;
+        gap:1rem;
+      }
+      .close-drawer {
+        display:block;
+        text-align:right;
+        font-size:24px;
+        cursor:pointer;
+        color:#333;
+        margin-bottom:10px;
+      }
+    }
+
         @media (max-width: 768px) {
             .slider {
                 height: 300px;
@@ -241,11 +434,41 @@
         </div>
         <nav>
             <a href="index.html">Home</a>
-            <a href="products.html">Products</a>
+            <a href="products.html" id="productsNav">Products</a>
             <a href="about.html">About</a>
             <a href="contact.html">Contact</a>
         </nav>
+
+    <div class="second-level-nav" id="secondLevelNav">
+      <div class="scroll-wrap">
+        <div class="scroll-items">
+          <a href="javascript:void(0)" class="level2-item active" data-target="belt-buckles">Belt Buckles</a>
+          <a href="javascript:void(0)" class="level2-item" data-target="shoe-accessories">Shoe Accessories</a>
+          <a href="javascript:void(0)" class="level2-item" data-target="rivets">Garment Hardware</a>
+        </div>
+      </div>
+
+      <div class="third-level-wrap show" id="belt-buckles">
+        <div class="third-level-items">
+          <a href="javascript:showCate('zinc')">Zinc Alloy Buckles</a>
+          <a href="javascript:showCate('steel')">Stainless Steel Buckles</a>
+          <a href="javascript:showCate('brass')">Brass Buckles</a>
+        </div>
+      </div>
+
+      <div class="third-level-wrap" id="shoe-accessories">
+        <div class="third-level-items">
+          <a href="javascript:showCate('shoe-buckle')">Shoe Buckles</a>
+        </div>
+      </div>
+
+      <div class="third-level-wrap" id="rivets">
+        <div class="third-level-items">
+          <a href="javascript:showCate('rivet')">Metal Rivets & Eyelets</a>
+        </div>
+      </div>
     </div>
+
 </header>
 
 <section class="slider">
@@ -297,6 +520,186 @@
         </div>
     </div>
 </section>
+
+<div class="overlay" id="overlay" onclick="closeMenu()"></div>
+
+<div class="container">
+  <button class="menu-toggle" id="menuToggle">☰  Product Categories</button>
+
+  <div class="page-wrap">
+    <div class="side-left" id="categoryMenu">
+      <ul>
+        <li class="cate-title">Belt Buckles</li>
+        <li><span class="cate-link active" data-cate="zinc">Zinc Alloy Buckles</span></li>
+        <li><span class="cate-link" data-cate="steel">Stainless Steel Buckles</span></li>
+        <li><span class="cate-link" data-cate="brass">Brass Buckles</span></li>
+
+        <li class="cate-title">Shoe Accessories</li>
+        <li><span class="cate-link" data-cate="shoe-buckle">Shoe Buckles</span></li>
+
+        <li class="cate-title">Garment Hardware</li>
+        <li><span class="cate-link" data-cate="rivet">Metal Rivets & Eyelets</span></li>
+      </ul>
+    </div>
+
+    <div class="main-content">
+      <div class="cate-box" id="zinc">
+        <h1>Zinc Alloy Belt Buckles</h1>
+        <div class="product">
+          <div class="product-row">
+            <div class="product-text">
+              <h2>Classic Pin Buckle</h2>
+              <p>Premium zinc alloy with brushed finish, solid and wear-resistant. Custom logo, size and plating colors are available for OEM service. Contact us for catalog & price</p>
+            </div>
+            <div class="product-img">
+              <div class="img-big"><img src="p1-1.jpg"></div>
+              <div class="img-sm"><img src="p1-2.jpg"></div>
+              <div class="img-sm"><img src="p1-3.jpg"></div>
+            </div>
+          </div>
+        </div>
+        <div class="product">
+          <div class="product-row">
+            <div class="product-text">
+              <h2>Plate Belt Buckle</h2>
+              <p>Durable zinc alloy plate buckle, fine electroplated surface. Suitable for business and casual leather belts, custom designs welcomed. Contact us for catalog & price</p>
+            </div>
+            <div class="product-img">
+              <div class="img-big"><img src="p2-1.jpg"></div>
+              <div class="img-sm"><img src="p2-2.jpg"></div>
+              <div class="img-sm"><img src="p2-3.jpg"></div>
+            </div>
+          </div>
+        </div>
+        <div class="product">
+          <div class="product-row">
+            <div class="product-text">
+              <h2>Reversible Rotating Buckle</h2>
+              <p>Dual-sided rotatable design, thick zinc alloy construction. Strong metal texture, fits daily casual and fashion belt matching. Contact us for catalog & price</p>
+            </div>
+            <div class="product-img">
+              <div class="img-big"><img src="p3-1.jpg"></div>
+              <div class="img-sm"><img src="p3-2.jpg"></div>
+              <div class="img-sm"><img src="p3-3.jpg"></div>
+            </div>
+          </div>
+        </div>
+        <div class="product">
+          <div class="product-row">
+            <div class="product-text">
+              <h2>Custom Logo Belt Buckle</h2>
+              <p>Custom engraved logo and artwork supported. Various plating and size options, ideal for brand promotion, gifts and wholesale orders. Contact us for catalog & price</p>
+            </div>
+            <div class="product-img">
+              <div class="img-big"><img src="p4-1.jpg"></div>
+              <div class="img-sm"><img src="p4-2.jpg"></div>
+              <div class="img-sm"><img src="p4-3.jpg"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cate-box" id="shoe-buckle" style="display:none;">
+        <h1>Shoe Buckles</h1>
+        <div class="product">
+          <div class="product-row">
+            <div class="product-text">
+              <h2>Shoe Buckle Style 1</h2>
+              <p>Zinc alloy metal shoe buckle with fine electroplating. Solid structure, rust-proof and durable for sandals, boots and casual footwear. Contact us for catalog & price</p>
+            </div>
+            <div class="product-img">
+              <div class="img-big"><img src="s1-1.jpg"></div>
+              <div class="img-sm"><img src="s1-2.jpg"></div>
+              <div class="img-sm"><img src="s1-3.jpg"></div>
+            </div>
+          </div>
+        </div>
+        <div class="product">
+          <div class="product-row">
+            <div class="product-text">
+              <h2>Shoe Buckle Style 2</h2>
+              <p>Alloy decorative shoe ornament with multiple plating colors. Custom shape, logo and design available for footwear accessories. Contact us for catalog & price</p>
+            </div>
+            <div class="product-img">
+              <div class="img-big"><img src="s2-1.jpg"></div>
+              <div class="img-sm"><img src="s2-2.jpg"></div>
+              <div class="img-sm"><img src="s2-3.jpg"></div>
+            </div>
+          </div>
+        </div>
+        <div class="product">
+          <div class="product-row">
+            <div class="product-text">
+              <h2>Shoe Buckle Style 3</h2>
+              <p>Fashion metal shoe hardware with stable installation. Widely used in casual shoes, high heels, sandals and fashion boots. Contact us for catalog & price</p>
+            </div>
+            <div class="product-img">
+              <div class="img-big"><img src="s3-1.jpg"></div>
+              <div class="img-sm"><img src="s3-2.jpg"></div>
+              <div class="img-sm"><img src="s3-3.jpg"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cate-box" id="steel" style="display:none;">
+        <h1>Stainless Steel Belt Buckles</h1>
+        <div class="product">
+          <div class="product-row">
+            <div class="product-text">
+              <h2>High Polished Stainless Steel Buckle</h2>
+              <p>Made of premium 304 stainless steel, anti-rust, anti-corrosion and never fade. High polished mirror surface, solid structure, perfect for daily business and casual leather belts. Custom logo and size are acceptable. Contact us for catalog & price</p>
+            </div>
+            <div class="product-img">
+              <div class="img-big"><img src="ssp1-1.jpg"></div>
+              <div class="img-sm"><img src="ssp1-2.jpg"></div>
+              <div class="img-sm"><img src="ssp1-3.jpg"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cate-box" id="brass" style="display:none;">
+        <h1>Brass Belt Buckles</h1>
+        <div class="product">
+          <div class="product-row">
+            <div class="product-text">
+              <h2>Vintage Solid Brass Buckle</h2>
+              <p>Solid pure brass material with vintage antique finish, heavy metal texture and durable for years. Retro design fits cowboy, casual and vintage style belts. OEM custom engraving and plating available. Contact us for catalog & price</p>
+            </div>
+            <div class="product-img">
+              <div class="img-big"><img src="bp1-1.jpg"></div>
+              <div class="img-sm"><img src="bp1-2.jpg"></div>
+              <div class="img-sm"><img src="bp1-3.jpg"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cate-box" id="rivet" style="display:none;">
+        <h1>Garment Hardware</h1>
+        <div class="product">
+          <div class="product-row">
+            <div class="product-text">
+              <h2>Metal Rivets & Eyelets</h2>
+              <p>Various stainless steel and electroplated metal rivets, eyelets and garment hardware. Multiple sizes and plating colors available for bags, shoes and clothing accessories. Contact us for catalog & price</p>
+            </div>
+            <div class="product-img">
+              <div class="img-big"><img src="rv1-1.jpg"></div>
+              <div class="img-sm"><img src="rv1-2.jpg"></div>
+              <div class="img-sm"><img src="rv1-3.jpg"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="lightbox" id="lightbox">
+  <span class="close">&times;</span>
+  <img src="">
+</div>
 
 <footer>
     <div class="container">
@@ -353,6 +756,93 @@
     const slider = document.querySelector('.slider');
     slider.addEventListener('mouseenter', () => clearInterval(interval));
     slider.addEventListener('mouseleave', () => startInterval());
+
+  const menu = document.getElementById('categoryMenu');
+  const overlay = document.getElementById('overlay');
+  const toggleBtn = document.getElementById('menuToggle');
+
+  function openMenu() {
+    menu.classList.add('show');
+    overlay.classList.add('show');
+  }
+  function closeMenu() {
+    menu.classList.remove('show');
+    overlay.classList.remove('show');
+  }
+
+  toggleBtn.addEventListener('click', openMenu);
+
+  document.querySelectorAll('.cate-link').forEach(link => {
+    link.addEventListener('click', () => {
+      closeMenu();
+    });
+  });
+
+  const btns = document.querySelectorAll('.cate-link');
+  const boxes = document.querySelectorAll('.cate-box');
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.cate;
+      btns.forEach(b => b.classList.remove('active'));
+      boxes.forEach(box => box.style.display = 'none');
+      btns.forEach(b => {
+        if(b.dataset.cate === target) b.classList.add('active');
+      });
+      document.getElementById(target).style.display = 'block';
+    });
+  });
+
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = lightbox.querySelector('img');
+  const close = lightbox.querySelector('.close');
+  document.querySelectorAll('.product-img img').forEach(img => {
+    img.addEventListener('click', () => {
+      lightboxImg.src = img.src;
+      lightbox.classList.add('show');
+    });
+  });
+  close.addEventListener('click', () => lightbox.classList.remove('show'));
+  lightbox.addEventListener('click', (e) => {
+    if(e.target === lightbox) lightbox.classList.remove('show');
+  });
+
+  document.addEventListener('DOMContentLoaded', function(){
+    const productsNav = document.getElementById('productsNav');
+    const secondLevelNav = document.getElementById('secondLevelNav');
+    const level2Items = document.querySelectorAll('.level2-item');
+    const thirdLevelWraps = document.querySelectorAll('.third-level-wrap');
+
+    productsNav.addEventListener('click', function(e){
+      if(window.innerWidth > 768) return;
+      e.preventDefault();
+      secondLevelNav.classList.toggle('show');
+    });
+
+    level2Items.forEach(item => {
+      item.addEventListener('click', function(e){
+        e.preventDefault();
+        const targetId = this.dataset.target;
+        level2Items.forEach(i => i.classList.remove('active'));
+        this.classList.add('active');
+        thirdLevelWraps.forEach(wrap => {
+          wrap.classList.remove('show');
+        });
+        document.getElementById(targetId).classList.add('show');
+      });
+    });
+  });
+
+  function showCate(cate) {
+    document.querySelectorAll('.cate-box').forEach(box => box.style.display = 'none');
+    document.getElementById(cate).style.display = 'block';
+    document.querySelectorAll('.cate-link').forEach(link => {
+      link.classList.remove('active');
+      if(link.dataset.cate === cate) link.classList.add('active');
+    });
+    if(window.innerWidth <= 768){
+      document.getElementById('secondLevelNav').classList.remove('show');
+    }
+  }
 </script>
 </body>
 </html>
