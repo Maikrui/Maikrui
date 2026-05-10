@@ -15,7 +15,7 @@
       --brand-text-dark:#0A244B;
     }
 
-    /* 顶部导航（完全不动） */
+    /* 顶部导航 ———— 完全 100% 不动，你原来的代码 */
     header {
       background:var(--brand-dark-blue);
       padding:1rem 0;
@@ -48,7 +48,7 @@
       nav a { margin-left:0.8rem; }
     }
 
-    /* 原有样式保留 */
+    /* 原有样式保留 ———— 完全不动 */
     .mobile-cate{ display:none; }
     .page-wrap{ display:flex; gap:2rem; padding:1rem 0 2rem; }
     .side-left{
@@ -100,7 +100,7 @@
       background:var(--active-color); color:#fff; text-align:center; padding:2rem 0; margin-top:2rem;
     }
 
-    /* ===================== 侧滑抽屉方案（行业通用） ===================== */
+    /* ===================== 侧滑抽屉 ===================== */
     .menu-toggle {
       display:none;
     }
@@ -114,18 +114,20 @@
     }
 
     @media (max-width:768px) {
-      /* 只加这一行：居中透明文字按钮 */
+      /* ========== 只改这里！清晰可见的二级导航按钮 ========== */
       .menu-toggle {
         display:block;
         width:100%;
+        margin: 12px 0;
+        padding:14px 0;
         text-align:center;
-        padding:8px 0;
-        background:transparent;
-        color:var(--brand-dark-blue);
-        border:none;
         font-size:16px;
+        font-weight:bold;
+        color:#fff;
+        background:var(--brand-dark-blue);
+        border-radius:8px;
         cursor:pointer;
-        margin:0;
+        border:none;
       }
       .side-left {
         position:fixed;
@@ -182,11 +184,10 @@
   </div>
 </header>
 
-<!-- 遮罩层 -->
 <div class="overlay" id="overlay" onclick="closeMenu()"></div>
 
 <div class="container">
-  <!-- 只加这一行，居中文字按钮 -->
+  <!-- 二级导航按钮 —— 清晰、深蓝色、可看见、可点击 -->
   <button class="menu-toggle" id="menuToggle">☰  Product Categories</button>
 
   <div class="page-wrap">
