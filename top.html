@@ -40,13 +40,29 @@
         text-decoration:none;
         transition:0.3s;
         white-space:nowrap;
+        font-size:1rem;
     }
     nav a:hover{color:var(--brand-silver);}
-    nav a.active{color:#fff;font-weight:bold;}
+    nav a.active{
+        color:#fff;
+        font-weight:bold;
+    }
 
+    /* 手机自适应 */
     @media(max-width:768px){
-        .header-inner{flex-direction:column;text-align:center;}
-        nav{gap:1rem;}
+        .header-inner{
+            flex-direction:column;
+            text-align:center;
+            gap:0.8rem;
+        }
+        nav{
+            gap:1rem;
+            flex-wrap:wrap;
+            justify-content:center;
+        }
+        nav a{
+            font-size:0.95rem;
+        }
     }
 </style>
 
@@ -66,11 +82,11 @@
 </header>
 
 <script>
-const current = window.location.pathname.split("/").pop();
-document.querySelectorAll("nav a").forEach(a => {
-    if(a.getAttribute("href") === current){
-        document.querySelectorAll("nav a").forEach(l=>l.classList.remove("active"));
-        a.classList.add("active");
+const currentPage = window.location.pathname.split("/").pop();
+document.querySelectorAll("nav a").forEach(item => {
+    if (item.getAttribute("href") === currentPage) {
+        document.querySelectorAll("nav a").forEach(link => link.classList.remove("active"));
+        item.classList.add("active");
     }
 });
 </script>
