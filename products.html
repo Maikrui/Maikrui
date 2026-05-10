@@ -31,11 +31,14 @@
       width:90%; max-width:1100px; margin:0 auto;
     }
     .header-inner {
-      display:flex; justify-content:space-between; align-items:center; flex-wrap:nowrap; gap:1rem;
+      display:flex; justify-content:space-between; align-items:center;
+      flex-wrap:nowrap; /* 关键：强制不换行，防止导航被挤上去 */
+      gap:1rem;
     }
     .logo {
       font-size:1.5rem; font-weight:bold; color:var(--brand-silver);
       display:flex; align-items:center; gap:8px; white-space:nowrap;
+      flex-shrink:0; /* logo不收缩 */
     }
     .logo img {
       background:transparent !important; border:none !important; outline:none !important;
@@ -46,6 +49,8 @@
     nav {
       position: relative;
       white-space: nowrap;
+      flex-shrink:1; /* 导航栏可收缩 */
+      text-align:right;
     }
     nav a {
       color:#ccc; text-decoration:none; margin-left:1.5rem;
@@ -58,10 +63,10 @@
 
     /* ========== 手机端专用 只改下拉 不动一级导航排版 ========== */
     @media (max-width:768px) {
-      /* 一级导航文字间距微调，但整体布局不变形 */
+      /* 关键：手机端导航文字间距和字体缩小，防止溢出 */
       nav a { 
-        margin-left:1rem; 
-        font-size:15px;
+        margin-left:0.8rem; 
+        font-size:14px;
       }
       .slide-mask { padding-top: 60px; }
 
