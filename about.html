@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x32" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
     <title>About Maikrui Metal - Die Casting Factory</title>
-    <meta name="description" content="Maikrui Metal is a reliable die casting factory with 30+ years experience. We provide high-quality, eco-friendly metal hardware for worldwide clients.">
+<meta name="description" content="Maikrui Metal is a reliable die casting factory with 30+ years experience. We provide high-quality, eco-friendly metal hardware for worldwide clients.">
     <style>
         * {
             margin: 0;
@@ -78,35 +78,21 @@
         nav a:hover {
             color: var(--brand-silver);
         }
-        .content {
-            padding: 4rem 0;
-            background: #fff;
-        }
-        h1, h2 {
-            margin: 1rem 0;
-            color: var(--brand-dark-blue);
-        }
-        p {
-            margin-bottom: 1rem;
-        }
-        ul {
-            margin-left: 1.5rem;
-        }
-        li {
-            margin-bottom: 0.4rem;
-        }
-        footer {
-            background: var(--brand-dark-blue);
-            color: var(--brand-silver);
-            text-align: center;
-            padding: 2rem 0;
-            margin-top: 2rem;
-        }
         @media (max-width: 768px) {
             nav a {
                 margin-left: 0.8rem;
             }
+            /* 👈 手机端修复代码已加好 */
+            .slide-mask {
+                padding-top: 60px;
+            }
         }
+        .content { padding: 4rem 0; background: #fff; }
+        h1, h2 { margin: 1rem 0; color: var(--brand-dark-blue); }
+        p { margin-bottom: 1rem; }
+        ul { margin-left: 1.5rem; }
+        li { margin-bottom: 0.4rem; }
+        footer { background: var(--brand-dark-blue); color: var(--brand-silver); text-align: center; padding: 2rem 0; margin-top: 2rem; }
     </style>
 </head>
 <body>
@@ -145,6 +131,7 @@
     </div>
 </section>
 
+<!-- 👈 底部邮箱已加上，和首页一样 -->
 <footer>
     <div class="container">
         <p>Maikrui Metal © All Rights Reserved</p>
