@@ -15,7 +15,7 @@
       --brand-text-dark:#0A244B;
     }
 
-    /* 顶部导航 完全原封不动 */
+    /* 顶部导航（完全不动） */
     header {
       background:var(--brand-dark-blue);
       padding:1rem 0;
@@ -48,7 +48,7 @@
       nav a { margin-left:0.8rem; }
     }
 
-    /* 电脑端布局 */
+    /* 原有样式保留 */
     .page-wrap{ display:flex; gap:2rem; padding:1rem 0 2rem; }
     .side-left{
       width:230px; background:#fff; padding:1rem; border-radius:6px;
@@ -56,17 +56,16 @@
     }
     .side-left ul{ list-style:none; }
     .side-left .cate-title{
-      font-weight:bold; padding:0.5rem 0.5rem; background:#f6f6f6;
-      border-radius:4px; margin:0.6rem 0 0.3rem; font-size:15px;
+      font-weight:bold; padding:0.6rem 0.5rem; background:#f6f6f6;
+      border-radius:4px; margin:0.8rem 0 0.4rem;
     }
     .side-left .cate-link{
-      display:block; padding:0.5rem; border-radius:4px;
-      color:#333; cursor:pointer; margin:0.1rem 0; font-size:14px;
+      display:block; padding:0.6rem; border-radius:4px;
+      color:#333; cursor:pointer; margin:0.2rem 0;
     }
     .side-left .cate-link.active{
       background:var(--active-color); color:#fff;
     }
-
     .main-content{
       flex:1; background:#fff; padding:2rem; border-radius:8px;
     }
@@ -100,48 +99,53 @@
       background:var(--active-color); color:#fff; text-align:center; padding:2rem 0; margin-top:2rem;
     }
 
-    /* 手机端折叠按钮 */
-    .cate-fold-btn {
-      display:none;
-      width:100%;
-      background:#fff;
-      border:1px solid #eee;
-      padding:10px 12px;
-      border-radius:6px;
-      font-size:15px;
-      color:var(--brand-dark-blue);
-      cursor:pointer;
-      margin:10px 0;
+    /* 新增：手机端折叠按钮 */
+    .mobile-toggle-btn {
+      display: none;
+      width: 100%;
+      background: #fff;
+      border: 1px solid #eee;
+      border-radius: 6px;
+      padding: 12px 15px;
+      font-size: 15px;
+      color: var(--brand-dark-blue);
+      text-align: center;
+      cursor: pointer;
+      margin: 10px 0;
+    }
+    .mobile-toggle-btn::after {
+      content: " ▼";
+    }
+    .mobile-toggle-btn.open::after {
+      content: " ▲";
     }
 
-    /* 手机端适配 */
     @media (max-width:768px) {
-      .cate-fold-btn {
-        display:block;
+      /* 手机端：显示按钮，隐藏菜单 */
+      .mobile-toggle-btn {
+        display: block;
       }
-      /* 手机端默认隐藏二级导航 */
       .side-left {
-        width:100%;
-        display:none;
-        padding:0.8rem;
+        width: 100%;
+        display: none;
+        padding: 1rem;
+        margin-bottom: 1rem;
       }
-      /* 展开时显示 */
-      .side-left.show {
-        display:block;
+      .side-left.open {
+        display: block;
       }
-      /* 手机端导航文字缩小，紧凑 */
+      /* 手机端二级导航文字缩小，紧凑显示 */
       .side-left .cate-title {
-        font-size:14px;
-        padding:0.4rem;
+        font-size: 14px;
+        padding: 0.5rem;
       }
       .side-left .cate-link {
-        font-size:13px;
-        padding:0.4rem;
+        font-size: 14px;
+        padding: 0.5rem;
       }
       .page-wrap {
         flex-direction:column;
-        gap:0.5rem;
-        padding-top:0;
+        gap:1rem;
       }
       .main-content {
         padding:1rem;
@@ -171,11 +175,11 @@
 </header>
 
 <div class="container">
-  <!-- 手机折叠按钮 -->
-  <div class="cate-fold-btn" id="foldBtn">☰ Product Categories</div>
+  <!-- 手机端折叠按钮 -->
+  <button class="mobile-toggle-btn" id="toggleBtn">☰ Product Categories</button>
 
   <!-- 二级导航 -->
-  <div class="side-left" id="cateMenu">
+  <div class="side-left" id="categoryMenu">
     <ul>
       <li class="cate-title">Belt Buckles</li>
       <li><span class="cate-link active" data-cate="zinc">Zinc Alloy Buckles</span></li>
@@ -308,38 +312,54 @@
 </footer>
 
 <script>
-  // 折叠展开
-  const foldBtn = document.getElementById('foldBtn');
-  const cateMenu = document.getElementById('cateMenu');
-  foldBtn.onclick = function(){
-    cateMenu.classList.toggle('show');
-  };
+  // 折叠/展开逻辑
+  const toggleBtn = document.getElementById('toggleBtn');
+  const categoryMenu = document.getElementById('categoryMenu');
 
-  // 分类切换
-  const btns = document.querySelectorAll('.cate-link');
-  const boxes = document.querySelectorAll('.cate-box');
-  btns.forEach(btn => {
-    btn.onclick = function(){
-      let target = this.dataset.cate;
-      btns.forEach(b=>b.classList.remove('active'));
-      boxes.forEach(b=>b.style.display='none');
-      this.classList.add('active');
-      document.getElementById(target).style.display='block';
-    }
+  toggleBtn.addEventListener('click', () => {
+    categoryMenu.classList.toggle('open');
+    toggleBtn.classList.toggle('open');
   });
 
-  // 灯箱
+  // 分类切换逻辑
+  const cateLinks = document.querySelectorAll('.cate-link');
+  const cateBoxes = document.querySelectorAll('.cate-box');
+  cateLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      const target = link.dataset.cate;
+      if (!target) return;
+
+      // 更新选中状态
+      cateLinks.forEach(el => el.classList.remove('active'));
+      link.classList.add('active');
+
+      
+      // 切换显示内容
+      cateBoxes.forEach(box => box.style.display = 'none');
+      document.getElementById(target).style.display = 'block';
+
+      // 手机端点击后自动收起菜单
+      if (window.innerWidth <= 768) {
+        categoryMenu.classList.remove('open');
+        toggleBtn.classList.remove('open');
+      }
+    });
+  });
+
+  // 图片灯箱逻辑
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = lightbox.querySelector('img');
-  const close = lightbox.querySelector('.close');
+  const closeBtn = lightbox.querySelector('.close');
   document.querySelectorAll('.product-img img').forEach(img => {
-    img.onclick = function(){
-      lightboxImg.src = this.src;
+    img.addEventListener('click', () => {
+      lightboxImg.src = img.src;
       lightbox.classList.add('show');
-    }
+    });
   });
-  close.onclick = () => lightbox.classList.remove('show');
-  lightbox.onclick = e => { if(e.target === lightbox) lightbox.classList.remove('show'); }
+  closeBtn.addEventListener('click', () => lightbox.classList.remove('show'));
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) lightbox.classList.remove('show');
+  });
 </script>
 </body>
 </html>
