@@ -2,41 +2,96 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About - Maikrui Metal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x32" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+    <title>About Maikrui Metal - Die Casting Factory</title>
+<meta name="description" content="Maikrui Metal is a reliable die casting factory with 30+ years experience. We provide high-quality, eco-friendly metal hardware for worldwide clients.">
     <style>
-        *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
-        :root{--brand-dark-blue:#0A244B;--brand-silver:#E0E0E0;}
-        body{padding-top:80px;}
-
-        header{background:var(--brand-dark-blue);height:80px;line-height:80px;padding:0;position:fixed;top:0;left:0;width:100%;z-index:9999;overflow:hidden;}
-        .container{width:90%;max-width:1100px;margin:0 auto;height:100%;}
-        .header-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:nowrap;gap:1rem;height:100%;}
-        .logo{font-size:1.5rem;font-weight:bold;color:var(--brand-silver);display:flex;align-items:center;gap:8px;white-space:nowrap;height:100%;}
-        .logo img{height:40px;width:auto;display:block;}
-        nav{display:flex;gap:1.2rem;height:100%;align-items:center;flex-wrap:nowrap;}
-        nav a{color:#ccc;text-decoration:none;transition:0.3s;white-space:nowrap;font-size:1rem;width:80px;text-align:center;line-height:normal;}
-        nav a:hover{color:var(--brand-silver);}
-        nav a.active{color:#fff;font-weight:bold;}
-
-        .content{padding:60px 0;text-align:center;}
-
-        footer{background:var(--brand-dark-blue);color:var(--brand-silver);text-align:center;padding:2rem 1rem;margin-top:3rem;}
-        .whatsapp-btn{position:fixed;right:16px;bottom:20px;background:#25D366;color:#fff;padding:10px 14px;border-radius:50px;text-decoration:none;font-size:14px;z-index:99;cursor:move;user-select:none;}
-
-        @media(max-width:768px){
-            header{height:auto;padding:12px 0;}
-            .header-inner{flex-direction:row;justify-content:space-between;flex-wrap:nowrap;}
-            .logo{font-size:1rem;}
-            .logo img{height:32px;}
-            nav{gap:0.5rem;}
-            nav a{width:auto;padding:0 2px;font-size:12px;}
-            .content{padding:30px 15px;}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
         }
+        body {
+            background: #f8f8f8;
+            color: #333;
+            line-height: 1.6;
+            padding-top: 65px;
+        }
+        :root {
+            --brand-dark-blue: #0A244B;
+            --brand-silver: #E0E0E0;
+            --brand-text-dark: #0A244B;
+        }
+        header {
+            background: var(--brand-dark-blue);
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+        }
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--brand-silver);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+        .logo img {
+            background: transparent !important;
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+            filter: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            height: 40px !important;
+            width: auto !important;
+        }
+        nav a {
+            color: #cccccc;
+            text-decoration: none;
+            margin-left: 1.5rem;
+            transition: color 0.3s ease;
+            white-space: nowrap;
+        }
+        nav a:hover {
+            color: var(--brand-silver);
+        }
+        @media (max-width: 768px) {
+            nav a {
+                margin-left: 0.8rem;
+            }
+        }
+        .content { padding: 4rem 0; background: #fff; }
+        h1, h2 { margin: 1rem 0; color: var(--brand-dark-blue); }
+        p { margin-bottom: 1rem; }
+        ul { margin-left: 1.5rem; }
+        li { margin-bottom: 0.4rem; }
+        footer { background: var(--brand-dark-blue); color: var(--brand-silver); text-align: center; padding: 2rem 0; margin-top: 2rem; }
     </style>
 </head>
 <body>
-
 <header>
     <div class="container header-inner">
         <div class="logo">
@@ -46,30 +101,36 @@
         <nav>
             <a href="index.html">Home</a>
             <a href="products.html">Products</a>
-            <a href="about.html" class="active">About</a>
+            <a href="about.html">About</a>
             <a href="contact.html">Contact</a>
         </nav>
     </div>
 </header>
 
-<div class="content container">
-    <h1>About Us</h1>
-</div>
+<section class="content">
+    <div class="container">
+        <h1>About Maikrui Metal</h1>
+        <p>We are an integrated factory with over 30 years of experience in garment hardware.</p>
+        <p>Our core strength is zinc alloy die casting, supported by spin casting, lost wax casting and stamping.</p>
+        <p>We control full production in-house, including mold design, CNC machining, plating, epoxy filling and laser engraving.</p>
+        <p>We specialize in custom belt buckles, rivets and garment hardware for global buyers.</p>
+
+        <h2>Our Capabilities</h2>
+        <ul>
+            <li>Zinc Alloy Die Casting</li>
+            <li>Spin Casting & Lost Wax Casting</li>
+            <li>Stamping</li>
+            <li>CNC Machining</li>
+            <li>Plating, Painting & Polishing</li>
+            <li>Laser Engraving & Custom Finishes</li>
+        </ul>
+    </div>
+</section>
 
 <footer>
     <div class="container">
         <p>Maikrui Metal © All Rights Reserved</p>
-        <p>Email: contact@maikrui.com</p>
     </div>
 </footer>
-
-<a href="https://api.whatsapp.com/send?phone=861598009534" class="whatsapp-btn" id="wa">WhatsApp Us</a>
-
-<script>
-const btn=document.getElementById("wa");let isDrag=!1,ox,oy;
-btn.addEventListener("mousedown",e=>{isDrag=!0;const r=btn.getBoundingClientRect();ox=e.clientX-r.left,oy=e.clientY-r.top;});
-document.addEventListener("mousemove",e=>{isDrag&&(btn.style.right="auto",btn.style.bottom="auto",btn.style.left=e.clientX-ox+"px",btn.style.top=e.clientY-oy+"px");});
-document.addEventListener("mouseup",()=>{isDrag=!1;});
-</script>
 </body>
 </html>
