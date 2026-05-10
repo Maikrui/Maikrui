@@ -4,56 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/site.webmanifest">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
     <title>Contact Maikrui Metal - Custom Hardware Inquiries</title>
-<meta name="description" content="Contact Maikrui Metal for custom metal hardware, OEM orders, and bulk pricing. Get professional service from our experienced sales team.">
+    <meta name="description" content="Contact Maikrui Metal for custom metal hardware, OEM orders, and bulk pricing. Get professional service from our experienced sales team.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
-        body { background: #f8f8f8; color: #333; line-height: 1.6; padding-top: 65px; }
-        
-        :root{
-            --brand-dark-blue: #0A244B;
-            --brand-silver: #E0E0E0;
-        }
-        header {
-            background: var(--brand-dark-blue);
-            padding: 1rem 0;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 100;
-        }
-        .container { width: 90%; max-width: 1100px; margin: 0 auto; }
-        .header-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--brand-silver);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            white-space: nowrap;
-        }
-        .logo img {
-            background: transparent !important;
-            border: none !important;
-            outline: none !important;
-            box-shadow: none !important;
-            filter: none !important;
-            padding: 0 !important;
-            margin: 0 !important;
-            height: 40px !important;
-            width: auto !important;
-        }
-        nav a { color: #cccccc; text-decoration: none; margin-left: 1.5rem; transition: color 0.3s ease; white-space: nowrap; }
-        nav a:hover { color: var(--brand-silver); }
-        .content { padding: 4rem 0; background: #ffffff; }
-        h1 { text-align: center; margin-bottom: 2rem; color: var(--brand-dark-blue); }
-        .form-wrapper { max-width: 600px; margin: 0 auto; }
-        label { display: block; margin-bottom: 0.5rem; font-weight: bold; color: var(--brand-dark-blue); }
+        body { background: #f8f8f8; color: #333; line-height: 1.6; padding-top: 70px; min-height: 100vh; display: flex; flex-direction: column; }
+        .content { flex:1; padding: 4rem 0; background: #ffffff; }
+        .container { width: 90%; max-width: 600px; margin: 0 auto; }
+        h1 { text-align: center; margin-bottom: 2rem; color: #0A244B; }
+        label { display: block; margin-bottom: 0.5rem; font-weight: bold; color: #0A244B; }
         input, textarea {
             width: 100%;
             padding: 0.8rem;
@@ -65,17 +27,13 @@
         button {
             width: 100%;
             padding: 1rem;
-            background: var(--brand-dark-blue);
+            background: #0A244B;
             border: none;
             border-radius: 4px;
             font-weight: bold;
             cursor: pointer;
             font-size: 16px;
             color: #fff;
-            transition: 0.3s;
-        }
-        button:hover {
-            background: #153870;
         }
         .contact-info {
             text-align: center;
@@ -85,75 +43,57 @@
             border-radius: 8px;
             line-height: 2;
         }
-        .contact-info h3 {
-            margin-bottom: 0.8rem;
-            color: var(--brand-dark-blue);
-        }
-        .email-link {
-            color: var(--brand-dark-blue);
-            font-weight: bold;
-            text-decoration: none;
-            font-size: 17px;
-        }
-        footer { background: var(--brand-dark-blue); color: var(--brand-silver); text-align: center; padding: 2rem 0; margin-top: 2rem; }
-        @media (max-width: 768px) {
-            nav a { margin-left: 0.8rem; }
-        }
+        .contact-info h3 { margin-bottom: 0.8rem; color: #0A244B; }
+        .email-link { color: #0A244B; font-weight: bold; text-decoration: none; }
     </style>
 </head>
 <body>
-<header>
-    <div class="container header-inner">
-        <div class="logo">
-            <img src="logo.png" alt="Logo">
-            Maikrui Metal
-        </div>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="products.html">Products</a>
-            <a href="about.html">About</a>
-            <a href="contact.html">Contact</a>
-        </nav>
-    </div>
-</header>
 
+<!-- 自动加载顶部 -->
+<div id="top"></div>
+
+<!-- 联系页面内容（只有内容） -->
 <section class="content">
     <div class="container">
         <h1>Get in Touch</h1>
-        <div class="form-wrapper">
-            <form action="https://formsubmit.co/wiki458413539@gmail.com" method="POST">
-                <label>Your Name</label>
-                <input type="text" name="name" required>
+        <form action="https://formsubmit.co/wiki458413539@gmail.com" method="POST">
+            <label>Your Name</label>
+            <input type="text" name="name" required>
 
-                <label>Your Email</label>
-                <input type="email" name="email" required>
+            <label>Your Email</label>
+            <input type="email" name="email" required>
 
-                <label>Subject</label>
-                <input type="text" name="subject" required placeholder="Belt Buckle / Hardware Inquiry">
+            <label>Subject</label>
+            <input type="text" name="subject" required placeholder="Belt Buckle / Hardware Inquiry">
 
-                <label>Your Requirements</label>
-                <textarea name="message" rows="5" required placeholder="quantity, design, material, finishing..."></textarea>
+            <label>Your Requirements</label>
+            <textarea name="message" rows="5" required placeholder="quantity, design, material, finishing..."></textarea>
 
-                <!-- 防跳转 + 收信必须配置 -->
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_next" value="https://yourdomain.com/thank-you.html">
-                <button type="submit">Send Inquiry Now</button>
-            </form>
+            <input type="hidden" name="_captcha" value="false">
+            <button type="submit">Send Inquiry Now</button>
+        </form>
 
-            <div class="contact-info">
-                <h3>Direct Contact</h3>
-                <p>📩 Email: <a class="email-link" href="mailto:wiki458413539@gmail.com">Click to Send Email</a></p>
-                <p>📱 WhatsApp: +86 15980009534</p>
-                <p>📍 Location: Quanzhou, Fujian, China</p>
-            </div>
+        <div class="contact-info">
+            <h3>Direct Contact</h3>
+            <p>📩 Email: <a class="email-link" href="mailto:wiki458413539@gmail.com">Click to Send Email</a></p>
+            <p>📱 WhatsApp: +86 15980009534</p>
+            <p>📍 Location: Quanzhou, Fujian, China</p>
         </div>
     </div>
 </section>
 
-<footer>
-    <div class="container">
-        <p>Maikrui Metal © All Rights Reserved</p>
-    </div>
-</footer>
+<!-- 自动加载底部 -->
+<div id="bottom"></div>
+
+<script>
+    // 加载公共顶部 + 底部
+    fetch("top.html").then(res=>res.text()).then(data=>{
+        document.getElementById("top").innerHTML = data;
+    });
+    fetch("bottom.html").then(res=>res.text()).then(data=>{
+        document.getElementById("bottom").innerHTML = data;
+    });
+</script>
+
 </body>
 </html>

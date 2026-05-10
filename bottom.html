@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;}
+        :root{--brand-dark-blue:#0A244B;--brand-silver:#E0E0E0;}
+        html,body{height:100%;}
+        body{display:flex;flex-direction:column;}
+        .container{width:90%;max-width:1100px;margin:0 auto;}
+        footer{margin-top:auto;background:var(--brand-dark-blue);color:var(--brand-silver);text-align:center;padding:2rem 1rem;}
+        footer p{margin:6px 0;}
+        .whatsapp{position:fixed;right:15px;bottom:15px;background:#25D366;color:#fff;padding:10px 14px;border-radius:50px;text-decoration:none;font-size:14px;cursor:move;z-index:99;}
+    </style>
+</head>
+<body>
+
+<footer>
+    <div class="container">
+        <p>Maikrui Metal © All Rights Reserved</p>
+        <p>Email: contact@maikrui.com</p>
+    </div>
+</footer>
+
+<a href="https://api.whatsapp.com/send?phone=8615980009534" class="whatsapp" target="_blank" id="dragBtn">
+    WhatsApp Us
+</a>
+
+<script>
+let btn=document.getElementById("dragBtn");let isDrag=false,offsetX,offsetY;
+btn.addEventListener("mousedown",start);btn.addEventListener("touchstart",start,{passive:false});
+document.addEventListener("mousemove",move);document.addEventListener("touchmove",move,{passive:false});
+document.addEventListener("mouseup",end);document.addEventListener("touchend",end);
+function start(e){e.preventDefault();isDrag=true;let p=e.touches?e.touches[0]:e;offsetX=p.clientX-btn.getBoundingClientRect().left;offsetY=p.clientY-btn.getBoundingClientRect().top;}
+function move(e){if(!isDrag)return;e.preventDefault();let p=e.touches?e.touches[0]:e;let x=p.clientX-offsetX;let y=p.clientY-offsetY;btn.style.left=x+"px";btn.style.top=y+"px";btn.style.right="auto";btn.style.bottom="auto";}
+function end(){isDrag=false;}
+</script>
+
+</body>
+</html>
