@@ -2,7 +2,6 @@
     *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
     :root{--brand-dark-blue:#0A244B;--brand-silver:#E0E0E0;}
 
-    /* 强制让 footer 永远在页面底部 */
     html, body {
         height: 100%;
         margin: 0;
@@ -22,7 +21,7 @@
         color:var(--brand-silver);
         text-align:center;
         padding:2rem 1rem;
-        margin-top: auto; /* 核心：推到底部 */
+        margin-top: auto;
         width: 100%;
     }
     footer p{
@@ -42,6 +41,7 @@
         font-size:14px;
         z-index:99;
         cursor:move;
+        user-select: none;
     }
 
     @media(max-width:768px){
@@ -59,26 +59,28 @@
 <a href="https://api.whatsapp.com/send?phone=8615980009534" class="whatsapp-btn" id="wa">WhatsApp Us</a>
 
 <script>
-let btn=document.getElementById("wa");
-let isDrag=false,ox=0,oy=0;
+// 仅实现可拖动，不改动任何其他内容
+let btn = document.getElementById("wa");
+let isDrag = false;
+let ox, oy;
 
-btn.addEventListener("mousedown",start);
-document.addEventListener("mousemove",move);
-document.addEventListener("mouseup",end);
+btn.addEventListener("mousedown", start);
+document.addEventListener("mousemove", move);
+document.addEventListener("mouseup", end);
 
 function start(e){
-    isDrag=true;
-    ox=e.clientX-btn.offsetLeft;
-    oy=e.clientY-btn.offsetTop;
+    isDrag = true;
+    ox = e.clientX - btn.getBoundingClientRect().left;
+    oy = e.clientY - btn.getBoundingClientRect().top;
 }
 function move(e){
     if(!isDrag) return;
-    btn.style.right="auto";
-    btn.style.bottom="auto";
-    btn.style.left=e.clientX-ox+"px";
-    btn.style.top=e.clientY-oy+"px";
+    btn.style.right = "auto";
+    btn.style.bottom = "auto";
+    btn.style.left = e.clientX - ox + "px";
+    btn.style.top = e.clientY - oy + "px";
 }
 function end(){
-    isDrag=false;
+    isDrag = false;
 }
 </script>
