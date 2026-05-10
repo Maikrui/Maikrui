@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x32" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="16x32" href="/favicon-16x32.png">
 <link rel="manifest" href="/site.webmanifest">
     <title>Contact Maikrui Metal - Custom Hardware Inquiries</title>
 <meta name="description" content="Contact Maikrui Metal for custom metal hardware, OEM orders, and bulk pricing. Get professional service from our experienced sales team.">
@@ -16,7 +16,6 @@
         :root{
             --brand-dark-blue: #0A244B;
             --brand-silver: #E0E0E0;
-            --active-color:#0A244B;
         }
         header {
             background: var(--brand-dark-blue);
@@ -51,324 +50,6 @@
         }
         nav a { color: #cccccc; text-decoration: none; margin-left: 1.5rem; transition: color 0.3s ease; white-space: nowrap; }
         nav a:hover { color: var(--brand-silver); }
-
-    /* ========== 手机端箭头提示样式（已加粗醒目、放大箭头） ========== */
-    @media (max-width:768px) {
-      #productsNav::after {
-        content:" ▾";
-        font-size: 22px;
-        margin-left:4px;
-        color: #ffffff;
-        font-weight: bold;
-      }
-      .level2-item::after {
-        content:" ▾";
-        font-size: 20px;
-        margin-left:6px;
-        color: var(--brand-dark-blue);
-        font-weight: bold;
-      }
-    }
-
-    /* 手机端 二级横向滑动导航 */
-    .second-level-nav {
-      display: none;
-      width: 100%;
-      background: #ffffff;
-      border-bottom: 1px solid #e0e0e0;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      z-index: 99;
-    }
-    .second-level-nav.show {
-      display: block;
-    }
-    .scroll-wrap {
-      overflow-x: auto;
-      overflow-y: hidden;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-    }
-    .scroll-wrap::-webkit-scrollbar {
-      display: none;
-    }
-    .scroll-items {
-      display: flex;
-      padding: 10px 12px;
-      gap: 16px;
-      white-space: nowrap;
-    }
-    .scroll-items a {
-      color: var(--brand-dark-blue);
-      font-size: 14px;
-      text-decoration: none;
-      padding: 4px 0;
-      font-weight: 500;
-    }
-    .scroll-items a.active {
-      color: #0056b3;
-      border-bottom: 2px solid #0056b3;
-    }
-
-    /* 手机端 三级下拉导航 */
-    .third-level-wrap {
-      display: none;
-      width: 100%;
-      background: #f8f8f8;
-      border-bottom: 1px solid #eee;
-    }
-    .third-level-wrap.show {
-      display: block;
-    }
-    .third-level-items {
-      display: flex;
-      flex-wrap: wrap;
-      padding: 8px 12px;
-      gap: 12px;
-    }
-    .third-level-items a {
-      color: #333;
-      font-size: 13px;
-      text-decoration: none;
-      padding: 6px 10px;
-      background: #fff;
-      border-radius: 4px;
-      border: 1px solid #eee;
-    }
-    .third-level-items a:active {
-      background: var(--brand-dark-blue);
-      color: #fff;
-      border-color: var(--brand-dark-blue);
-    }
-
-    @media (max-width:768px) {
-      nav a { margin-left:0.8rem; }
-      nav { position: static; }
-      .header-inner { position: relative; }
-    }
-    @media (min-width:769px) {
-      .second-level-nav,
-      .third-level-wrap { display: none !important; }
-    }
-
-    .mobile-cate{ display:none; }
-    .page-wrap{ display:flex; gap:2rem; padding:1rem 0 2rem; }
-    .side-left{
-      width:230px; background:#fff; padding:1rem; border-radius:6px;
-      border:1px solid #eee; height:fit-content;
-    }
-    .side-left ul{ list-style:none; }
-    .side-left .cate-title{
-      font-weight:bold; padding:0.6rem 0.5rem; background:#f6f6f6;
-      border-radius:4px; margin:0.8rem 0 0.4rem;
-    }
-    .side-left .cate-link{
-      display:block; padding:0.6rem; border-radius:4px;
-      color:#333; cursor:pointer; margin:0.2rem 0;
-    }
-    .side-left .cate-link.active{
-      background:var(--active-color); color:#fff;
-    }
-    .main-content{
-      flex:1; background:#fff; padding:2rem; border-radius:8px;
-    }
-    h1{ margin-bottom:1.8rem; color:var(--active-color); font-size:24px; }
-    .product{
-      margin-bottom:3rem; padding-bottom:2rem; border-bottom:1px solid #eee;
-    }
-    .product:last-child{ margin-bottom:0; padding-bottom:0; border:none; }
-    .product-row{
-      display:grid; grid-template-columns:1fr 1.4fr; gap:2rem; align-items:center;
-    }
-    .product-text h2{ font-size:20px; margin-bottom:0.6rem; color:var(--active-color); }
-    .product-text p{ font-size:14px; color:#555; line-height:1.5; }
-    .product-img{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-    .img-big{ grid-column:1/-1; height:260px; }
-    .img-sm{ height:160px; }
-    .product-img div{ border:1px solid #eee; border-radius:6px; overflow:hidden; background:#fff; }
-    .product-img img{ width:100%; height:100%; object-fit:contain; cursor:pointer; }
-
-    .lightbox{
-      position:fixed; top:0; left:0; width:100%; height:100%;
-      background:rgba(0,0,0,0.9); display:none; align-items:center; justify-content:center; z-index:999;
-    }
-    .lightbox.show{ display:flex; }
-    .lightbox img{ max-width:90%; max-height:90%; }
-    .lightbox .close{
-      position:absolute; top:20px; right:30px; color:#fff; font-size:36px; cursor:pointer;
-    }
-
-        .slider {
-            position: relative;
-            width: 100%;
-            height: 500px;
-            overflow: hidden;
-            background: #f8f8f8;
-        }
-        .slide-item {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transition: opacity 1s ease;
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-        .slide-item.active {
-            opacity: 1;
-            z-index: 1;
-        }
-        .slide-mask {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(10, 36, 75, 0.35);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            text-align: center;
-            padding: 0 20px;
-            z-index: 2;
-        }
-        .slide-mask h1 {
-            font-size: 2.4rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000;
-        }
-        .slide-mask p {
-            font-size: 1.1rem;
-            max-width: 800px;
-            color: #fff;
-            text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
-        }
-        .prev, .next {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 3rem;
-            color: var(--brand-silver);
-            background: transparent;
-            padding: 0 15px;
-            cursor: pointer;
-            z-index: 10;
-            border: none;
-        }
-        .prev {left: 0;}
-        .next {right: 0;}
-        .slider-indicators {
-            position: absolute;
-            bottom: 16px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 10;
-            display: flex;
-            gap: 8px;
-        }
-        .indicator {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.5);
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        .indicator.active {
-            background: var(--brand-silver);
-        }
-        .advantages {
-            background: #ffffff;
-            padding: 4rem 0;
-        }
-        .section-title {
-            text-align: center;
-            font-size: 1.8rem;
-            margin-bottom: 2.5rem;
-            color: var(--brand-text-dark);
-        }
-        .advantage-items {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 2rem;
-            text-align: center;
-        }
-        .advantage {
-            flex: 1;
-            min-width: 220px;
-        }
-        .advantage h3 {
-            color: var(--brand-text-dark);
-            margin-bottom: 0.5rem;
-        }
-
-    .menu-toggle {
-      display:none;
-    }
-    .overlay {
-      position:fixed; top:0; left:0; width:100%; height:100%;
-      background:rgba(0,0,0,0.6); z-index:199; opacity:0; visibility:hidden;
-      transition:all 0.3s ease;
-    }
-    .overlay.show {
-      opacity:1; visibility:visible;
-    }
-
-    @media (max-width:768px) {
-      .menu-toggle {
-        display:block;
-        width:100%;
-        text-align:center;
-        padding:8px 0;
-        background:transparent;
-        color:var(--brand-dark-blue);
-        border:none;
-        font-size:16px;
-        cursor:pointer;
-        margin:0;
-      }
-      .side-left {
-        position:fixed;
-        top:0; left:0;
-        width:280px; height:100vh;
-        background:#fff;
-        z-index:200;
-        transform:translateX(-100%);
-        transition:transform 0.3s ease;
-        overflow-y:auto;
-        padding:20px;
-        border-radius:0;
-        border-right:1px solid #eee;
-      }
-      .side-left.show {
-        transform:translateX(0);
-      }
-      .page-wrap {
-        flex-direction:column;
-        gap:1rem;
-      }
-      .main-content {
-        padding:1rem;
-      }
-      .product-row {
-        grid-template-columns:1fr;
-        gap:1rem;
-      }
-      .close-drawer {
-        display:block;
-        text-align:right;
-        font-size:24px;
-        cursor:pointer;
-        color:#333;
-        margin-bottom:10px;
-      }
-    }
-        
         .content { padding: 4rem 0; background: #ffffff; }
         h1 { text-align: center; margin-bottom: 2rem; color: var(--brand-dark-blue); }
         .form-wrapper { max-width: 600px; margin: 0 auto; }
@@ -414,9 +95,11 @@
             text-decoration: none;
             font-size: 17px;
         }
-
+        footer { background: var(--brand-dark-blue); color: var(--brand-silver); text-align: center; padding: 2rem 0; margin-top: 2rem; }
+        
         @media (max-width: 768px) {
             nav a { margin-left: 0.8rem; }
+            /* 👈 手机端修复代码已加好 */
             .slide-mask {
                 padding-top: 60px;
             }
@@ -432,41 +115,11 @@
         </div>
         <nav>
             <a href="index.html">Home</a>
-            <a href="products.html" id="productsNav">Products</a>
+            <a href="products.html">Products</a>
             <a href="about.html">About</a>
             <a href="contact.html">Contact</a>
         </nav>
-
-    <div class="second-level-nav" id="secondLevelNav">
-      <div class="scroll-wrap">
-        <div class="scroll-items">
-          <a href="javascript:void(0)" class="level2-item active" data-target="belt-buckles">Belt Buckles</a>
-          <a href="javascript:void(0)" class="level2-item" data-target="shoe-accessories">Shoe Accessories</a>
-          <a href="javascript:void(0)" class="level2-item" data-target="rivets">Garment Hardware</a>
-        </div>
-      </div>
-
-      <div class="third-level-wrap show" id="belt-buckles">
-        <div class="third-level-items">
-          <a href="javascript:showCate('zinc')">Zinc Alloy Buckles</a>
-          <a href="javascript:showCate('steel')">Stainless Steel Buckles</a>
-          <a href="javascript:showCate('brass')">Brass Buckles</a>
-        </div>
-      </div>
-
-      <div class="third-level-wrap" id="shoe-accessories">
-        <div class="third-level-items">
-          <a href="javascript:showCate('shoe-buckle')">Shoe Buckles</a>
-        </div>
-      </div>
-
-      <div class="third-level-wrap" id="rivets">
-        <div class="third-level-items">
-          <a href="javascript:showCate('rivet')">Metal Rivets & Eyelets</a>
-        </div>
-      </div>
     </div>
-
 </header>
 
 <section class="content">
@@ -501,148 +154,12 @@
     </div>
 </section>
 
+<!-- 👈 底部邮箱已加上，和首页一样 -->
 <footer>
     <div class="container">
         <p>Maikrui Metal © All Rights Reserved</p>
         <p>Email: contact@maikrui.com</p>
     </div>
 </footer>
-
-<a href="https://wa.me/8615980009534?text=Hello,%20I'm%20interested%20in%20your%20hardware%20products." target="_blank" class="whatsapp-btn">WhatsApp Us</a>
-
-<script>
-    let slides = document.querySelectorAll('.slide-item');
-    let indicators = document.querySelectorAll('.indicator');
-    let current = 0;
-    let interval;
-
-    function updateIndicators() {
-        indicators.forEach((dot, i) => {
-            dot.classList.toggle('active', i === current);
-        });
-    }
-
-    function showSlide(index){
-        slides.forEach(item => item.classList.remove('active'));
-        current = (index + slides.length) % slides.length;
-        slides[current].classList.add('active');
-        updateIndicators();
-    }
-
-    function prevSlide(){
-        showSlide(current - 1);
-    }
-    function nextSlide(){
-        showSlide(current + 1);
-    }
-    function goToSlide(index){
-        showSlide(index);
-        resetInterval();
-    }
-
-    function startInterval(){
-        interval = setInterval(nextSlide, 5000);
-    }
-    function resetInterval(){
-        clearInterval(interval);
-        startInterval();
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-        showSlide(0);
-        startInterval();
-    });
-
-    const slider = document.querySelector('.slider');
-    slider.addEventListener('mouseenter', () => clearInterval(interval));
-    slider.addEventListener('mouseleave', () => startInterval());
-
-  const menu = document.getElementById('categoryMenu');
-  const overlay = document.getElementById('overlay');
-  const toggleBtn = document.getElementById('menuToggle');
-
-  function openMenu() {
-    menu.classList.add('show');
-    overlay.classList.add('show');
-  }
-  function closeMenu() {
-    menu.classList.remove('show');
-    overlay.classList.remove('show');
-  }
-
-  toggleBtn.addEventListener('click', openMenu);
-
-  document.querySelectorAll('.cate-link').forEach(link => {
-    link.addEventListener('click', () => {
-      closeMenu();
-    });
-  });
-
-  const btns = document.querySelectorAll('.cate-link');
-  const boxes = document.querySelectorAll('.cate-box');
-  btns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const target = btn.dataset.cate;
-      btns.forEach(b => b.classList.remove('active'));
-      boxes.forEach(box => box.style.display = 'none');
-      btns.forEach(b => {
-        if(b.dataset.cate === target) b.classList.add('active');
-      });
-      document.getElementById(target).style.display = 'block';
-    });
-  });
-
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImg = lightbox.querySelector('img');
-  const close = lightbox.querySelector('.close');
-  document.querySelectorAll('.product-img img').forEach(img => {
-    img.addEventListener('click', () => {
-      lightboxImg.src = img.src;
-      lightbox.classList.add('show');
-    });
-  });
-  close.addEventListener('click', () => lightbox.classList.remove('show'));
-  lightbox.addEventListener('click', (e) => {
-    if(e.target === lightbox) lightbox.classList.remove('show');
-  });
-
-  document.addEventListener('DOMContentLoaded', function(){
-    const productsNav = document.getElementById('productsNav');
-    const secondLevelNav = document.getElementById('secondLevelNav');
-    const level2Items = document.querySelectorAll('.level2-item');
-    const thirdLevelWraps = document.querySelectorAll('.third-level-wrap');
-
-    productsNav.addEventListener('click', function(e){
-      if(window.innerWidth > 768) return;
-      e.preventDefault();
-      secondLevelNav.classList.toggle('show');
-    });
-
-    level2Items.forEach(item => {
-      item.addEventListener('click', function(e){
-        e.preventDefault();
-        const targetId = this.dataset.target;
-        level2Items.forEach(i => i.remove('active'));
-        this.classList.add('active');
-        thirdLevelWraps.forEach(wrap => {
-          wrap.classList.remove('show');
-        });
-        document.getElementById(targetId).classList.add('show');
-      });
-    });
-  });
-
-  function showCate(cate) {
-    document.querySelectorAll('.cate-box').forEach(box => box.style.display = 'none');
-    document.getElementById(cate).style.display = 'block';
-    document.querySelectorAll('.cate-link').forEach(link => {
-      link.classList.remove('active');
-      if(link.dataset.cate === cate) link.classList.add('active');
-    });
-    if(window.innerWidth <= 768){
-      document.getElementById('secondLevelNav').classList.remove('show');
-    }
-  }
-</script>
 </body>
 </html>
