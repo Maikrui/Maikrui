@@ -22,11 +22,9 @@
     }
     .header-inner{
         display:flex;
-        /* ↓ 这里改成居中对称，你要的效果 */
         justify-content: space-between;
         align-items: center;
-        /* ↓ 强制永远不换行，保证四个选项一行 */
-        flex-wrap: nowrap !important;
+        flex-wrap: nowrap; /* 永远不换行 */
         gap: 1rem;
         height: 100%;
     }
@@ -53,8 +51,7 @@
         gap:1.2rem;
         height: 100%;
         align-items: center;
-        /* ↓ 强制导航永远一行 */
-        flex-wrap: nowrap !important;
+        flex-wrap: nowrap; /* 导航永远一行 */
     }
     nav a{
         color:#ccc;
@@ -73,40 +70,27 @@
         font-weight:bold;
     }
 
-    /* 手机自适应 —— 永远一行、对称居中 */
+    /* 手机端 —— 只做一件事：保持一行，不堆叠 */
     @media(max-width:768px){
         header{
-            height: auto;
-            line-height: normal;
-            padding: 1rem 0;
+            height: 80px; /* 保持高度不变 */
         }
         .header-inner{
-            /* ↓ 手机也保持一行，左右对称，不居中堆叠 */
-            flex-direction: row !important;
-            justify-content: space-between !important;
-            text-align:left;
-            gap:0.8rem;
-            height: auto;
-            flex-wrap: nowrap !important;
+            flex-direction:row; /* 横向一行，不竖过来 */
+            flex-wrap:nowrap;
+            justify-content:space-between;
         }
         .logo{
-            height: auto;
             line-height: normal;
         }
-        .logo span {
-            display:none; /* 手机只显示LOGO，不显示文字，保证导航有位置 */
-        }
         nav{
-            gap:0.6rem;
-            /* ↓ 手机端永远一行，不换行 */
-            flex-wrap: nowrap !important;
-            justify-content:flex-end;
-            height: auto;
+            flex-wrap:nowrap;
+            gap:0.5rem;
         }
         nav a{
-            font-size:0.9rem;
-            width: auto !important;
-            padding:0 4px;
+            width: auto;
+            padding:0 3px;
+            font-size:12px;
         }
     }
 </style>
