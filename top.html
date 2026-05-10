@@ -4,54 +4,51 @@
 
     header{
         background:var(--brand-dark-blue);
-        height: 80px;
-        line-height: 80px;
-        padding: 0;
+        height:80px;
+        line-height:80px;
+        padding:0;
         position:fixed;
         top:0;
         left:0;
         width:100%;
-        z-index:999;
-        overflow: hidden;
+        z-index:9999;
+        overflow:hidden;
     }
     .container{
         width:90%;
         max-width:1100px;
         margin:0 auto;
-        height: 100%;
+        height:100%;
     }
     .header-inner{
         display:flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: nowrap; /* 永远不换行 */
-        gap: 1rem;
-        height: 100%;
+        justify-content:space-between;
+        align-items:center;
+        flex-wrap:nowrap;
+        gap:1rem;
+        height:100%;
     }
-
     .logo{
         font-size:1.5rem;
         font-weight:bold;
         color:var(--brand-silver);
         display:flex;
-        align-items: center;
+        align-items:center;
         gap:8px;
         white-space:nowrap;
-        height: 100%;
-        line-height: 80px;
+        height:100%;
     }
     .logo img{
         height:40px;
         width:auto;
-        vertical-align: middle;
+        display:block;
     }
-
     nav{
         display:flex;
         gap:1.2rem;
-        height: 100%;
-        align-items: center;
-        flex-wrap: nowrap; /* 导航永远一行 */
+        height:100%;
+        align-items:center;
+        flex-wrap:nowrap;
     }
     nav a{
         color:#ccc;
@@ -59,10 +56,9 @@
         transition:0.3s;
         white-space:nowrap;
         font-size:1rem;
-        display: inline-block;
-        width: 80px;
-        text-align: center;
-        line-height: normal;
+        width:80px;
+        text-align:center;
+        line-height:normal;
     }
     nav a:hover{color:var(--brand-silver);}
     nav a.active{
@@ -70,26 +66,19 @@
         font-weight:bold;
     }
 
-    /* 手机端 —— 只做一件事：保持一行，不堆叠 */
     @media(max-width:768px){
-        header{
-            height: 80px; /* 保持高度不变 */
-        }
+        header{height:auto; padding:12px 0;}
         .header-inner{
-            flex-direction:row; /* 横向一行，不竖过来 */
-            flex-wrap:nowrap;
+            flex-direction:row;
             justify-content:space-between;
-        }
-        .logo{
-            line-height: normal;
-        }
-        nav{
             flex-wrap:nowrap;
-            gap:0.5rem;
         }
+        .logo{font-size:1rem;}
+        .logo img{height:32px;}
+        nav{gap:0.5rem;}
         nav a{
-            width: auto;
-            padding:0 3px;
+            width:auto;
+            padding:0 2px;
             font-size:12px;
         }
     }
@@ -111,14 +100,11 @@
 </header>
 
 <script>
-window.addEventListener('DOMContentLoaded', function() {
-    const currentPage = window.location.pathname.split("/").pop() || 'index.html';
-    const navLinks = document.querySelectorAll("nav a");
-    navLinks.forEach(link => {
-        link.classList.remove("active");
-        if (link.getAttribute("href") === currentPage) {
-            link.classList.add("active");
-        }
+window.addEventListener('DOMContentLoaded', function(){
+    const current = window.location.pathname.split("/").pop() || "index.html";
+    document.querySelectorAll("nav a").forEach(a => {
+        a.classList.remove("active");
+        if(a.getAttribute("href") === current) a.classList.add("active");
     });
 });
 </script>
