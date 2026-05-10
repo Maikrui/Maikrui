@@ -16,7 +16,7 @@ body { background:#f8f8f8; color:#333; line-height:1.6; padding-top:65px; }
 --brand-text-dark:#0A244B;
 }
 
-/* 顶部导航 原封不动 */
+/* 顶部导航 完全原封不动 */
 header {
 background:var(--brand-dark-blue);
 padding:1rem 0;
@@ -49,7 +49,7 @@ nav a:hover { color:var(--brand-silver); }
 nav a { margin-left:0.8rem; }
 }
 
-/* 主体布局 */
+/* 原有样式 完全不动 */
 .page-wrap{ display:flex; gap:2rem; padding:1rem 0 2rem; }
 .side-left{
 width:230px; background:#fff; padding:1rem; border-radius:6px;
@@ -101,84 +101,53 @@ footer{
 background:var(--active-color); color:#fff; text-align:center; padding:2rem 0; margin-top:2rem;
 }
 
-/* ===============================
-   手机端折叠二级导航
-=============================== */
-.cate-toggle {
+/* 只新增这部分：手机端折叠导航 */
+.mobile-nav-btn {
 display: none;
 width: 100%;
-padding: 10px 12px;
-margin: 10px 0;
+padding: 10px;
 background: #fff;
-border: 1px solid #ddd;
+border: 1px solid #eee;
 border-radius: 6px;
-font-size: 14px;
+font-size: 15px;
 color: var(--brand-dark-blue);
-text-align: left;
+text-align: center;
 cursor: pointer;
-display: flex;
-align-items: center;
-gap: 8px;
-}
-
-.cate-toggle .arrow {
-display: inline-block;
-transition: transform 0.35s cubic-bezier(.68,-0.55,.27,1.55);
-color: var(--brand-dark-blue);
-}
-
-.cate-toggle.open .arrow {
-transform: rotate(90deg);
-}
-
-.cate-toggle .txt {
-flex: 1;
-min-width: 0;
-white-space: nowrap;
-overflow: hidden;
-text-overflow: ellipsis;
+margin: 10px 0;
 }
 
 @media (max-width:768px) {
-.cate-toggle {
-display: flex;
+.mobile-nav-btn {
+display: block;
 }
-
 .side-left {
-display: none;
 width: 100%;
-padding: 0.6rem;
+display: none;
+padding: 0.8rem;
 margin-bottom: 1rem;
 }
-
 .side-left.open {
 display: block;
 }
-
+/* 手机端导航紧凑显示 */
 .side-left .cate-title {
-font-size: 13px;
-padding: 0.35rem 0.5rem;
-margin: 0.6rem 0 0.3rem;
+font-size: 14px;
+padding: 0.4rem;
 }
-
 .side-left .cate-link {
-font-size: 12.5px;
-padding: 0.35rem 0.6rem;
-margin: 0.15rem 0;
+font-size: 13px;
+padding: 0.4rem;
 }
-
 .page-wrap {
-flex-direction: column;
-gap: 1rem;
+flex-direction:column;
+gap:1rem;
 }
-
 .main-content {
-padding: 1rem;
+padding:1rem;
 }
-
 .product-row {
-grid-template-columns: 1fr;
-gap: 1rem;
+grid-template-columns:1fr;
+gap:1rem;
 }
 }
 </style>
@@ -203,32 +172,22 @@ Maikrui Metal
 
 <div class="container">
 
-<!-- 手机端折叠按钮 -->
-<button class="cate-toggle" id="cateToggle">
-<svg class="arrow" viewBox="0 0 24 24" width="16" height="16">
-<path d="M9 18l6-6-6-6"
-fill="none"
-stroke="currentColor"
-stroke-width="2"
-stroke-linecap="round"
-stroke-linejoin="round"/>
-</svg>
-<span class="txt">Product Categories</span>
-</button>
+<!-- 手机端提醒按钮 -->
+<button class="mobile-nav-btn" id="navBtn">☰ Product Categories</button>
 
 <!-- 二级导航 -->
 <div class="side-left" id="cateNav">
 <ul>
 <li class="cate-title">Belt Buckles</li>
-<li><span class="cate-link active" data-cate="zinc" data-name="Zinc Alloy">Zinc Alloy Buckles</span></li>
-<li><span class="cate-link" data-cate="steel" data-name="Stainless Steel">Stainless Steel Buckles</span></li>
-<li><span class="cate-link" data-cate="brass" data-name="Brass">Brass Buckles</span></li>
+<li><span class="cate-link active" data-cate="zinc">Zinc Alloy Buckles</span></li>
+<li><span class="cate-link" data-cate="steel">Stainless Steel Buckles</span></li>
+<li><span class="cate-link" data-cate="brass">Brass Buckles</span></li>
 
 <li class="cate-title">Shoe Accessories</li>
-<li><span class="cate-link" data-cate="shoe-buckle" data-name="Shoe Buckles">Shoe Buckles</span></li>
+<li><span class="cate-link" data-cate="shoe-buckle">Shoe Buckles</span></li>
 
 <li class="cate-title">Garment Hardware</li>
-<li><span class="cate-link" data-cate="rivet" data-name="Rivets & Eyelets">Rivets & Eyelets</span></li>
+<li><span class="cate-link" data-cate="rivet">Rivets & Eyelets</span></li>
 </ul>
 </div>
 
@@ -331,37 +290,29 @@ stroke-linejoin="round"/>
 </footer>
 
 <script>
-const cateToggle = document.getElementById('cateToggle');
+const navBtn = document.getElementById('navBtn');
 const cateNav = document.getElementById('cateNav');
-const cateTxt = cateToggle.querySelector('.txt');
 
-cateToggle.onclick = () => {
+navBtn.onclick = function() {
 cateNav.classList.toggle('open');
-cateToggle.classList.toggle('open');
 };
 
 const cateLinks = document.querySelectorAll('.cate-link');
 const cateBoxes = document.querySelectorAll('.cate-box');
 
 cateLinks.forEach(link => {
-link.onclick = function () {
+link.onclick = function() {
 const target = this.dataset.cate;
-const name = this.dataset.name;
 if (!target) return;
 
 cateLinks.forEach(el => el.classList.remove('active'));
 this.classList.add('active');
-
-if (name && window.innerWidth <= 768) {
-cateTxt.textContent = name;
-}
 
 cateBoxes.forEach(box => box.style.display = 'none');
 document.getElementById(target).style.display = 'block';
 
 if (window.innerWidth <= 768) {
 cateNav.classList.remove('open');
-cateToggle.classList.remove('open');
 }
 };
 });
@@ -372,7 +323,7 @@ const lightboxImg = lightbox.querySelector('img');
 const closeBtn = lightbox.querySelector('.close');
 
 document.querySelectorAll('.product-img img').forEach(img => {
-img.onclick = function () {
+img.onclick = function() {
 lightboxImg.src = this.src;
 lightbox.classList.add('show');
 };
