@@ -1,100 +1,358 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Maikrui Metal | Professional Die Casting Hardware Manufacturer</title>
-<meta name="description" content="Maikrui Metal is a professional die casting hardware manufacturer with 30+ years experience, providing custom belt buckles, shoe accessories, garment hardware.">
-<meta property="og:title" content="Maikrui Metal | Die Casting Hardware Manufacturer">
-<meta property="og:site_name" content="Maikrui Metal">
-<meta name="author" content="Maikrui Metal">
-<link rel="canonical" href="https://maikrui.com">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="16x32" href="/favicon-16x16.png">
 <link rel="manifest" href="/site.webmanifest">
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
-body{background:#f8f8f8;color:#333;line-height:1.6;padding-top:65px;}
-:root{--brand-dark-blue:#0A244B;--brand-silver:#E0E0E0;}
-
-header{background:var(--brand-dark-blue);padding:1rem 0;position:fixed;top:0;left:0;width:100%;z-index:100;}
-.container{width:90%;max-width:1100px;margin:0 auto;}
-.header-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
-.logo{font-size:1.5rem;font-weight:bold;color:var(--brand-silver);display:flex;align-items:center;gap:8px;white-space:nowrap;}
-.logo img{background:transparent!important;border:none!important;outline:none!important;box-shadow:none!important;filter:none!important;padding:0!important;margin:0!important;height:40px!important;width:auto!important;}
-nav a{color:#ccc;text-decoration:none;margin-left:1.5rem;transition:color 0.3s ease;white-space:nowrap;}
-nav a:hover{color:var(--brand-silver);}
-
-.hero{height:500px;background:var(--brand-dark-blue);display:flex;align-items:center;justify-content:center;color:#fff;text-align:center;padding:0 20px;}
-.hero h1{font-size:2.4rem;margin-bottom:1rem;}
-.hero p{font-size:1.1rem;max-width:800px;}
-
-.section{padding:4rem 0;background:#fff;}
-.section-title{text-align:center;font-size:1.8rem;margin-bottom:2.5rem;color:var(--brand-dark-blue);}
-.advantage-items{display:flex;flex-wrap:wrap;justify-content:center;gap:2rem;text-align:center;}
-.advantage{flex:1;min-width:220px;}
-.advantage h3{margin-bottom:0.5rem;color:var(--brand-dark-blue);}
-
-footer{background:var(--brand-dark-blue);color:#fff;text-align:center;padding:2rem 0;margin-top:2rem;}
-
-@media (max-width:768px){
-    .hero{height:350px;}
-    .hero h1{font-size:1.8rem;}
-    nav a{margin-left:0.8rem;}
-}
-</style>
+    <title>Maikrui Metal - Die Casting Hardware Manufacturer</title>
+<meta name="description" content="Maikrui Metal is a professional die casting hardware manufacturer, specializing in custom belt buckles, shoe buckles, and garment accessories. OEM/ODM service available.">
+    <meta name="description" content="Professional manufacturer of custom die-cast belt buckles and metal accessories. OEM/ODM service, factory direct price.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background: #f8f8f8;
+            color: #333;
+            line-height: 1.6;
+            padding-top: 65px;
+        }
+        :root {
+            --brand-dark-blue: #0A244B;
+            --brand-silver: #E0E0E0;
+            --brand-text-dark: #0A244B;
+        }
+        header {
+            background: var(--brand-dark-blue);
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+        }
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--brand-silver);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+        .logo img {
+            background: transparent !important;
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+            filter: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            height: 40px !important;
+            width: auto !important;
+        }
+        nav a {
+            color: #cccccc;
+            text-decoration: none;
+            margin-left: 1.5rem;
+            transition: color 0.3s ease;
+            white-space: nowrap;
+        }
+        nav a:hover {
+            color: var(--brand-silver);
+        }
+        .slider {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+            background: #f8f8f8;
+        }
+        .slide-item {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .slide-item.active {
+            opacity: 1;
+            z-index: 1;
+        }
+        .slide-mask {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 36, 75, 0.35);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-align: center;
+            padding: 0 20px;
+            z-index: 2;
+        }
+        .slide-mask h1 {
+            font-size: 2.4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000;
+        }
+        .slide-mask p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            color: #fff;
+            text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+        }
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3rem;
+            color: var(--brand-silver);
+            background: transparent;
+            padding: 0 15px;
+            cursor: pointer;
+            z-index: 10;
+            border: none;
+        }
+        .prev {left: 0;}
+        .next {right: 0;}
+        .slider-indicators {
+            position: absolute;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            display: flex;
+            gap: 8px;
+        }
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .indicator.active {
+            background: var(--brand-silver);
+        }
+        .advantages {
+            background: #ffffff;
+            padding: 4rem 0;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 2.5rem;
+            color: var(--brand-text-dark);
+        }
+        .advantage-items {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            text-align: center;
+        }
+        .advantage {
+            flex: 1;
+            min-width: 220px;
+        }
+        .advantage h3 {
+            color: var(--brand-text-dark);
+            margin-bottom: 0.5rem;
+        }
+        footer {
+            background: var(--brand-dark-blue);
+            color: var(--brand-silver);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+        .whatsapp-btn {
+            position: fixed;
+            right: 16px;
+            bottom: 32px;
+            background: #25D366;
+            color: white;
+            padding: 12px 16px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            z-index: 999;
+        }
+        @media (max-width: 768px) {
+            .slider {
+                height: 300px;
+                padding-top:0!important;
+                margin-top:0!important;
+            }
+            .slide-item {
+                background-size: cover;
+                background-position: center;
+            }
+            .slide-mask {
+                padding-top:60px;
+            }
+            .slide-mask h1 {
+                font-size: 1.4rem;
+            }
+            .slide-mask p {
+                font-size: 0.9rem;
+                max-width: 90%;
+            }
+            nav a {
+                margin-left: 0.8rem;
+            }
+        }
+    </style>
 </head>
-
 <body>
+
 <header>
-<div class="container header-inner">
-<div class="logo">
-<img src="logo.png" alt="Logo"> Maikrui Metal
-</div>
-<nav>
-<a href="index.html">Home</a>
-<a href="products.html">Products</a>
-<a href="about.html">About</a>
-<a href="contact.html">Contact</a>
-</nav>
-</div>
+    <div class="container header-inner">
+        <div class="logo">
+            <img src="logo.png" alt="Logo">
+            Maikrui Metal
+        </div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="products.html">Products</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </div>
 </header>
 
-<section class="hero">
-<div>
-<h1>Professional Die Casting Hardware Manufacturer</h1>
-<p>Maikrui Metal provides high-quality custom belt buckles, shoe accessories and garment hardware with 30+ years experience.</p>
-</div>
+<section class="slider">
+    <div class="slide-item active" style="background-image: url('banner1.jpg');">
+        <div class="slide-mask">
+            <h1>Professional Die Casting Hardware Manufacturer</h1>
+            <p>30+ years integrated garment hardware factory, custom belt buckles & garment hardware solutions.</p>
+        </div>
+    </div>
+    <div class="slide-item" style="background-image: url('banner2.jpg');">
+        <div class="slide-mask">
+            <h1>OEM & ODM Custom Service</h1>
+            <p>Zinc alloy die casting, spin casting, lost wax casting and full finishing support.</p>
+        </div>
+    </div>
+    <div class="slide-item" style="background-image: url('banner3.jpg');">
+        <div class="slide-mask">
+            <h1>Factory Direct Supply</h1>
+            <p>Stable quality, competitive price, one-stop service for global buyers.</p>
+        </div>
+    </div>
+
+    <button class="prev" onclick="prevSlide()">&#10094;</button>
+    <button class="next" onclick="nextSlide()">&#10095;</button>
+
+    <div class="slider-indicators">
+        <span class="indicator active" onclick="goToSlide(0)"></span>
+        <span class="indicator" onclick="goToSlide(1)"></span>
+        <span class="indicator" onclick="goToSlide(2)"></span>
+    </div>
 </section>
 
-<section class="section">
-<h2 class="section-title">Our Advantages</h2>
-<div class="advantage-items">
-<div class="advantage">
-<h3>30+ Years Experience</h3>
-<p>Professional mold & die casting factory</p>
-</div>
-<div class="advantage">
-<h3>Custom OEM Service</h3>
-<p>Design, mold, production, plating one-stop</p>
-</div>
-<div class="advantage">
-<h3>Stable Quality</h3>
-<p>Strict inspection for each batch</p>
-</div>
-<div class="advantage">
-<h3>Fast Delivery</h3>
-<p>Short lead time for mass production</p>
-</div>
-</div>
+<section class="advantages">
+    <div class="container">
+        <h2 class="section-title">Why Choose Us</h2>
+        <div class="advantage-items">
+            <div class="advantage">
+                <h3>Factory Direct</h3>
+                <p>Competitive price without middleman</p>
+            </div>
+            <div class="advantage">
+                <h3>Custom Design</h3>
+                <p>OEM & ODM service available</p>
+            </div>
+            <div class="advantage">
+                <h3>Strict QC</h3>
+                <p>Each piece checked before shipment</p>
+            </div>
+        </div>
+    </div>
 </section>
 
 <footer>
-<div class="container">
-<p>Maikrui Metal © All Rights Reserved</p>
-<p>Email: contact@maikrui.com</p>
-</div>
+    <div class="container">
+        <p>Maikrui Metal © All Rights Reserved</p>
+        <p>Email: contact@maikrui.com</p>
+    </div>
 </footer>
+
+<a href="https://wa.me/8615980009534?text=Hello,%20I'm%20interested%20in%20your%20hardware%20products." target="_blank" class="whatsapp-btn">WhatsApp Us</a>
+
+<script>
+    let slides = document.querySelectorAll('.slide-item');
+    let indicators = document.querySelectorAll('.indicator');
+    let current = 0;
+    let interval;
+
+    function updateIndicators() {
+        indicators.forEach((dot, i) => {
+            dot.classList.toggle('active', i === current);
+        });
+    }
+
+    function showSlide(index){
+        slides.forEach(item => item.classList.remove('active'));
+        current = (index + slides.length) % slides.length;
+        slides[current].classList.add('active');
+        updateIndicators();
+    }
+
+    function prevSlide(){
+        showSlide(current - 1);
+    }
+    function nextSlide(){
+        showSlide(current + 1);
+    }
+    function goToSlide(index){
+        showSlide(index);
+        resetInterval();
+    }
+
+    function startInterval(){
+        interval = setInterval(nextSlide, 5000);
+    }
+    function resetInterval(){
+        clearInterval(interval);
+        startInterval();
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        showSlide(0);
+        startInterval();
+    });
+
+    const slider = document.querySelector('.slider');
+    slider.addEventListener('mouseenter', () => clearInterval(interval));
+    slider.addEventListener('mouseleave', () => startInterval());
+</script>
 </body>
 </html>
