@@ -4,20 +4,35 @@
 
     header{
         background:var(--brand-dark-blue);
-        padding:1rem 0;
+        /* 固定导航栏高度，避免不同页面渲染高度不一致 */
+        height: 80px;
+        line-height: 80px;
+        padding: 0;
         position:fixed;
         top:0;
         left:0;
         width:100%;
         z-index:999;
+        /* 强制防止抖动 */
+        overflow: hidden;
     }
-    .container{width:90%;max-width:1100px;margin:0 auto;}
+    .container{
+        width:90%;
+        max-width:1100px;
+        margin:0 auto;
+        /* 容器高度和导航栏一致 */
+        height: 100%;
+    }
     .header-inner{
         display:flex;
-        justify-content:space-between;
-        align-items:center;
-        flex-wrap:wrap;
-        gap:1rem;
+        /* 强制水平两端对齐，固定基准 */
+        justify-content: space-between;
+        align-items: center;
+        /* 取消wrap，避免小屏换行导致位置变化 */
+        flex-wrap: nowrap;
+        gap: 1rem;
+        /* 高度继承容器，确保对齐 */
+        height: 100%;
     }
 
     .logo{
@@ -25,43 +40,77 @@
         font-weight:bold;
         color:var(--brand-silver);
         display:flex;
-        align-items:center;
+        align-items: center;
         gap:8px;
         white-space:nowrap;
+        /* 固定logo高度，避免图片加载导致偏移 */
+        height: 100%;
+        line-height: 80px;
     }
     .logo img{
         height:40px;
         width:auto;
+        /* 图片垂直居中 */
+        vertical-align: middle;
     }
 
-    nav{display:flex;gap:1.2rem;}
+    nav{
+        display:flex;
+        gap:1.2rem;
+        /* 固定导航容器高度，对齐基准 */
+        height: 100%;
+        align-items: center;
+    }
     nav a{
         color:#ccc;
         text-decoration:none;
         transition:0.3s;
         white-space:nowrap;
         font-size:1rem;
+        /* 关键：给所有导航项固定宽度，消除激活态加粗导致的宽度变化 */
+        display: inline-block;
+        width: 80px;
+        text-align: center;
+        /* 垂直居中 */
+        line-height: normal;
     }
     nav a:hover{color:var(--brand-silver);}
     nav a.active{
         color:#fff;
         font-weight:bold;
+        /* 避免加粗后宽度变化，提前预留空间（替代方案：用边框/颜色区分激活态，而非加粗） */
+        /* 若不想固定宽度，可注释width:80px，改用此样式：
+        font-weight: normal;
+        border-bottom: 2px solid var(--brand-silver);
+        */
     }
 
-    /* 手机自适应 */
+    /* 手机自适应（仍保持布局一致性） */
     @media(max-width:768px){
+        header{
+            height: auto;
+            line-height: normal;
+            padding: 1rem 0;
+        }
         .header-inner{
             flex-direction:column;
             text-align:center;
             gap:0.8rem;
+            height: auto;
+        }
+        .logo{
+            height: auto;
+            line-height: normal;
         }
         nav{
             gap:1rem;
             flex-wrap:wrap;
             justify-content:center;
+            height: auto;
         }
         nav a{
             font-size:0.95rem;
+            width: 70px;
         }
     }
 </style>
@@ -82,11 +131,15 @@
 </header>
 
 <script>
-const currentPage = window.location.pathname.split("/").pop();
-document.querySelectorAll("nav a").forEach(item => {
-    if (item.getAttribute("href") === currentPage) {
-        document.querySelectorAll("nav a").forEach(link => link.classList.remove("active"));
-        item.classList.add("active");
-    }
+// 优化激活态逻辑：确保页面加载完成后再执行，避免渲染偏差
+window.addEventListener('DOMContentLoaded', function() {
+    const currentPage = window.location.pathname.split("/").pop() || 'index.html';
+    const navLinks = document.querySelectorAll("nav a");
+    navLinks.forEach(link => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === currentPage) {
+            link.classList.add("active");
+        }
+    });
 });
 </script>
