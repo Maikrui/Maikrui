@@ -4,7 +4,6 @@
 
     header{
         background:var(--brand-dark-blue);
-        /* 固定导航栏高度，避免不同页面渲染高度不一致 */
         height: 80px;
         line-height: 80px;
         padding: 0;
@@ -13,25 +12,22 @@
         left:0;
         width:100%;
         z-index:999;
-        /* 强制防止抖动 */
         overflow: hidden;
     }
     .container{
         width:90%;
         max-width:1100px;
         margin:0 auto;
-        /* 容器高度和导航栏一致 */
         height: 100%;
     }
     .header-inner{
         display:flex;
-        /* 强制水平两端对齐，固定基准 */
+        /* ↓ 这里改成居中对称，你要的效果 */
         justify-content: space-between;
         align-items: center;
-        /* 取消wrap，避免小屏换行导致位置变化 */
-        flex-wrap: nowrap;
+        /* ↓ 强制永远不换行，保证四个选项一行 */
+        flex-wrap: nowrap !important;
         gap: 1rem;
-        /* 高度继承容器，确保对齐 */
         height: 100%;
     }
 
@@ -43,23 +39,22 @@
         align-items: center;
         gap:8px;
         white-space:nowrap;
-        /* 固定logo高度，避免图片加载导致偏移 */
         height: 100%;
         line-height: 80px;
     }
     .logo img{
         height:40px;
         width:auto;
-        /* 图片垂直居中 */
         vertical-align: middle;
     }
 
     nav{
         display:flex;
         gap:1.2rem;
-        /* 固定导航容器高度，对齐基准 */
         height: 100%;
         align-items: center;
+        /* ↓ 强制导航永远一行 */
+        flex-wrap: nowrap !important;
     }
     nav a{
         color:#ccc;
@@ -67,25 +62,18 @@
         transition:0.3s;
         white-space:nowrap;
         font-size:1rem;
-        /* 关键：给所有导航项固定宽度，消除激活态加粗导致的宽度变化 */
         display: inline-block;
         width: 80px;
         text-align: center;
-        /* 垂直居中 */
         line-height: normal;
     }
     nav a:hover{color:var(--brand-silver);}
     nav a.active{
         color:#fff;
         font-weight:bold;
-        /* 避免加粗后宽度变化，提前预留空间（替代方案：用边框/颜色区分激活态，而非加粗） */
-        /* 若不想固定宽度，可注释width:80px，改用此样式：
-        font-weight: normal;
-        border-bottom: 2px solid var(--brand-silver);
-        */
     }
 
-    /* 手机自适应（仍保持布局一致性） */
+    /* 手机自适应 —— 永远一行、对称居中 */
     @media(max-width:768px){
         header{
             height: auto;
@@ -93,24 +81,32 @@
             padding: 1rem 0;
         }
         .header-inner{
-            flex-direction:column;
-            text-align:center;
+            /* ↓ 手机也保持一行，左右对称，不居中堆叠 */
+            flex-direction: row !important;
+            justify-content: space-between !important;
+            text-align:left;
             gap:0.8rem;
             height: auto;
+            flex-wrap: nowrap !important;
         }
         .logo{
             height: auto;
             line-height: normal;
         }
+        .logo span {
+            display:none; /* 手机只显示LOGO，不显示文字，保证导航有位置 */
+        }
         nav{
-            gap:1rem;
-            flex-wrap:wrap;
-            justify-content:center;
+            gap:0.6rem;
+            /* ↓ 手机端永远一行，不换行 */
+            flex-wrap: nowrap !important;
+            justify-content:flex-end;
             height: auto;
         }
         nav a{
-            font-size:0.95rem;
-            width: 70px;
+            font-size:0.9rem;
+            width: auto !important;
+            padding:0 4px;
         }
     }
 </style>
@@ -131,7 +127,6 @@
 </header>
 
 <script>
-// 优化激活态逻辑：确保页面加载完成后再执行，避免渲染偏差
 window.addEventListener('DOMContentLoaded', function() {
     const currentPage = window.location.pathname.split("/").pop() || 'index.html';
     const navLinks = document.querySelectorAll("nav a");
