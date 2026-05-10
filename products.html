@@ -15,7 +15,7 @@
       --brand-text-dark:#0A244B;
     }
 
-    /* 顶部导航 原样完全保留 不做任何修改 */
+    /* 顶部导航（完全不动） */
     header {
       background:var(--brand-dark-blue);
       padding:1rem 0;
@@ -48,27 +48,11 @@
       nav a { margin-left:0.8rem; }
     }
 
-    /* ========== 核心改动：二级导航永远直接可见，不再隐藏、不再侧滑 ========== */
-    .menu-toggle, .overlay, .close-drawer {
-      display: none !important;
-    }
-
-    .page-wrap{ 
-      display:flex; 
-      gap:2rem; 
-      padding:1rem 0 2rem; 
-    }
-    /* 左右布局永久生效，手机也直接展示二级菜单 */
+    /* 原有样式保留 */
+    .page-wrap{ display:flex; gap:2rem; padding:1rem 0 2rem; }
     .side-left{
-      width:230px; 
-      background:#fff; 
-      padding:1rem; 
-      border-radius:6px;
-      border:1px solid #eee; 
-      height:fit-content;
-      /* 取消所有fixed/平移隐藏 */
-      position: static;
-      transform: none;
+      width:230px; background:#fff; padding:1rem; border-radius:6px;
+      border:1px solid #eee; height:fit-content;
     }
     .side-left ul{ list-style:none; }
     .side-left .cate-title{
@@ -82,7 +66,6 @@
     .side-left .cate-link.active{
       background:var(--active-color); color:#fff;
     }
-
     .main-content{
       flex:1; background:#fff; padding:2rem; border-radius:8px;
     }
@@ -116,10 +99,44 @@
       background:var(--active-color); color:#fff; text-align:center; padding:2rem 0; margin-top:2rem;
     }
 
-    /* 手机端：布局自动上下排列，但二级导航依然**直接可见** */
+    /* 手机端折叠分类按钮 */
+    .mobile-cate-toggle {
+      display: none;
+      width: 100%;
+      padding: 10px 15px;
+      background: #fff;
+      border: 1px solid #eee;
+      border-radius: 6px;
+      font-size: 16px;
+      color: var(--brand-dark-blue);
+      text-align: left;
+      cursor: pointer;
+      margin-bottom: 1rem;
+    }
+    .mobile-cate-toggle::after {
+      content: " ▼";
+      float: right;
+    }
+    .mobile-cate-toggle.open::after {
+      content: " ▲";
+    }
+
     @media (max-width:768px) {
+      /* 手机端：只显示折叠按钮，菜单默认隐藏 */
+      .mobile-cate-toggle {
+        display: block;
+      }
+      .side-left {
+        width: 100%;
+        display: none;
+        margin-bottom: 1rem;
+      }
+      .side-left.open {
+        display: block;
+      }
       .page-wrap {
         flex-direction:column;
+        gap:0;
       }
       .main-content {
         padding:1rem;
@@ -129,7 +146,6 @@
         gap:1rem;
       }
     }
-
   </style>
 </head>
 <body>
@@ -149,26 +165,26 @@
   </div>
 </header>
 
-<!-- 遮罩、按钮全部删掉，不再需要 -->
-
 <div class="container">
+  <!-- 手机端折叠分类按钮 -->
+  <button class="mobile-cate-toggle" id="cateToggle">☰ Product Categories</button>
+
+  <div class="side-left" id="categoryMenu">
+    <ul>
+      <li class="cate-title">Belt Buckles</li>
+      <li><span class="cate-link active" data-cate="zinc">Zinc Alloy Buckles</span></li>
+      <li><span class="cate-link" data-cate="steel">Stainless Steel Buckles</span></li>
+      <li><span class="cate-link" data-cate="brass">Brass Buckles</span></li>
+
+      <li class="cate-title">Shoe Accessories</li>
+      <li><span class="cate-link" data-cate="shoe-buckle">Shoe Buckles</span></li>
+
+      <li class="cate-title">Garment Hardware</li>
+      <li><span class="cate-link" data-cate="rivet">Rivets & Eyelets</span></li>
+    </ul>
+  </div>
+
   <div class="page-wrap">
-    <!-- 二级导航栏：电脑/手机 全部直接看得见 -->
-    <div class="side-left" id="categoryMenu">
-      <ul>
-        <li class="cate-title">Belt Buckles</li>
-        <li><span class="cate-link active" data-cate="zinc">Zinc Alloy Buckles</span></li>
-        <li><span class="cate-link" data-cate="steel">Stainless Steel Buckles</span></li>
-        <li><span class="cate-link" data-cate="brass">Brass Buckles</span></li>
-
-        <li class="cate-title">Shoe Accessories</li>
-        <li><span class="cate-link" data-cate="shoe-buckle">Shoe Buckles</span></li>
-
-        <li class="cate-title">Garment Hardware</li>
-        <li><span class="cate-link" data-cate="rivet">Rivets & Eyelets</span></li>
-      </ul>
-    </div>
-
     <div class="main-content">
       <div class="cate-box" id="zinc">
         <h1>Zinc Alloy Belt Buckles</h1>
@@ -247,9 +263,11 @@
               <h2>Shoe Buckle Style 2</h2>
               <p>Alloy shoe ornament buckle, various plating color, custom design and logo are acceptable.</p>
             </div>
-            <div class="img-big"><img src="s2-1.jpg"></div>
+            <div class="product-img">
+              <div class="img-big"><img src="s2-1.jpg"></div>
               <div class="img-sm"><img src="s2-2.jpg"></div>
               <div class="img-sm"><img src="s2-3.jpg"></div>
+            </div>
           </div>
         </div>
         <div class="product">
@@ -284,7 +302,15 @@
 </footer>
 
 <script>
-  // 保留你原来的分类切换逻辑不变
+  // 手机端折叠菜单逻辑
+  const toggleBtn = document.getElementById('cateToggle');
+  const menu = document.getElementById('categoryMenu');
+  toggleBtn.addEventListener('click', () => {
+    menu.classList.toggle('open');
+    toggleBtn.classList.toggle('open');
+  });
+
+  // 分类切换逻辑
   const btns = document.querySelectorAll('.cate-link');
   const boxes = document.querySelectorAll('.cate-box');
   btns.forEach(btn => {
@@ -292,14 +318,18 @@
       const target = btn.dataset.cate;
       btns.forEach(b => b.classList.remove('active'));
       boxes.forEach(box => box.style.display = 'none');
-      btns.forEach(b => {
-        if(b.dataset.cate === target) b.classList.add('active');
-      });
+      document.querySelectorAll(`[data-cate="${target}"]`).forEach(b => b.classList.add('active'));
       document.getElementById(target).style.display = 'block';
+      
+      // 手机端点击后自动收起菜单
+      if (window.innerWidth <= 768) {
+        menu.classList.remove('open');
+        toggleBtn.classList.remove('open');
+      }
     });
   });
 
-  // 图片灯箱保留原样
+  // 图片灯箱逻辑
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = lightbox.querySelector('img');
   const close = lightbox.querySelector('.close');
