@@ -2,98 +2,74 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <title>Contact Maikrui Metal - Custom Hardware Inquiries</title>
-    <meta name="description" content="Contact Maikrui Metal for custom metal hardware, OEM orders, and bulk pricing. Get professional service from our experienced sales team.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Maikrui Metal</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
-        body { background: #f8f8f8; color: #333; line-height: 1.6; padding-top: 70px; min-height: 100vh; display: flex; flex-direction: column; }
-        .content { flex:1; padding: 4rem 0; background: #ffffff; }
-        .container { width: 90%; max-width: 600px; margin: 0 auto; }
-        h1 { text-align: center; margin-bottom: 2rem; color: #0A244B; }
-        label { display: block; margin-bottom: 0.5rem; font-weight: bold; color: #0A244B; }
-        input, textarea {
-            width: 100%;
-            padding: 0.8rem;
-            margin-bottom: 1.2rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 16px;
+        *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
+        :root{--brand-dark-blue:#0A244B;--brand-silver:#E0E0E0;}
+        body{padding-top:80px;}
+
+        header{background:var(--brand-dark-blue);height:80px;line-height:80px;padding:0;position:fixed;top:0;left:0;width:100%;z-index:9999;overflow:hidden;}
+        .container{width:90%;max-width:1100px;margin:0 auto;height:100%;}
+        .header-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:nowrap;gap:1rem;height:100%;}
+        .logo{font-size:1.5rem;font-weight:bold;color:var(--brand-silver);display:flex;align-items:center;gap:8px;white-space:nowrap;height:100%;}
+        .logo img{height:40px;width:auto;display:block;}
+        nav{display:flex;gap:1.2rem;height:100%;align-items:center;flex-wrap:nowrap;}
+        nav a{color:#ccc;text-decoration:none;transition:0.3s;white-space:nowrap;font-size:1rem;width:80px;text-align:center;line-height:normal;}
+        nav a:hover{color:var(--brand-silver);}
+        nav a.active{color:#fff;font-weight:bold;}
+
+        .content{padding:60px 0;text-align:center;}
+
+        footer{background:var(--brand-dark-blue);color:var(--brand-silver);text-align:center;padding:2rem 1rem;margin-top:3rem;}
+        .whatsapp-btn{position:fixed;right:16px;bottom:20px;background:#25D366;color:#fff;padding:10px 14px;border-radius:50px;text-decoration:none;font-size:14px;z-index:99;cursor:move;user-select:none;}
+
+        @media(max-width:768px){
+            header{height:auto;padding:12px 0;}
+            .header-inner{flex-direction:row;justify-content:space-between;flex-wrap:nowrap;}
+            .logo{font-size:1rem;}
+            .logo img{height:32px;}
+            nav{gap:0.5rem;}
+            nav a{width:auto;padding:0 2px;font-size:12px;}
+            .content{padding:30px 15px;}
         }
-        button {
-            width: 100%;
-            padding: 1rem;
-            background: #0A244B;
-            border: none;
-            border-radius: 4px;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 16px;
-            color: #fff;
-        }
-        .contact-info {
-            text-align: center;
-            margin-top: 2.5rem;
-            padding: 1.5rem;
-            background: #f8f8f8;
-            border-radius: 8px;
-            line-height: 2;
-        }
-        .contact-info h3 { margin-bottom: 0.8rem; color: #0A244B; }
-        .email-link { color: #0A244B; font-weight: bold; text-decoration: none; }
     </style>
 </head>
 <body>
 
-<!-- 自动加载顶部 -->
-<div id="top"></div>
-
-<!-- 联系页面内容（只有内容） -->
-<section class="content">
-    <div class="container">
-        <h1>Get in Touch</h1>
-        <form action="https://formsubmit.co/wiki458413539@gmail.com" method="POST">
-            <label>Your Name</label>
-            <input type="text" name="name" required>
-
-            <label>Your Email</label>
-            <input type="email" name="email" required>
-
-            <label>Subject</label>
-            <input type="text" name="subject" required placeholder="Belt Buckle / Hardware Inquiry">
-
-            <label>Your Requirements</label>
-            <textarea name="message" rows="5" required placeholder="quantity, design, material, finishing..."></textarea>
-
-            <input type="hidden" name="_captcha" value="false">
-            <button type="submit">Send Inquiry Now</button>
-        </form>
-
-        <div class="contact-info">
-            <h3>Direct Contact</h3>
-            <p>📩 Email: <a class="email-link" href="mailto:wiki458413539@gmail.com">Click to Send Email</a></p>
-            <p>📱 WhatsApp: +86 15980009534</p>
-            <p>📍 Location: Quanzhou, Fujian, China</p>
+<header>
+    <div class="container header-inner">
+        <div class="logo">
+            <img src="logo.png" alt="Logo">
+            Maikrui Metal
         </div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="products.html">Products</a>
+            <a href="about.html">About</a>
+            <a href="contact.html" class="active">Contact</a>
+        </nav>
     </div>
-</section>
+</header>
 
-<!-- 自动加载底部 -->
-<div id="bottom"></div>
+<div class="content container">
+    <h1>Contact Us</h1>
+</div>
+
+<footer>
+    <div class="container">
+        <p>Maikrui Metal © All Rights Reserved</p>
+        <p>Email: contact@maikrui.com</p>
+    </div>
+</footer>
+
+<a href="https://api.whatsapp.com/send?phone=861598009534" class="whatsapp-btn" id="wa">WhatsApp Us</a>
 
 <script>
-    // 加载公共顶部 + 底部
-    fetch("top.html").then(res=>res.text()).then(data=>{
-        document.getElementById("top").innerHTML = data;
-    });
-    fetch("bottom.html").then(res=>res.text()).then(data=>{
-        document.getElementById("bottom").innerHTML = data;
-    });
+const btn=document.getElementById("wa");let isDrag=!1,ox,oy;
+btn.addEventListener("mousedown",e=>{isDrag=!0;const r=btn.getBoundingClientRect();ox=e.clientX-r.left,oy=e.clientY-r.top;});
+document.addEventListener("mousemove",e=>{isDrag&&(btn.style.right="auto",btn.style.bottom="auto",btn.style.left=e.clientX-ox+"px",btn.style.top=e.clientY-oy+"px");});
+document.addEventListener("mouseup",()=>{isDrag=!1;});
 </script>
-
 </body>
 </html>
