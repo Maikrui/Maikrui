@@ -3,10 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="manifest" href="/site.webmanifest">
   <title>Products | Maikrui Metal</title>
   <style>
     * { margin:0; padding:0; box-sizing:border-box; font-family:Arial,sans-serif; }
@@ -17,128 +13,140 @@
       --brand-silver:#E0E0E0;
       --active-color:#0A244B;
       --brand-text-dark:#0A244B;
+      --header-height:65px; /* 统一高度变量 */
     }
 
-    /* ========== 电脑端导航 原版完全保留 ========== */
+    /* ========== 固定头部：高度写死、禁止挤压 ========== */
     header {
       background:var(--brand-dark-blue);
-      padding:1rem 0;
+      padding:0 1rem;
+      min-height:var(--header-height);
+      height:var(--header-height);
       position:fixed;
       top:0; left:0; width:100%;
       z-index:100;
+      display:flex;
+      align-items:center; /* 强垂直居中 */
     }
     .container {
       width:90%; max-width:1100px; margin:0 auto;
     }
     .header-inner {
-      display:flex; justify-content:space-between; align-items:center;
-      flex-wrap:nowrap; /* 关键：强制不换行，防止导航被挤上去 */
-      gap:1rem;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      width:100%;
+      flex-wrap:nowrap; /* 强制不换行 */
     }
     .logo {
-      font-size:1.5rem; font-weight:bold; color:var(--brand-silver);
-      display:flex; align-items:center; gap:8px; white-space:nowrap;
-      flex-shrink:0; /* logo不收缩 */
+      font-size:1.5rem;
+      font-weight:bold;
+      color:var(--brand-silver);
+      display:flex;
+      align-items:center;
+      gap:8px;
+      white-space:nowrap;
+      flex-shrink:0; /* 关键：Logo不缩小 */
     }
     .logo img {
-      background:transparent !important; border:none !important; outline:none !important;
-      box-shadow:none !important; filter:none !important; padding:0 !important; margin:0 !important;
-      height:40px !important; width:auto !important;
+      height:40px !important;
+      width:auto !important;
     }
-    /* 一级导航链接 全局固定样式 禁止变形 */
+
+    /* ========== 一级导航：禁止缩小、垂直居中 ========== */
     nav {
-      position: relative;
-      white-space: nowrap;
-      flex-shrink:1; /* 导航栏可收缩 */
-      text-align:right;
+      position:relative;
+      display:flex;
+      align-items:center;
+      height:100%;
     }
     nav a {
-      color:#ccc; text-decoration:none; margin-left:1.5rem;
-      transition:color 0.3s ease; white-space:nowrap;
+      color:#ccc;
+      text-decoration:none;
+      margin-left:1.5rem;
+      transition:color 0.3s ease;
+      white-space:nowrap;
       font-size:16px;
-      line-height:1;
-      display:inline-block;
+      line-height:var(--header-height); /* 强垂直居中 */
+      flex-shrink:0; /* 关键：文字不挤扁 */
+      min-width:fit-content;
+      display:inline-flex;
+      align-items:center;
     }
     nav a:hover { color:var(--brand-silver); }
 
-    /* ========== 手机端专用 只改下拉 不动一级导航排版 ========== */
+    /* ========== 手机端：微调间距，仍不挤压 ========== */
     @media (max-width:768px) {
-      /* 关键：手机端导航文字间距和字体缩小，防止溢出 */
-      nav a { 
-        margin-left:0.8rem; 
-        font-size:14px;
+      nav a {
+        margin-left:0.9rem;
+        font-size:15px;
       }
-      .slide-mask { padding-top: 60px; }
-
-      /* 下拉菜单绝对定位 不占文档流 不会撑变形导航 */
+      /* 下拉绝对定位，不占空间 */
       .products-dropdown {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 220px;
-        background: #fff;
-        box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-        z-index: 9999;
-        padding: 8px 0;
-        border-radius: 0 0 6px 6px;
-        opacity: 0;
-        transform: translateY(-5px);
-        transition: all 0.25s ease;
+        display:none;
+        position:absolute;
+        top:100%;
+        left:0;
+        width:220px;
+        background:#fff;
+        box-shadow:0 3px 10px rgba(0,0,0,0.15);
+        z-index:9999;
+        padding:8px 0;
+        border-radius:0 0 6px 6px;
+        opacity:0;
+        transform:translateY(-5px);
+        transition:all 0.25s ease;
       }
       .products-dropdown.show {
-        display: block;
-        opacity: 1;
-        transform: translateY(0);
+        display:block;
+        opacity:1;
+        transform:translateY(0);
       }
       .products-dropdown > div,
       .products-dropdown a {
-        display: block;
-        padding: 11px 18px;
-        color: #333;
-        margin: 0;
-        text-decoration: none;
-        cursor: pointer;
-        font-size: 15px;
-        transition: background 0.2s ease;
+        display:block;
+        padding:11px 18px;
+        color:#333;
+        margin:0;
+        text-decoration:none;
+        cursor:pointer;
+        font-size:15px;
+        transition:background 0.2s ease;
       }
       .products-dropdown > div:hover,
       .products-dropdown a:hover {
-        background: #f5f5f5;
+        background:#f5f5f5;
       }
       .third-sub {
-        display: none;
-        background: #f8f8f8;
-        padding-left: 12px;
+        display:none;
+        background:#f8f8f8;
+        padding-left:12px;
       }
-      .third-sub.show {
-        display: block;
-      }
+      .third-sub.show { display:block; }
       .has-third {
-        position: relative;
+        position:relative;
       }
       .has-third::after {
-        content: "▼";
-        position: absolute;
-        right: 15px;
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 10px;
-        color: #666;
-        transition: transform 0.3s ease;
+        content:"▼";
+        position:absolute;
+        right:15px;
+        top:50%;
+        transform:translateY(-50%);
+        font-size:10px;
+        color:#666;
+        transition:transform 0.3s ease;
       }
       .has-third.active::after {
-        transform: translateY(-50%) rotate(180deg);
+        transform:translateY(-50%) rotate(180deg);
       }
     }
 
-    /* 电脑端强制隐藏手机下拉菜单 绝不影响布局 */
+    /* 电脑端强制隐藏下拉 */
     @media (min-width:769px) {
-      .products-dropdown {
-        display: none !important;
-      }
+      .products-dropdown { display:none !important; }
     }
 
+    /* 以下原有样式完全不动 */
     .mobile-cate{ display:none; }
     .page-wrap{ display:flex; gap:2rem; padding:1rem 0 2rem; }
     .side-left{
@@ -266,7 +274,6 @@
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
 
-      <!-- 手机下拉菜单 绝对定位 不挤压一级导航 -->
       <div class="products-dropdown">
         <div class="has-third">Belt Buckles</div>
         <div class="third-sub">
@@ -472,10 +479,8 @@
     if(e.target === lightbox) lightbox.classList.remove('show');
   });
 
-  // 仅手机端下拉菜单交互
   document.addEventListener('DOMContentLoaded', function(){
     if(window.innerWidth > 768) return;
-
     const productsNav = document.getElementById('productsNav');
     const dropdown = document.querySelector('.products-dropdown');
     const hasThird = document.querySelector('.has-third');
@@ -485,7 +490,6 @@
       e.preventDefault();
       dropdown.classList.toggle('show');
     });
-
     hasThird.addEventListener('click', function(e){
       e.preventDefault();
       thirdSub.classList.toggle('show');
@@ -493,7 +497,6 @@
     });
   });
 
-  // 切换分类关闭下拉
   function showCate(cate) {
     document.querySelectorAll('.cate-box').forEach(box => {
       box.style.display = 'none';
