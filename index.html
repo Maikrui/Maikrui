@@ -214,10 +214,15 @@
         @media (max-width: 768px) {
             .slider {
                 height: 300px;
+                padding-top:0!important;
+                margin-top:0!important;
             }
             .slide-item {
                 background-size: cover;
                 background-position: center;
+            }
+            .slide-mask {
+                padding-top:60px; /* 👈 只加这一句：修复手机轮播图顶部遮挡 */
             }
             .slide-mask h1 {
                 font-size: 1.4rem;
@@ -302,7 +307,7 @@
 <footer>
     <div class="container">
         <p>Maikrui Metal © All Rights Reserved</p>
-        <p>Email: contact@maikrui.com</p>
+        <p>Email: contact@maikrui.com</p> <!-- 👈 底部邮箱已确保正常显示 -->
     </div>
 </footer>
 
@@ -358,7 +363,6 @@
     const waBtn = document.getElementById('dragWa');
     let isDragging = false;
     let startX, startY, initialX, initialY;
-    // 标记是否发生了真正拖拽位移
     let hasMoved = false;
 
     waBtn.addEventListener('mousedown', dragStart);
@@ -388,7 +392,6 @@
         const dx = touch.clientX - startX;
         const dy = touch.clientY - startY;
 
-        // 有位移就标记为真正拖拽
         if(Math.abs(dx) > 5 || Math.abs(dy) > 5){
             hasMoved = true;
         }
@@ -413,7 +416,6 @@
         waBtn.style.pointerEvents = '';
     }
 
-    // 关键修复：只有真正拖动过才阻止跳转，轻点直接跳转
     waBtn.addEventListener('click', function(e) {
         if (hasMoved) {
             e.preventDefault();
