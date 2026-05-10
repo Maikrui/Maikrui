@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x32" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
   <title>Products | Maikrui Metal</title>
   <style>
     * { margin:0; padding:0; box-sizing:border-box; font-family:Arial,sans-serif; }
@@ -46,6 +50,10 @@
 
     @media (max-width:768px) {
       nav a { margin-left:0.8rem; }
+      /* 👈 手机端修复代码已加好 */
+      .slide-mask {
+        padding-top: 60px;
+      }
     }
 
     /* 原有样式保留 */
@@ -318,8 +326,12 @@
   <img src="">
 </div>
 
+<!-- 👈 底部邮箱已加上，和首页一样 -->
 <footer>
-  <div class="container">Maikrui Metal © All Rights Reserved</div>
+  <div class="container">
+    <p>Maikrui Metal © All Rights Reserved</p>
+    <p>Email: contact@maikrui.com</p>
+  </div>
 </footer>
 
 <script>
