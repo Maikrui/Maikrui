@@ -1,119 +1,238 @@
-<style>
-    *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
-    :root{--brand-dark-blue:#0A244B;--brand-silver:#E0E0E0;}
-
-    header{
-        background:var(--brand-dark-blue);
-        /* 固定导航栏高度，避免不同页面渲染高度不一致 */
-        height: 80px;
-        line-height: 80px;
-        padding: 0;
-        position:fixed;
-        top:0;
-        left:0;
-        width:100%;
-        z-index:999;
-        /* 强制防止抖动 */
-        overflow: hidden;
-    }
-    .container{
-        width:90%;
-        max-width:1100px;
-        margin:0 auto;
-        /* 容器高度和导航栏一致 */
-        height: 100%;
-    }
-    .header-inner{
-        display:flex;
-        /* 强制水平两端对齐，固定基准 */
-        justify-content: space-between;
-        align-items: center;
-        /* 取消wrap，避免小屏换行导致位置变化 */
-        flex-wrap: nowrap;
-        gap: 1rem;
-        /* 高度继承容器，确保对齐 */
-        height: 100%;
-    }
-
-    .logo{
-        font-size:1.5rem;
-        font-weight:bold;
-        color:var(--brand-silver);
-        display:flex;
-        align-items: center;
-        gap:8px;
-        white-space:nowrap;
-        /* 固定logo高度，避免图片加载导致偏移 */
-        height: 100%;
-        line-height: 80px;
-    }
-    .logo img{
-        height:40px;
-        width:auto;
-        /* 图片垂直居中 */
-        vertical-align: middle;
-    }
-
-    nav{
-        display:flex;
-        gap:1.2rem;
-        /* 固定导航容器高度，对齐基准 */
-        height: 100%;
-        align-items: center;
-    }
-    nav a{
-        color:#ccc;
-        text-decoration:none;
-        transition:0.3s;
-        white-space:nowrap;
-        font-size:1rem;
-        /* 关键：给所有导航项固定宽度，消除激活态加粗导致的宽度变化 */
-        display: inline-block;
-        width: 80px;
-        text-align: center;
-        /* 垂直居中 */
-        line-height: normal;
-    }
-    nav a:hover{color:var(--brand-silver);}
-    nav a.active{
-        color:#fff;
-        font-weight:bold;
-        /* 避免加粗后宽度变化，提前预留空间（替代方案：用边框/颜色区分激活态，而非加粗） */
-        /* 若不想固定宽度，可注释width:80px，改用此样式：
-        font-weight: normal;
-        border-bottom: 2px solid var(--brand-silver);
-        */
-    }
-
-    /* 手机自适应（仍保持布局一致性） */
-    @media(max-width:768px){
-        header{
-            height: auto;
-            line-height: normal;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x32" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+    <title>Maikrui Metal - Die Casting Hardware Manufacturer</title>
+<meta name="description" content="Maikrui Metal is a professional die casting hardware manufacturer, specializing in custom belt buckles, shoe buckles, and garment accessories. OEM/ODM service available.">
+    <meta name="description" content="Professional manufacturer of custom die-cast belt buckles and metal accessories. OEM/ODM service, factory direct price.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background: #f8f8f8;
+            color: #333;
+            line-height: 1.6;
+            padding-top: 65px;
+        }
+        :root {
+            --brand-dark-blue: #0A244B;
+            --brand-silver: #E0E0E0;
+            --brand-text-dark: #0A244B;
+        }
+        header {
+            background: var(--brand-dark-blue);
             padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
         }
-        .header-inner{
-            flex-direction:column;
-            text-align:center;
-            gap:0.8rem;
-            height: auto;
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
         }
-        .logo{
-            height: auto;
-            line-height: normal;
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
-        nav{
-            gap:1rem;
-            flex-wrap:wrap;
-            justify-content:center;
-            height: auto;
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--brand-silver);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
         }
-        nav a{
-            font-size:0.95rem;
-            width: 70px;
+        .logo img {
+            background: transparent !important;
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+            filter: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            height: 40px !important;
+            width: auto !important;
         }
-    }
-</style>
+        nav a {
+            color: #cccccc;
+            text-decoration: none;
+            margin-left: 1.5rem;
+            transition: color 0.3s ease;
+            white-space: nowrap;
+        }
+        nav a:hover {
+            color: var(--brand-silver);
+        }
+        .slider {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+            background: #f8f8f8;
+        }
+        .slide-item {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .slide-item.active {
+            opacity: 1;
+            z-index: 1;
+        }
+        .slide-mask {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 36, 75, 0.35);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-align: center;
+            padding: 0 20px;
+            z-index: 2;
+        }
+        .slide-mask h1 {
+            font-size: 2.4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000;
+        }
+        .slide-mask p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            color: #fff;
+            text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+        }
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3rem;
+            color: var(--brand-silver);
+            background: transparent;
+            padding: 0 15px;
+            cursor: pointer;
+            z-index: 10;
+            border: none;
+        }
+        .prev {left: 0;}
+        .next {right: 0;}
+        .slider-indicators {
+            position: absolute;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            display: flex;
+            gap: 8px;
+        }
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .indicator.active {
+            background: var(--brand-silver);
+        }
+        .advantages {
+            background: #ffffff;
+            padding: 4rem 0;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 2.5rem;
+            color: var(--brand-text-dark);
+        }
+        .advantage-items {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            text-align: center;
+        }
+        .advantage {
+            flex: 1;
+            min-width: 220px;
+        }
+        .advantage h3 {
+            color: var(--brand-text-dark);
+            margin-bottom: 0.5rem;
+        }
+        footer {
+            background: var(--brand-dark-blue);
+            color: var(--brand-silver);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+        .whatsapp-btn {
+            position: fixed;
+            right: 16px;
+            bottom: 32px;
+            background: #25D366;
+            color: white;
+            padding: 12px 16px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            z-index: 999;
+            cursor: grab;
+            user-select: none;
+            touch-action: none;
+        }
+        .whatsapp-btn:active {
+            cursor: grabbing;
+        }
+        @media (max-width: 768px) {
+            .slider {
+                height: 300px;
+            }
+            .slide-item {
+                background-size: cover;
+                background-position: center;
+            }
+            .slide-mask h1 {
+                font-size: 1.4rem;
+            }
+            .slide-mask p {
+                font-size: 0.9rem;
+                max-width: 90%;
+            }
+            nav a {
+                margin-left: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
 
 <header>
     <div class="container header-inner">
@@ -130,16 +249,176 @@
     </div>
 </header>
 
+<section class="slider">
+    <div class="slide-item active" style="background-image: url('banner1.jpg');">
+        <div class="slide-mask">
+            <h1>Professional Die Casting Hardware Manufacturer</h1>
+            <p>30+ years integrated garment hardware factory, custom belt buckles & garment hardware solutions.</p>
+        </div>
+    </div>
+    <div class="slide-item" style="background-image: url('banner2.jpg');">
+        <div class="slide-mask">
+            <h1>OEM & ODM Custom Service</h1>
+            <p>Zinc alloy die casting, spin casting, lost wax casting and full finishing support.</p>
+        </div>
+    </div>
+    <div class="slide-item" style="background-image: url('banner3.jpg');">
+        <div class="slide-mask">
+            <h1>Factory Direct Supply</h1>
+            <p>Stable quality, competitive price, one-stop service for global buyers.</p>
+        </div>
+    </div>
+
+    <button class="prev" onclick="prevSlide()">&#10094;</button>
+    <button class="next" onclick="nextSlide()">&#10095;</button>
+
+    <div class="slider-indicators">
+        <span class="indicator active" onclick="goToSlide(0)"></span>
+        <span class="indicator" onclick="goToSlide(1)"></span>
+        <span class="indicator" onclick="goToSlide(2)"></span>
+    </div>
+</section>
+
+<section class="advantages">
+    <div class="container">
+        <h2 class="section-title">Why Choose Us</h2>
+        <div class="advantage-items">
+            <div class="advantage">
+                <h3>Factory Direct</h3>
+                <p>Competitive price without middleman</p>
+            </div>
+            <div class="advantage">
+                <h3>Custom Design</h3>
+                <p>OEM & ODM service available</p>
+            </div>
+            <div class="advantage">
+                <h3>Strict QC</h3>
+                <p>Each piece checked before shipment</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>Maikrui Metal © All Rights Reserved</p>
+        <p>Email: contact@maikrui.com</p>
+    </div>
+</footer>
+
+<a href="https://api.whatsapp.com/send?phone=8615980009534&text=Hello,%20I%20am%20interested%20in%20your%20hardware%20products." target="_blank" class="whatsapp-btn" id="dragWa">WhatsApp Us</a>
+
 <script>
-// 优化激活态逻辑：确保页面加载完成后再执行，避免渲染偏差
-window.addEventListener('DOMContentLoaded', function() {
-    const currentPage = window.location.pathname.split("/").pop() || 'index.html';
-    const navLinks = document.querySelectorAll("nav a");
-    navLinks.forEach(link => {
-        link.classList.remove("active");
-        if (link.getAttribute("href") === currentPage) {
-            link.classList.add("active");
+    let slides = document.querySelectorAll('.slide-item');
+    let indicators = document.querySelectorAll('.indicator');
+    let current = 0;
+    let interval;
+
+    function updateIndicators() {
+        indicators.forEach((dot, i) => {
+            dot.classList.toggle('active', i === current);
+        });
+    }
+
+    function showSlide(index){
+        slides.forEach(item => item.classList.remove('active'));
+        current = (index + slides.length) % slides.length;
+        slides[current].classList.add('active');
+        updateIndicators();
+    }
+
+    function prevSlide(){
+        showSlide(current - 1);
+    }
+    function nextSlide(){
+        showSlide(current + 1);
+    }
+    function goToSlide(index){
+        showSlide(index);
+        resetInterval();
+    }
+
+    function startInterval(){
+        interval = setInterval(nextSlide, 5000);
+    }
+    function resetInterval(){
+        clearInterval(interval);
+        startInterval();
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        showSlide(0);
+        startInterval();
+    });
+
+    const slider = document.querySelector('.slider');
+    slider.addEventListener('mouseenter', () => clearInterval(interval));
+    slider.addEventListener('mouseleave', () => startInterval());
+
+    const waBtn = document.getElementById('dragWa');
+    let isDragging = false;
+    let startX, startY, initialX, initialY;
+    // 标记是否发生了真正拖拽位移
+    let hasMoved = false;
+
+    waBtn.addEventListener('mousedown', dragStart);
+    waBtn.addEventListener('touchstart', dragStart, { passive: false });
+    document.addEventListener('mousemove', dragMove);
+    document.addEventListener('touchmove', dragMove, { passive: false });
+    document.addEventListener('mouseup', dragEnd);
+    document.addEventListener('touchend', dragEnd);
+
+    function dragStart(e) {
+        isDragging = true;
+        hasMoved = false;
+        const touch = e.touches ? e.touches[0] : e;
+        startX = touch.clientX;
+        startY = touch.clientY;
+        const rect = waBtn.getBoundingClientRect();
+        initialX = rect.left;
+        initialY = rect.top;
+        waBtn.style.transition = 'none';
+        waBtn.style.pointerEvents = 'none';
+    }
+
+    function dragMove(e) {
+        if (!isDragging) return;
+        e.preventDefault();
+        const touch = e.touches ? e.touches[0] : e;
+        const dx = touch.clientX - startX;
+        const dy = touch.clientY - startY;
+
+        // 有位移就标记为真正拖拽
+        if(Math.abs(dx) > 5 || Math.abs(dy) > 5){
+            hasMoved = true;
+        }
+
+        let newX = initialX + dx;
+        let newY = initialY + dy;
+
+        const maxX = window.innerWidth - waBtn.offsetWidth;
+        const maxY = window.innerHeight - waBtn.offsetHeight;
+        newX = Math.max(0, Math.min(newX, maxX));
+        newY = Math.max(0, Math.min(newY, maxY));
+
+        waBtn.style.left = newX + 'px';
+        waBtn.style.top = newY + 'px';
+        waBtn.style.right = 'auto';
+        waBtn.style.bottom = 'auto';
+    }
+
+    function dragEnd() {
+        isDragging = false;
+        waBtn.style.transition = '';
+        waBtn.style.pointerEvents = '';
+    }
+
+    // 关键修复：只有真正拖动过才阻止跳转，轻点直接跳转
+    waBtn.addEventListener('click', function(e) {
+        if (hasMoved) {
+            e.preventDefault();
         }
     });
-});
 </script>
+</body>
+</html>
