@@ -204,12 +204,6 @@
             text-decoration: none;
             font-weight: bold;
             z-index: 999;
-            cursor: grab;
-            user-select: none;
-            touch-action: none;
-        }
-        .whatsapp-btn:active {
-            cursor: grabbing;
         }
         @media (max-width: 768px) {
             .slider {
@@ -311,14 +305,7 @@
     </div>
 </footer>
 
-<!-- 👇 修复版 WhatsApp 按钮：格式+兼容+拖拽不冲突 -->
-<a href="https://wa.me/8615980009534?text=Hello,%20I'm%20interested%20in%20your%20hardware%20products." 
-   target="_blank" 
-   rel="noopener noreferrer" 
-   class="whatsapp-btn" 
-   id="dragWa">
-   WhatsApp Us
-</a>
+<a href="https://wa.me/8615980009534?text=Hello,%20I'm%20interested%20in%20your%20hardware%20products." target="_blank" class="whatsapp-btn">WhatsApp Us</a>
 
 <script>
     let slides = document.querySelectorAll('.slide-item');
@@ -366,70 +353,6 @@
     const slider = document.querySelector('.slider');
     slider.addEventListener('mouseenter', () => clearInterval(interval));
     slider.addEventListener('mouseleave', () => startInterval());
-
-    const waBtn = document.getElementById('dragWa');
-    let isDragging = false;
-    let startX, startY, initialX, initialY;
-    let hasMoved = false;
-
-    waBtn.addEventListener('mousedown', dragStart);
-    waBtn.addEventListener('touchstart', dragStart, { passive: false });
-    document.addEventListener('mousemove', dragMove);
-    document.addEventListener('touchmove', dragMove, { passive: false });
-    document.addEventListener('mouseup', dragEnd);
-    document.addEventListener('touchend', dragEnd);
-
-    function dragStart(e) {
-        isDragging = true;
-        hasMoved = false;
-        const touch = e.touches ? e.touches[0] : e;
-        startX = touch.clientX;
-        startY = touch.clientY;
-        const rect = waBtn.getBoundingClientRect();
-        initialX = rect.left;
-        initialY = rect.top;
-        waBtn.style.transition = 'none';
-        waBtn.style.pointerEvents = 'none';
-    }
-
-    function dragMove(e) {
-        if (!isDragging) return;
-        e.preventDefault();
-        const touch = e.touches ? e.touches[0] : e;
-        const dx = touch.clientX - startX;
-        const dy = touch.clientY - startY;
-
-        if(Math.abs(dx) > 5 || Math.abs(dy) > 5){
-            hasMoved = true;
-        }
-
-        let newX = initialX + dx;
-        let newY = initialY + dy;
-
-        const maxX = window.innerWidth - waBtn.offsetWidth;
-        const maxY = window.innerHeight - waBtn.offsetHeight;
-        newX = Math.max(0, Math.min(newX, maxX));
-        newY = Math.max(0, Math.min(newY, maxY));
-
-        waBtn.style.left = newX + 'px';
-        waBtn.style.top = newY + 'px';
-        waBtn.style.right = 'auto';
-        waBtn.style.bottom = 'auto';
-    }
-
-    function dragEnd() {
-        isDragging = false;
-        waBtn.style.transition = '';
-        waBtn.style.pointerEvents = '';
-    }
-
-    // 修复：只有真正拖动才阻止跳转，轻点击正常跳转
-    waBtn.addEventListener('click', function(e) {
-        if (hasMoved) {
-            e.preventDefault();
-            hasMoved = false;
-        }
-    });
 </script>
 </body>
 </html>
