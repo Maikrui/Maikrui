@@ -7,14 +7,14 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="manifest" href="/site.webmanifest">
-  <!-- 谷歌SEO 新名称识别代码 开始 -->
-  <meta name="description" content="Maikrui Metal - Professional manufacturer of belt buckles, shoe accessories, rivets & eyelets. Custom metal hardware for garments and leather goods.">
-  <meta name="keywords" content="Maikrui Metal, belt buckles, zinc alloy buckles, stainless steel buckles, brass buckles, shoe accessories, rivets, eyelets">
+  <!-- 谷歌SEO 新品牌名识别代码 开始 -->
+  <meta name="description" content="Maikrui Metal - Professional manufacturer of belt buckles, shoe accessories, garment hardware, metal rivets & eyelets.">
+  <meta name="keywords" content="Maikrui Metal, belt buckles, zinc alloy buckles, stainless steel buckles, brass buckles, shoe buckles, garment hardware, rivets, eyelets">
   <meta property="og:title" content="Products | Maikrui Metal">
-  <meta property="og:description" content="Maikrui Metal provides high-quality custom metal hardware including belt buckles, shoe accessories, rivets and eyelets.">
+  <meta property="og:description" content="Maikrui Metal provides high-quality custom metal hardware including belt buckles, shoe accessories, garment hardware, rivets & eyelets.">
   <meta property="og:site_name" content="Maikrui Metal">
   <meta name="robots" content="index, follow">
-  <!-- 谷歌SEO 新名称识别代码 结束 -->
+  <!-- 谷歌SEO 新品牌名识别代码 结束 -->
   <title>Products | Maikrui Metal</title>
   <style>
     * { margin:0; padding:0; box-sizing:border-box; font-family:Arial,sans-serif; }
@@ -211,7 +211,7 @@
     }
     .overlay {
       position:fixed; top:0; left:0; width:100%; height:100%;
-      background:rgba(0,0,0,0.6); z-index:199; opacity:0; visibility:hidden;
+      background:rgba(0,0,0.6); z-index:199; opacity:0; visibility:hidden;
       transition:all 0.3s ease;
     }
     .overlay.show {
@@ -284,17 +284,15 @@
       <a href="contact.html">Contact</a>
     </nav>
 
-    <!-- 手机端 二级横向滑动导航 -->
     <div class="second-level-nav" id="secondLevelNav">
       <div class="scroll-wrap">
         <div class="scroll-items">
           <a href="javascript:void(0)" class="level2-item active" data-target="belt-buckles">Belt Buckles</a>
           <a href="javascript:void(0)" class="level2-item" data-target="shoe-accessories">Shoe Accessories</a>
-          <a href="javascript:void(0)" class="level2-item" data-target="rivets">Rivets & Eyelets</a>
+          <a href="javascript:void(0)" class="level2-item" data-target="rivets">Garment Hardware</a>
         </div>
       </div>
 
-      <!-- 三级导航：Belt Buckles -->
       <div class="third-level-wrap show" id="belt-buckles">
         <div class="third-level-items">
           <a href="javascript:showCate('zinc')">Zinc Alloy Buckles</a>
@@ -303,17 +301,15 @@
         </div>
       </div>
 
-      <!-- 三级导航：Shoe Accessories -->
       <div class="third-level-wrap" id="shoe-accessories">
         <div class="third-level-items">
           <a href="javascript:showCate('shoe-buckle')">Shoe Buckles</a>
         </div>
       </div>
 
-      <!-- 三级导航：Rivets & Eyelets -->
       <div class="third-level-wrap" id="rivets">
         <div class="third-level-items">
-          <a href="javascript:showCate('rivet')">Rivets & Eyelets</a>
+          <a href="javascript:showCate('rivet')">Metal Rivets & Eyelets</a>
         </div>
       </div>
     </div>
@@ -337,7 +333,7 @@
         <li><span class="cate-link" data-cate="shoe-buckle">Shoe Buckles</span></li>
 
         <li class="cate-title">Garment Hardware</li>
-        <li><span class="cate-link" data-cate="rivet">Rivets & Eyelets</span></li>
+        <li><span class="cate-link" data-cate="rivet">Metal Rivets & Eyelets</span></li>
       </ul>
     </div>
 
@@ -475,7 +471,22 @@
         </div>
       </div>
 
-      <div class="cate-box" id="rivet" style="display:none;"><h1>Rivets & Eyelets</h1><p>Coming soon...</p></div>
+      <div class="cate-box" id="rivet" style="display:none;">
+        <h1>Garment Hardware</h1>
+        <div class="product">
+          <div class="product-row">
+            <div class="product-text">
+              <h2>Metal Rivets & Eyelets</h2>
+              <p>Various stainless steel and electroplated metal rivets, eyelets and garment hardware. Multiple sizes and plating colors available for bags, shoes and clothing accessories. Contact us for catalog & price</p>
+            </div>
+            <div class="product-img">
+              <div class="img-big"><img src="rv1-1.jpg"></div>
+              <div class="img-sm"><img src="rv1-2.jpg"></div>
+              <div class="img-sm"><img src="rv1-3.jpg"></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -542,31 +553,24 @@
     if(e.target === lightbox) lightbox.classList.remove('show');
   });
 
-  // ========== 手机端 Products 点击显示/隐藏二级导航 ==========
   document.addEventListener('DOMContentLoaded', function(){
     const productsNav = document.getElementById('productsNav');
     const secondLevelNav = document.getElementById('secondLevelNav');
     const level2Items = document.querySelectorAll('.level2-item');
     const thirdLevelWraps = document.querySelectorAll('.third-level-wrap');
 
-    // 点击一级导航 Products 显示/隐藏二级导航
     productsNav.addEventListener('click', function(e){
       if(window.innerWidth > 768) return;
       e.preventDefault();
       secondLevelNav.classList.toggle('show');
     });
 
-    // 点击二级导航项，切换三级导航
     level2Items.forEach(item => {
       item.addEventListener('click', function(e){
         e.preventDefault();
         const targetId = this.dataset.target;
-
-        // 切换二级导航选中状态
         level2Items.forEach(i => i.classList.remove('active'));
         this.classList.add('active');
-
-        // 显示对应的三级导航
         thirdLevelWraps.forEach(wrap => {
           wrap.classList.remove('show');
         });
@@ -575,7 +579,6 @@
     });
   });
 
-  // 切换分类并关闭导航
   function showCate(cate) {
     document.querySelectorAll('.cate-box').forEach(box => box.style.display = 'none');
     document.getElementById(cate).style.display = 'block';
@@ -583,8 +586,6 @@
       link.classList.remove('active');
       if(link.dataset.cate === cate) link.classList.add('active');
     });
-
-    // 手机端：点击三级选项后，关闭二级导航
     if(window.innerWidth <= 768){
       document.getElementById('secondLevelNav').classList.remove('show');
     }
