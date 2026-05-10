@@ -7,30 +7,102 @@
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
         :root{--brand-dark-blue:#0A244B;--brand-silver:#E0E0E0;}
-        body{background:#f8f8f8;padding-top:70px;}
-        .container{width:90%;max-width:1100px;margin:0 auto;}
+        
+        /* 头部样式整合（解决导航栏固定导致轮播图被遮挡+布局抖动问题） */
+        header{
+            background:var(--brand-dark-blue);
+            height: 80px;
+            line-height: 80px;
+            padding: 0;
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            z-index:999;
+            overflow: hidden;
+        }
+        .container{
+            width:90%;
+            max-width:1100px;
+            margin:0 auto;
+            height: 100%;
+        }
+        .header-inner{
+            display:flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: nowrap;
+            gap: 1rem;
+            height: 100%;
+        }
+        .logo{
+            font-size:1.5rem;
+            font-weight:bold;
+            color:var(--brand-silver);
+            display:flex;
+            align-items: center;
+            gap:8px;
+            white-space:nowrap;
+            height: 100%;
+            line-height: 80px;
+        }
+        .logo img{
+            height:40px;
+            width:auto;
+            vertical-align: middle;
+        }
+        nav{
+            display:flex;
+            gap:1.2rem;
+            height: 100%;
+            align-items: center;
+        }
+        nav a{
+            color:#ccc;
+            text-decoration:none;
+            transition:0.3s;
+            white-space:nowrap;
+            font-size:1rem;
+            display: inline-block;
+            width: 80px;
+            text-align: center;
+            line-height: normal;
+        }
+        nav a:hover{color:var(--brand-silver);}
+        nav a.active{
+            color:#fff;
+            font-weight:bold;
+        }
 
-        /* 轮播容器修改：使用aspect-ratio保证自适应比例，同时设置最小/最大高度 */
+        /* 核心修复：页面body间距适配头部高度（原70px适配旧导航，现改为80px） */
+        body{background:#f8f8f8;padding-top:80px;}
+        
+        /* 轮播图样式重构（解决电脑端/手机端尺寸问题） */
         .slider{
             position:relative;
             width:100%;
-            /* 核心：用aspect-ratio替代固定height，保证宽高比自适应 */
+            /* 电脑端核心：固定宽高比+合理的最大高度，同时消除滚动条 */
             aspect-ratio: 16/9; 
-            min-height: 280px; /* 移动端最小高度 */
-            max-height: 600px; /* 电脑端最大高度 */
+            min-height: 320px;   /* 提升电脑端最小高度，避免过窄 */
+            max-height: 650px;   /* 电脑端最大高度适配主流屏幕 */
             background:#f8f8f8;
             overflow:hidden;
+            /* 防止轮播图溢出 */
+            margin: 0 auto;
         }
         .slide-item{
             position:absolute;
+            top:0;
+            left:0;
             width:100%;
             height:100%;
             opacity:0;
             transition:opacity 1s ease;
-            /* 关键：背景图片不平铺 + 覆盖容器 + 居中，保证自适应 */
-            background-size: cover;    /* 覆盖容器，保持比例 */
-            background-position: center; /* 居中显示 */
-            background-repeat: no-repeat; /* 禁止平铺 */
+            background-size: cover;    
+            background-position: center; 
+            background-repeat: no-repeat;
+            /* 强制继承父容器尺寸，避免错位 */
+            min-height: 100%;
         }
         .slide-item.active{opacity:1;}
         .slide-mask{
@@ -47,67 +119,141 @@
             color:#fff;
             text-align:center;
             padding:0 20px;
+            /* 确保遮罩层完全覆盖轮播项 */
+            z-index: 1;
         }
-        .slide-mask h1{font-size:2.4rem;margin-bottom:1rem;text-shadow:1px 1px #000;}
+        .slide-mask h1{font-size:2.8rem;margin-bottom:1rem;text-shadow:1px 1px #000;}
         .prev,.next{
             position:absolute;
             top:50%;
             transform:translateY(-50%);
-            font-size:2rem;
+            font-size:2.2rem;
             color:#fff;
             background:none;
             border:none;
             cursor:pointer;
             z-index:10;
             padding:0 15px;
-            /* 优化按钮点击区域 */
-            width: 60px;
-            height: 60px;
+            width: 70px;
+            height: 70px;
             display: flex;
             align-items: center;
             justify-content: center;
+            /* 优化按钮点击体验，增加半透明背景 */
+            background-color: rgba(0,0,0,0.2);
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
         }
-        .prev{left:0;}.next{right:0;}
+        .prev:hover, .next:hover{
+            background-color: rgba(0,0,0,0.4);
+        }
+        .prev{left:15px;}
+        .next{right:15px;}
 
         .advantages{background:#fff;padding:4rem 0;text-align:center;}
         .section-title{font-size:1.8rem;margin-bottom:2rem;color:var(--brand-dark-blue);}
         .advantage-items{display:flex;flex-wrap:wrap;gap:2rem;justify-content:center;}
         .advantage{min-width:220px;}
 
-        /* 响应式优化：不同屏幕尺寸微调轮播比例和文字大小 */
+        /* 手机端响应式修复（768px以下） */
         @media (max-width:768px){
-            .slider{
-                aspect-ratio: 4/3; /* 移动端调整宽高比更适配 */
-                max-height: 400px;
+            /* 头部移动端适配 */
+            header{
+                height: auto;
+                line-height: normal;
+                padding: 1rem 0;
             }
-            .slide-mask h1{font-size:1.4rem;}
+            .header-inner{
+                flex-direction:column;
+                text-align:center;
+                gap:0.8rem;
+                height: auto;
+            }
+            .logo{
+                height: auto;
+                line-height: normal;
+            }
+            nav{
+                gap:1rem;
+                flex-wrap:wrap;
+                justify-content:center;
+                height: auto;
+            }
+            nav a{
+                font-size:0.95rem;
+                width: 70px;
+            }
+            
+            /* 轮播图移动端核心修复 */
+            body{
+                padding-top: 0; /* 移动端头部高度自适应，取消固定top padding */
+                padding-top: calc(100% - 90vh); /* 动态适配头部高度 */
+            }
+            .slider{
+                aspect-ratio: 4/3; /* 移动端更合理的宽高比 */
+                min-height: 260px;  /* 提升移动端最小高度，避免内容挤压 */
+                max-height: 420px;  /* 限制移动端最大高度 */
+            }
+            .slide-mask h1{font-size:1.6rem;}
             .prev, .next{
-                font-size:1.5rem;
-                width: 40px;
-                height: 40px;
+                font-size:1.6rem;
+                width: 50px;
+                height: 50px;
+                left: 10px;
+                right: 10px;
             }
         }
-        /* 小屏手机额外适配 */
+        
+        /* 小屏手机额外适配（480px以下） */
         @media (max-width:480px){
             .slider{
-                min-height: 240px;
+                min-height: 220px;
+                max-height: 380px;
             }
-            .slide-mask h1{font-size:1.2rem;}
+            .slide-mask h1{font-size:1.3rem;}
+            .prev, .next{
+                width: 40px;
+                height: 40px;
+                font-size: 1.4rem;
+            }
         }
     </style>
 </head>
 <body>
 
-<!-- 引入顶部 -->
-<div id="top"></div>
+<!-- 头部直接整合（替代原fetch加载，避免异步加载导致布局偏移） -->
+<header>
+    <div class="container header-inner">
+        <div class="logo">
+            <img src="logo.png" alt="Logo">
+            Maikrui Metal
+        </div>
+        <nav>
+            <a href="index.html" class="active">Home</a>
+            <a href="products.html">Products</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </div>
+</header>
 
+<!-- 轮播图区域 -->
 <section class="slider">
-    <div class="slide-item active" style="background-image:url(banner1.jpg)"><div class="slide-mask"><h1>Professional Die Casting Hardware Manufacturer</h1></div></div>
-    <div class="slide-item" style="background-image:url(banner2.jpg)"><div class="slide-mask"><h1>OEM & ODM Custom Service</h1></div></div>
+    <div class="slide-item active" style="background-image:url(banner1.jpg)">
+        <div class="slide-mask">
+            <h1>Professional Die Casting Hardware Manufacturer</h1>
+        </div>
+    </div>
+    <div class="slide-item" style="background-image:url(banner2.jpg)">
+        <div class="slide-mask">
+            <h1>OEM & ODM Custom Service</h1>
+        </div>
+    </div>
     <button class="prev" onclick="prevSlide()">&#10094;</button>
     <button class="next" onclick="nextSlide()">&#10095;</button>
 </section>
 
+<!-- 优势区域 -->
 <section class="advantages">
     <div class="container">
         <h2 class="section-title">Why Choose Us</h2>
@@ -119,20 +265,33 @@
     </div>
 </section>
 
-<!-- 引入底部 -->
+<!-- 底部区域 -->
 <div id="bottom"></div>
 
 <script>
-    // 加载头部底部
-    fetch('top.html').then(res=>res.text()).then(data=>document.getElementById('top').innerHTML=data);
+    // 加载底部（保留原逻辑）
     fetch('bottom.html').then(res=>res.text()).then(data=>document.getElementById('bottom').innerHTML=data);
 
-    // 轮播图自动5秒切换
+    // 头部激活态逻辑
+    window.addEventListener('DOMContentLoaded', function() {
+        const currentPage = window.location.pathname.split("/").pop() || 'index.html';
+        const navLinks = document.querySelectorAll("nav a");
+        navLinks.forEach(link => {
+            link.classList.remove("active");
+            if (link.getAttribute("href") === currentPage) {
+                link.classList.add("active");
+            }
+        });
+    });
+
+    // 轮播图逻辑（优化稳定性）
     let slides = document.querySelectorAll('.slide-item');
     let current = 0;
     let interval;
 
     function showSlide(index) {
+        // 防呆处理：确保slides存在
+        if (!slides.length) return;
         slides.forEach(s => s.classList.remove('active'));
         current = (index + slides.length) % slides.length;
         slides[current].classList.add('active');
@@ -157,10 +316,17 @@
         startAutoSlide();
     }
 
-    // 页面加载后自动开始
+    // 页面加载后初始化轮播
     document.addEventListener('DOMContentLoaded', function() {
         showSlide(0);
         startAutoSlide();
+        
+        // 窗口大小变化时重新计算轮播尺寸（修复自适应失效问题）
+        window.addEventListener('resize', function() {
+            const slider = document.querySelector('.slider');
+            slider.style.height = 'auto'; // 重置高度
+            slider.style.height = slider.offsetWidth * (window.innerWidth > 768 ? 9/16 : 3/4) + 'px';
+        });
     });
 </script>
 
