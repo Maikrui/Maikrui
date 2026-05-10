@@ -47,21 +47,23 @@
     }
     nav a:hover { color:var(--brand-silver); }
 
-    /* ========== 手机端箭头提示样式 ========== */
+    /* ========== 手机端箭头提示样式（已加粗醒目） ========== */
     @media (max-width:768px) {
       /* 一级Products下拉箭头 */
       #productsNav::after {
         content:" ▾";
-        font-size:12px;
+        font-size: 16px;
         margin-left:4px;
-        color:#ccc;
+        color: #ffffff;
+        font-weight: bold;
       }
       /* 二级导航每项右侧箭头，提示有三级 */
       .level2-item::after {
         content:" ▾";
-        font-size:11px;
+        font-size: 14px;
         margin-left:6px;
-        color:#999;
+        color: var(--brand-dark-blue);
+        font-weight: bold;
       }
     }
 
