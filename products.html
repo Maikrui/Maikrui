@@ -15,7 +15,7 @@
       --brand-text-dark:#0A244B;
     }
 
-    /* 顶部导航（完全不动） */
+    /* 顶部导航 完全原封不动 */
     header {
       background:var(--brand-dark-blue);
       padding:1rem 0;
@@ -48,7 +48,7 @@
       nav a { margin-left:0.8rem; }
     }
 
-    /* 原有样式保留 */
+    /* 原有样式 完全不动 */
     .page-wrap{ display:flex; gap:2rem; padding:1rem 0 2rem; }
     .side-left{
       width:230px; background:#fff; padding:1rem; border-radius:6px;
@@ -99,49 +99,42 @@
       background:var(--active-color); color:#fff; text-align:center; padding:2rem 0; margin-top:2rem;
     }
 
-    /* 新增：手机端折叠按钮 */
-    .mobile-toggle-btn {
+    /* 只新增这部分：手机端折叠导航 */
+    .mobile-nav-btn {
       display: none;
       width: 100%;
+      padding: 10px;
       background: #fff;
       border: 1px solid #eee;
       border-radius: 6px;
-      padding: 12px 15px;
       font-size: 15px;
       color: var(--brand-dark-blue);
       text-align: center;
       cursor: pointer;
       margin: 10px 0;
     }
-    .mobile-toggle-btn::after {
-      content: " ▼";
-    }
-    .mobile-toggle-btn.open::after {
-      content: " ▲";
-    }
 
     @media (max-width:768px) {
-      /* 手机端：显示按钮，隐藏菜单 */
-      .mobile-toggle-btn {
+      .mobile-nav-btn {
         display: block;
       }
       .side-left {
         width: 100%;
         display: none;
-        padding: 1rem;
+        padding: 0.8rem;
         margin-bottom: 1rem;
       }
       .side-left.open {
         display: block;
       }
-      /* 手机端二级导航文字缩小，紧凑显示 */
+      /* 手机端导航紧凑显示 */
       .side-left .cate-title {
         font-size: 14px;
-        padding: 0.5rem;
+        padding: 0.4rem;
       }
       .side-left .cate-link {
-        font-size: 14px;
-        padding: 0.5rem;
+        font-size: 13px;
+        padding: 0.4rem;
       }
       .page-wrap {
         flex-direction:column;
@@ -175,11 +168,11 @@
 </header>
 
 <div class="container">
-  <!-- 手机端折叠按钮 -->
-  <button class="mobile-toggle-btn" id="toggleBtn">☰ Product Categories</button>
+  <!-- 手机端提醒按钮 -->
+  <button class="mobile-nav-btn" id="navBtn">☰ Product Categories</button>
 
   <!-- 二级导航 -->
-  <div class="side-left" id="categoryMenu">
+  <div class="side-left" id="cateNav">
     <ul>
       <li class="cate-title">Belt Buckles</li>
       <li><span class="cate-link active" data-cate="zinc">Zinc Alloy Buckles</span></li>
@@ -312,54 +305,46 @@
 </footer>
 
 <script>
-  // 折叠/展开逻辑
-  const toggleBtn = document.getElementById('toggleBtn');
-  const categoryMenu = document.getElementById('categoryMenu');
+  // 折叠/展开
+  const navBtn = document.getElementById('navBtn');
+  const cateNav = document.getElementById('cateNav');
+  navBtn.onclick = function() {
+    cateNav.classList.toggle('open');
+  };
 
-  toggleBtn.addEventListener('click', () => {
-    categoryMenu.classList.toggle('open');
-    toggleBtn.classList.toggle('open');
-  });
-
-  // 分类切换逻辑
+  // 分类切换
   const cateLinks = document.querySelectorAll('.cate-link');
   const cateBoxes = document.querySelectorAll('.cate-box');
   cateLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      const target = link.dataset.cate;
+    link.onclick = function() {
+      const target = this.dataset.cate;
       if (!target) return;
 
-      // 更新选中状态
       cateLinks.forEach(el => el.classList.remove('active'));
-      link.classList.add('active');
+      this.classList.add('active');
 
-      
-      // 切换显示内容
       cateBoxes.forEach(box => box.style.display = 'none');
       document.getElementById(target).style.display = 'block';
 
-      // 手机端点击后自动收起菜单
+      // 手机端点击后自动收起
       if (window.innerWidth <= 768) {
-        categoryMenu.classList.remove('open');
-        toggleBtn.classList.remove('open');
+        cateNav.classList.remove('open');
       }
-    });
+    };
   });
 
-  // 图片灯箱逻辑
+  // 灯箱
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = lightbox.querySelector('img');
   const closeBtn = lightbox.querySelector('.close');
   document.querySelectorAll('.product-img img').forEach(img => {
-    img.addEventListener('click', () => {
-      lightboxImg.src = img.src;
+    img.onclick = function() {
+      lightboxImg.src = this.src;
       lightbox.classList.add('show');
-    });
+    };
   });
-  closeBtn.addEventListener('click', () => lightbox.classList.remove('show'));
-  lightbox.addEventListener('click', (e) => {
-    if (e.target === lightbox) lightbox.classList.remove('show');
-  });
+  closeBtn.onclick = () => lightbox.classList.remove('show');
+  lightbox.onclick = e => { if (e.target === lightbox) lightbox.classList.remove('show'); };
 </script>
 </body>
 </html>
