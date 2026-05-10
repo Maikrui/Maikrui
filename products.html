@@ -47,6 +47,24 @@
     }
     nav a:hover { color:var(--brand-silver); }
 
+    /* ========== 手机端箭头提示样式 ========== */
+    @media (max-width:768px) {
+      /* 一级Products下拉箭头 */
+      #productsNav::after {
+        content:" ▾";
+        font-size:12px;
+        margin-left:4px;
+        color:#ccc;
+      }
+      /* 二级导航每项右侧箭头，提示有三级 */
+      .level2-item::after {
+        content:" ▾";
+        font-size:11px;
+        margin-left:6px;
+        color:#999;
+      }
+    }
+
     /* ================== 手机端 二级横向滑动导航 ================== */
     .second-level-nav {
       display: none;
@@ -83,7 +101,6 @@
       padding: 4px 0;
       font-weight: 500;
     }
-    .scroll-items a:active,
     .scroll-items a.active {
       color: #0056b3;
       border-bottom: 2px solid #0056b3;
