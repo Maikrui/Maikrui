@@ -2,33 +2,26 @@
     *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
     :root{--brand-dark-blue:#0A244B;--brand-silver:#E0E0E0;}
 
-    html, body {
-        height: 100%;
-        margin: 0;
-    }
-    body {
-        display: flex;
-        flex-direction: column;
-    }
+    html,body{height:100%;}
+    body{display:flex;flex-direction:column;}
+
     .container{
         width:90%;
         max-width:1100px;
         margin:0 auto;
     }
-
     footer{
         background:var(--brand-dark-blue);
         color:var(--brand-silver);
         text-align:center;
         padding:2rem 1rem;
-        margin-top: auto;
-        width: 100%;
+        margin-top:auto;
+        width:100%;
     }
     footer p{
         margin:6px 0;
         font-size:1rem;
     }
-
     .whatsapp-btn{
         position:fixed;
         right:16px;
@@ -41,9 +34,8 @@
         font-size:14px;
         z-index:99;
         cursor:move;
-        user-select: none;
+        user-select:none;
     }
-
     @media(max-width:768px){
         footer p{font-size:0.9rem;}
     }
@@ -56,13 +48,11 @@
     </div>
 </footer>
 
-<a href="https://api.whatsapp.com/send?phone=8615980009534" class="whatsapp-btn" id="wa">WhatsApp Us</a>
+<a href="https://api.whatsapp.com/send?phone=861598009534" class="whatsapp-btn" id="wa">WhatsApp Us</a>
 
 <script>
-// 仅实现可拖动，不改动任何其他内容
-let btn = document.getElementById("wa");
-let isDrag = false;
-let ox, oy;
+const btn = document.getElementById("wa");
+let isDrag = false, ox, oy;
 
 btn.addEventListener("mousedown", start);
 document.addEventListener("mousemove", move);
@@ -80,7 +70,5 @@ function move(e){
     btn.style.left = e.clientX - ox + "px";
     btn.style.top = e.clientY - oy + "px";
 }
-function end(){
-    isDrag = false;
-}
+function end(){ isDrag = false; }
 </script>
