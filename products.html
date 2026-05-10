@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
   <title>Products | Maikrui Metal</title>
   <style>
     * { margin:0; padding:0; box-sizing:border-box; font-family:Arial,sans-serif; }
@@ -13,140 +17,86 @@
       --brand-silver:#E0E0E0;
       --active-color:#0A244B;
       --brand-text-dark:#0A244B;
-      --header-height:65px; /* 统一高度变量 */
     }
 
-    /* ========== 固定头部：高度写死、禁止挤压 ========== */
     header {
       background:var(--brand-dark-blue);
-      padding:0 1rem;
-      min-height:var(--header-height);
-      height:var(--header-height);
+      padding:1rem 0;
       position:fixed;
       top:0; left:0; width:100%;
       z-index:100;
-      display:flex;
-      align-items:center; /* 强垂直居中 */
     }
     .container {
       width:90%; max-width:1100px; margin:0 auto;
     }
     .header-inner {
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      width:100%;
-      flex-wrap:nowrap; /* 强制不换行 */
+      display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;
     }
     .logo {
-      font-size:1.5rem;
-      font-weight:bold;
-      color:var(--brand-silver);
-      display:flex;
-      align-items:center;
-      gap:8px;
-      white-space:nowrap;
-      flex-shrink:0; /* 关键：Logo不缩小 */
+      font-size:1.5rem; font-weight:bold; color:var(--brand-silver);
+      display:flex; align-items:center; gap:8px; white-space:nowrap;
     }
     .logo img {
-      height:40px !important;
-      width:auto !important;
-    }
-
-    /* ========== 一级导航：禁止缩小、垂直居中 ========== */
-    nav {
-      position:relative;
-      display:flex;
-      align-items:center;
-      height:100%;
+      background:transparent !important; border:none !important; outline:none !important;
+      box-shadow:none !important; filter:none !important; padding:0 !important; margin:0 !important;
+      height:40px !important; width:auto !important;
     }
     nav a {
-      color:#ccc;
-      text-decoration:none;
-      margin-left:1.5rem;
-      transition:color 0.3s ease;
-      white-space:nowrap;
-      font-size:16px;
-      line-height:var(--header-height); /* 强垂直居中 */
-      flex-shrink:0; /* 关键：文字不挤扁 */
-      min-width:fit-content;
-      display:inline-flex;
-      align-items:center;
+      color:#ccc; text-decoration:none; margin-left:1.5rem;
+      transition:color 0.3s ease; white-space:nowrap;
     }
     nav a:hover { color:var(--brand-silver); }
 
-    /* ========== 手机端：微调间距，仍不挤压 ========== */
+    /* ================== 亚马逊风格 手机横向滑动导航 ================== */
+    .amazon-scroll-nav {
+      display: none;
+      width: 100%;
+      background: #ffffff;
+      border-bottom: 1px solid #e0e0e0;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      z-index: 99;
+    }
+    .amazon-scroll-nav.show {
+      display: block;
+    }
+    .scroll-wrap {
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .scroll-wrap::-webkit-scrollbar {
+      display: none;
+    }
+    .scroll-items {
+      display: flex;
+      padding: 10px 12px;
+      gap: 16px;
+      white-space: nowrap;
+    }
+    .scroll-items a {
+      color: var(--brand-dark-blue);
+      font-size: 14px;
+      text-decoration: none;
+      padding: 4px 0;
+      font-weight: 500;
+    }
+    .scroll-items a:active {
+      color: #0056b3;
+    }
+
     @media (max-width:768px) {
-      nav a {
-        margin-left:0.9rem;
-        font-size:15px;
-      }
-      /* 下拉绝对定位，不占空间 */
-      .products-dropdown {
-        display:none;
-        position:absolute;
-        top:100%;
-        left:0;
-        width:220px;
-        background:#fff;
-        box-shadow:0 3px 10px rgba(0,0,0,0.15);
-        z-index:9999;
-        padding:8px 0;
-        border-radius:0 0 6px 6px;
-        opacity:0;
-        transform:translateY(-5px);
-        transition:all 0.25s ease;
-      }
-      .products-dropdown.show {
-        display:block;
-        opacity:1;
-        transform:translateY(0);
-      }
-      .products-dropdown > div,
-      .products-dropdown a {
-        display:block;
-        padding:11px 18px;
-        color:#333;
-        margin:0;
-        text-decoration:none;
-        cursor:pointer;
-        font-size:15px;
-        transition:background 0.2s ease;
-      }
-      .products-dropdown > div:hover,
-      .products-dropdown a:hover {
-        background:#f5f5f5;
-      }
-      .third-sub {
-        display:none;
-        background:#f8f8f8;
-        padding-left:12px;
-      }
-      .third-sub.show { display:block; }
-      .has-third {
-        position:relative;
-      }
-      .has-third::after {
-        content:"▼";
-        position:absolute;
-        right:15px;
-        top:50%;
-        transform:translateY(-50%);
-        font-size:10px;
-        color:#666;
-        transition:transform 0.3s ease;
-      }
-      .has-third.active::after {
-        transform:translateY(-50%) rotate(180deg);
-      }
+      nav a { margin-left:0.8rem; }
+      nav { position: static; }
+      .header-inner { position: relative; }
     }
-
-    /* 电脑端强制隐藏下拉 */
     @media (min-width:769px) {
-      .products-dropdown { display:none !important; }
+      .amazon-scroll-nav { display: none !important; }
     }
 
-    /* 以下原有样式完全不动 */
+    /* 原有样式不动 */
     .mobile-cate{ display:none; }
     .page-wrap{ display:flex; gap:2rem; padding:1rem 0 2rem; }
     .side-left{
@@ -227,7 +177,8 @@
         position:fixed;
         top:0; left:0;
         width:280px; height:100vh;
-        background:#fff; z-index:200;
+        background:#fff;
+        z-index:200;
         transform:translateX(-100%);
         transition:transform 0.3s ease;
         overflow-y:auto;
@@ -273,18 +224,20 @@
       <a href="products.html" id="productsNav">Products</a>
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
-
-      <div class="products-dropdown">
-        <div class="has-third">Belt Buckles</div>
-        <div class="third-sub">
-          <a href="javascript:showCate('zinc')">Zinc Alloy Buckles</a>
-          <a href="javascript:showCate('steel')">Stainless Steel Buckles</a>
-          <a href="javascript:showCate('brass')">Brass Buckles</a>
-        </div>
-        <a href="javascript:showCate('shoe-buckle')">Shoe Accessories</a>
-        <a href="javascript:showCate('rivet')">Rivets & Eyelets</a>
-      </div>
     </nav>
+
+    <!-- 亚马逊风格 滑动二级导航 -->
+    <div class="amazon-scroll-nav" id="scrollNav">
+      <div class="scroll-wrap">
+        <div class="scroll-items">
+          <a href="javascript:showCate('zinc')">Zinc Alloy Buckles</a>
+          <a href="javascript:showCate('steel')">Stainless Steel</a>
+          <a href="javascript:showCate('brass')">Brass Buckles</a>
+          <a href="javascript:showCate('shoe-buckle')">Shoe Accessories</a>
+          <a href="javascript:showCate('rivet')">Rivets & Eyelets</a>
+        </div>
+      </div>
+    </div>
   </div>
 </header>
 
@@ -479,35 +432,29 @@
     if(e.target === lightbox) lightbox.classList.remove('show');
   });
 
+  // ========== 手机端 Products 点击显示/隐藏滑动导航 ==========
   document.addEventListener('DOMContentLoaded', function(){
-    if(window.innerWidth > 768) return;
     const productsNav = document.getElementById('productsNav');
-    const dropdown = document.querySelector('.products-dropdown');
-    const hasThird = document.querySelector('.has-third');
-    const thirdSub = document.querySelector('.third-sub');
+    const scrollNav = document.getElementById('scrollNav');
 
     productsNav.addEventListener('click', function(e){
+      if(window.innerWidth > 768) return;
       e.preventDefault();
-      dropdown.classList.toggle('show');
-    });
-    hasThird.addEventListener('click', function(e){
-      e.preventDefault();
-      thirdSub.classList.toggle('show');
-      this.classList.toggle('active');
+      scrollNav.classList.toggle('show');
     });
   });
 
   function showCate(cate) {
-    document.querySelectorAll('.cate-box').forEach(box => {
-      box.style.display = 'none';
-    });
+    document.querySelectorAll('.cate-box').forEach(box => box.style.display = 'none');
     document.getElementById(cate).style.display = 'block';
     document.querySelectorAll('.cate-link').forEach(link => {
       link.classList.remove('active');
       if(link.dataset.cate === cate) link.classList.add('active');
     });
-    if (window.innerWidth <= 768) {
-      document.querySelector('.products-dropdown').classList.remove('show');
+
+    // 手机端点完自动关闭导航条
+    if(window.innerWidth <= 768){
+      document.getElementById('scrollNav').classList.remove('show');
     }
   }
 </script>
