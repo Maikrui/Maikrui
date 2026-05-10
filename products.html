@@ -16,7 +16,7 @@ body { background:#f8f8f8; color:#333; line-height:1.6; padding-top:65px; }
 --brand-text-dark:#0A244B;
 }
 
-/* 顶部导航 */
+/* 顶部导航 —— 完全不动 */
 header {
 background:var(--brand-dark-blue);
 padding:1rem 0;
@@ -25,23 +25,41 @@ top:0; left:0; width:100%;
 z-index:100;
 }
 .container {
-width:90%; max-width:1200px; margin:0 auto;
+width:90%; max-width:1100px; margin:0 auto;
 }
 .header-inner {
-display:flex; align-items:center; justify-content:space-between;
+display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;
 }
-.logo img { height:30px; }
-.nav-links { display:flex; gap:1.5rem; list-style:none; }
-.nav-links a { color:#fff; text-decoration:none; font-size:14px; }
+.logo {
+font-size:1.5rem; font-weight:bold; color:var(--brand-silver);
+display:flex; align-items:center; gap:8px; white-space:nowrap;
+}
+.logo img {
+background:transparent !important; border:none !important; outline:none !important;
+box-shadow:none !important; filter:none !important; padding:0 !important; margin:0 !important;
+height:40px !important; width:auto !important;
+}
+nav a {
+color:#ccc; text-decoration:none; margin-left:1.5rem;
+transition:color 0.3s ease; white-space:nowrap;
+}
+nav a:hover { color:var(--brand-silver); }
 
-/* 二级导航栏（电脑端固定） */
+@media (max-width:768px) {
+nav a { margin-left:0.8rem; }
+}
+
+/* 二级导航条 */
 .sub-nav {
 background:#fff;
 padding:1rem 0;
 border-bottom:1px solid #eee;
-margin-top:65px; /* 避开固定头部 */
+margin-top:65px;
 }
-.sub-nav ul { display:flex; gap:1.5rem; list-style:none; flex-wrap:wrap; }
+.sub-nav-inner {
+display:flex; gap:1.5rem; list-style:none; flex-wrap:wrap;
+width:90%; max-width:1100px; margin:0 auto;
+}
 .sub-nav a {
 text-decoration:none;
 color:#555;
@@ -50,175 +68,219 @@ padding:0.5rem 1rem;
 border-radius:4px;
 }
 .sub-nav a:hover { background:#f0f0f0; }
-.sub-nav .active { 
-    background:var(--brand-dark-blue); 
-    color:#fff; 
-    font-weight:bold;
+.sub-nav a.active { 
+background:var(--brand-dark-blue); 
+color:#fff; 
+font-weight:bold;
 }
 
-/* === 核心修复：主内容区域填满空白 === */
-.main-layout {
-    display:flex; /* 开启左右布局 */
-    width:100%;
-    margin-top:1rem;
+/* 布局结构 */
+.page-wrap {
+display: flex;
+gap: 1.5rem;
+padding: 1rem 0;
+}
+.side-left {
+width: 230px;
+background: #fff;
+padding: 1rem;
+border-radius: 6px;
+border: 1px solid #eee;
+height: fit-content;
+flex-shrink: 0;
+}
+.side-left ul { list-style: none; }
+.side-left .cate-title {
+font-weight: bold;
+padding: 0.6rem 0.5rem;
+background: #f6f6f6;
+border-radius: 4px;
+margin: 0.8rem 0 0.4rem;
+}
+.side-left .cate-link {
+display: block;
+padding: 0.6rem;
+border-radius: 4px;
+color: #333;
+cursor: pointer;
+margin: 0.2rem 0;
+}
+.side-left .cate-link.active {
+background: var(--active-color);
+color: #fff;
 }
 
-.sidebar {
-    width: 250px; /* 左侧导航固定宽度 */
-    flex-shrink: 0; /* 防止被压缩 */
-    background: #fff;
-    padding: 1rem;
-    border-radius: 8px;
-    margin-right: 1rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+/* 右侧主内容区，红色框位置在这里 */
+.main-content {
+flex: 1;
+background: #fff;
+border-radius: 8px;
+width: 100%;
 }
 
-.sidebar ul {
-    list-style: none;
-}
-.sidebar li a {
-    display: block;
-    padding: 0.75rem 1rem;
-    text-decoration: none;
-    color: #333;
-    border-radius: 4px;
-    margin-bottom: 0.5rem;
-    font-size: 14px;
-}
-.sidebar li a:hover {
-    background: #f5f5f5;
-}
-.sidebar li a.active {
-    background: var(--brand-dark-blue);
-    color: #fff;
-    font-weight: bold;
-}
-
-/* 右侧内容区：关键在这里，让它自动填满剩下的空间 */
-.content-area {
-    flex: 1; /* 占据所有剩余宽度 */
-    min-width: 0; /* 修复 flex 子项溢出 */
-}
-
-.content-card {
-    background: #fff;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    margin-bottom: 1rem;
-}
-
-.content-card h2 {
-    color: var(--brand-dark-blue);
-    margin-bottom: 1rem;
-    font-size: 24px;
-}
-
+/* 产品卡片布局，三张图并排 */
 .product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 1.5rem;
-    margin-top: 2rem;
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 1.2rem;
+padding: 1.5rem;
+}
+.product-card {
+border: 1px solid #eee;
+border-radius: 8px;
+padding: 1rem;
+text-align: center;
+background: #fff;
+}
+.product-card img {
+width: 100%;
+height: 140px;
+object-fit: contain;
+background: #f8f8f8;
+border-radius: 6px;
+margin-bottom: 0.8rem;
+}
+.product-card h3 {
+font-size: 15px;
+color: #222;
 }
 
-.product-item {
-    border: 1px solid #eee;
-    border-radius: 8px;
-    padding: 1rem;
-    text-align: center;
+/* 下面的标题 */
+.section-title {
+padding: 0 1.5rem 1.5rem;
 }
 
-.product-item img {
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 1rem;
+footer {
+background:var(--active-color); color:#fff; text-align:center; padding:2rem 0; margin-top:2rem;
 }
 
-/* 底部占位，模拟滚动 */
-footer { margin-top: 50px; padding: 20px; text-align:center; color:#999; background:#fff; }
+.cate-toggle {
+display: none;
+width: 100%;
+padding: 10px 12px;
+margin: 10px 0;
+background: #fff;
+border: 1px solid #ddd;
+border-radius: 6px;
+font-size: 14px;
+color: var(--brand-dark-blue);
+cursor: pointer;
+align-items: center;
+gap: 8px;
+}
+.arrow { transition: transform 0.3s; }
+.cate-toggle.open .arrow { transform: rotate(90deg); }
+
+@media (max-width:768px) {
+.cate-toggle { display: flex; }
+.side-left { display: none; width: 100%; }
+.side-left.open { display: block; }
+.product-grid { grid-template-columns: 1fr; padding: 1rem; }
+.page-wrap { flex-direction: column; }
+}
 </style>
 </head>
+
 <body>
 
-<!-- 顶部导航 -->
 <header>
-    <div class="container header-inner">
-        <div class="logo">
-            <img src="https://via.placeholder.com/100x30/0A244B/FFFFFF?text=M+Maikrui+Metal" alt="Maikrui Metal">
-        </div>
-        <ul class="nav-links">
-            <li><a href="#">Home</a></li>
-            <li><a href="#" style="color:#fff; font-weight:bold;">Products</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
-    </div>
+<div class="container header-inner">
+<div class="logo">
+<img src="logo.png" alt="Logo">Maikrui Metal
+</div>
+<nav>
+<a href="index.html">Home</a>
+<a href="products.html">Products</a>
+<a href="about.html">About</a>
+<a href="contact.html">Contact</a>
+</nav>
+</div>
 </header>
 
 <!-- 二级导航 -->
 <div class="sub-nav">
-    <div class="container">
-        <ul>
-            <li><a href="#">Belt Buckles</a></li>
-            <li><a href="#" class="active">Zinc Alloy Buckles</a></li>
-            <li><a href="#">Stainless Steel Buckles</a></li>
-            <li><a href="#">Brass Buckles</a></li>
-            <li><a href="#">Shoe Accessories</a></li>
-            <li><a href="#">Garment Hardware</a></li>
-        </ul>
-    </div>
+<ul class="sub-nav-inner">
+<li><a href="#" class="active">Zinc Alloy Buckles</a></li>
+<li><a href="#">Stainless Steel Buckles</a></li>
+<li><a href="#">Brass Buckles</a></li>
+<li><a href="#">Shoe Buckles</a></li>
+<li><a href="#">Rivets & Eyelets</a></li>
+</ul>
 </div>
 
-<!-- 主要内容区：已修复宽度 -->
-<div class="container main-layout">
-    
-    <!-- 左侧导航 -->
-    <aside class="sidebar">
-        <ul>
-            <li><a href="#" class="active">Zinc Alloy Buckles</a></li>
-            <li><a href="#">Stainless Steel Buckles</a></li>
-            <li><a href="#">Brass Buckles</a></li>
-            <li><a href="#">Shoe Buckles</a></li>
-            <li><a href="#">Rivets & Eyelets</a></li>
-        </ul>
-    </aside>
+<div class="container">
 
-    <!-- 右侧内容：这里会自动填满剩下的空间，不再留白 -->
-    <main class="content-area">
-        <div class="content-card">
-            <h2>Zinc Alloy Belt Buckles</h2>
-            High-quality zinc alloy buckles for belts, bags, and garments. Durable and stylish designs.
-            
-            <div class="product-grid">
-                <div class="product-item">
-                    <img src="https://via.placeholder.com/200x150/D0D0D0/000000?text=Buckle+1" alt="Classic Pin Buckle">
-                    <h3>Classic Pin Buckle</h3>
-                    Perfect for everyday use.
-                </div>
-                <div class="product-item">
-                    <img src="https://via.placeholder.com/200x150/D0D0D0/000000?text=Buckle+2" alt="Auto Lock Buckle">
-                    <h3>Auto Lock Buckle</h3>
-                    Secure and easy to use.
-                </div>
-                <div class="product-item">
-                    <img src="https://via.placeholder.com/200x150/D0D0D0/000000?text=Buckle+3" alt="Decorative Buckle">
-                    <h3>Decorative Buckle</h3>
-                    Vintage style for bags.
-                </div>
-                <div class="product-item">
-                    <img src="https://via.placeholder.com/200x150/D0D0D0/000000?text=Buckle+4" alt="Heavy Duty Buckle">
-                    <h3>Heavy Duty Buckle</h3>
-                    Built for tough conditions.
-                </div>
-            </div>
-        </div>
-    </main>
+<button class="cate-toggle" id="cateToggle">
+<span class="arrow">▶</span>
+<span>Product Categories</span>
+</button>
 
+<div class="side-left" id="cateNav">
+<ul>
+<li class="cate-title">Belt Buckles</li>
+<li><span class="cate-link active" data-cate="zinc">Zinc Alloy Buckles</span></li>
+<li><span class="cate-link" data-cate="steel">Stainless Steel Buckles</span></li>
+<li><span class="cate-link" data-cate="brass">Brass Buckles</span></li>
+
+<li class="cate-title">Shoe Accessories</li>
+<li><span class="cate-link" data-cate="shoe-buckle">Shoe Buckles</span></li>
+
+<li class="cate-title">Garment Hardware</li>
+<li><span class="cate-link" data-cate="rivet">Rivets & Eyelets</span></li>
+</ul>
+</div>
+
+<div class="page-wrap">
+<div class="main-content">
+
+  <!-- 红色框的位置：这里放产品三张照片 -->
+  <div class="product-grid">
+    <div class="product-card">
+      <img src="p1-1.jpg">
+      <h3>Classic Pin Buckle</h3>
+    </div>
+    <div class="product-card">
+      <img src="p1-2.jpg">
+      <h3>Automatic Buckle</h3>
+    </div>
+    <div class="product-card">
+      <img src="p1-3.jpg">
+      <h3>Western Style Buckle</h3>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- 下面的标题 -->
+<div class="section-title">
+  <h1>Zinc Alloy Belt Buckles</h1>
 </div>
 
 <footer>
-    © 2023 Maikrui Metal. All rights reserved.
+<div class="container">Maikrui Metal © All Rights Reserved</div>
 </footer>
+
+<script>
+const cateToggle = document.getElementById('cateToggle');
+const cateNav = document.getElementById('cateNav');
+cateToggle.onclick = () => {
+cateNav.classList.toggle('open');
+cateToggle.classList.toggle('open');
+};
+
+const links = document.querySelectorAll('.cate-link');
+links.forEach(link => {
+link.onclick = () => {
+links.forEach(l => l.classList.remove('active'));
+link.classList.add('active');
+if(window.innerWidth <= 768){
+cateNav.classList.remove('open');
+cateToggle.classList.remove('open');
+}
+};
+});
+</script>
 
 </body>
 </html>
