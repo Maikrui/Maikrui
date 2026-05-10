@@ -10,12 +10,63 @@
         body{background:#f8f8f8;padding-top:70px;}
         .container{width:90%;max-width:1100px;margin:0 auto;}
 
-        .slider{position:relative;width:100%;height:500px;background:#f8f8f8;overflow:hidden;}
-        .slide-item{position:absolute;width:100%;height:100%;opacity:0;transition:opacity 1s ease;background-size:cover;background-position:center;}
+        /* 轮播容器修改：使用aspect-ratio保证自适应比例，同时设置最小/最大高度 */
+        .slider{
+            position:relative;
+            width:100%;
+            /* 核心：用aspect-ratio替代固定height，保证宽高比自适应 */
+            aspect-ratio: 16/9; 
+            min-height: 280px; /* 移动端最小高度 */
+            max-height: 600px; /* 电脑端最大高度 */
+            background:#f8f8f8;
+            overflow:hidden;
+        }
+        .slide-item{
+            position:absolute;
+            width:100%;
+            height:100%;
+            opacity:0;
+            transition:opacity 1s ease;
+            /* 关键：背景图片不平铺 + 覆盖容器 + 居中，保证自适应 */
+            background-size: cover;    /* 覆盖容器，保持比例 */
+            background-position: center; /* 居中显示 */
+            background-repeat: no-repeat; /* 禁止平铺 */
+        }
         .slide-item.active{opacity:1;}
-        .slide-mask{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(10,36,75,0.35);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;text-align:center;padding:0 20px;}
+        .slide-mask{
+            position:absolute;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            background:rgba(10,36,75,0.35);
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            justify-content:center;
+            color:#fff;
+            text-align:center;
+            padding:0 20px;
+        }
         .slide-mask h1{font-size:2.4rem;margin-bottom:1rem;text-shadow:1px 1px #000;}
-        .prev,.next{position:absolute;top:50%;transform:translateY(-50%);font-size:2rem;color:#fff;background:none;border:none;cursor:pointer;z-index:10;padding:0 15px;}
+        .prev,.next{
+            position:absolute;
+            top:50%;
+            transform:translateY(-50%);
+            font-size:2rem;
+            color:#fff;
+            background:none;
+            border:none;
+            cursor:pointer;
+            z-index:10;
+            padding:0 15px;
+            /* 优化按钮点击区域 */
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
         .prev{left:0;}.next{right:0;}
 
         .advantages{background:#fff;padding:4rem 0;text-align:center;}
@@ -23,9 +74,25 @@
         .advantage-items{display:flex;flex-wrap:wrap;gap:2rem;justify-content:center;}
         .advantage{min-width:220px;}
 
+        /* 响应式优化：不同屏幕尺寸微调轮播比例和文字大小 */
         @media (max-width:768px){
-            .slider{height:300px;}
+            .slider{
+                aspect-ratio: 4/3; /* 移动端调整宽高比更适配 */
+                max-height: 400px;
+            }
             .slide-mask h1{font-size:1.4rem;}
+            .prev, .next{
+                font-size:1.5rem;
+                width: 40px;
+                height: 40px;
+            }
+        }
+        /* 小屏手机额外适配 */
+        @media (max-width:480px){
+            .slider{
+                min-height: 240px;
+            }
+            .slide-mask h1{font-size:1.2rem;}
         }
     </style>
 </head>
